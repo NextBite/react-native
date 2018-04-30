@@ -10,6 +10,23 @@ export default class App extends React.Component {
     usersPlaces: []
   }
 
+  // get user's current location on load of map
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(position);
+      this.setState({
+        userLocation: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.0622,
+          longitudeDelta: 0.0421,
+        }
+      });
+    });
+  }
+
+  // when get location button is pressed, new location is calculated
+  // plus coords are added to db
   getUserLocationHandler = () => {
     navigator.geolocation.getCurrentPosition(position => {
       console.log(position);
@@ -58,11 +75,11 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} />
         <View style={{marginBottom: 20}}>
           <Button title="Get User Places" onPress={this.getUserPlacesHandler} />
         </View>
         <FetchLocation onGetLocation={this.getUserLocationHandler} />
-        <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} />
       </View>
     );
   }

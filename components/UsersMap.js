@@ -2,42 +2,65 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
 
-const usersMap = props => {
+export default class usersMap extends React.Component {
+  state = {
+    userLocation: null,
+  }
+
+  // moves location dot to user's current location as they move
+  componentWillMount() {
+    this.setState({userLocation: this.props.userLocation})
+  }
+
+  // get's users new location upon change
+  getUpdatedLocation = () => {
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(position);
+      this.setState({
+        userLocation: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.0622, // zoom/circle level
+          longitudeDelta: 0.0421, // zoom/circle level
+        }
+      });
+    });
+  }
+
+  render() {
     let userLocationMarker = null;
 
-    if(props.userLocation) {
-        userLocationMarker = <MapView.Marker coordinate={props.userLocation} />;
+    // adds a marker to user's current location if the state has been set
+    if (this.state.userLocation) {
+      userLocationMarker = <MapView.Marker coordinate={this.state.userLocation} title="Your Location" description="desc" pinColor="#244B65" />;
     }
 
-    const usersMarkers = props.usersPlaces.map(userPlace => <MapView.Marker coordinate={userPlace} key={userPlace.id} />);
+    const usersMarkers = this.props.usersPlaces.map(userPlace => <MapView.Marker coordinate={userPlace} key={userPlace.id} title="User's Location" description="desc" />);
 
     return (
-        <View style={styles.mapContainer}>
-            <MapView style={styles.map}
-                initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.0622,
-                    longitudeDelta: 0.0421,
-                }}
-                region={props.userLocation} >
-                {userLocationMarker}
-                {usersMarkers}
-            </MapView>
-        </View>
+      <View style={styles.mapContainer}>
+        <MapView style={styles.map}
+          provider="google"
+          region={this.state.userLocation}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+          onUserLocationChange={this.getUpdatedLocation}
+        >
+          {userLocationMarker}
+          {usersMarkers}
+        </MapView>
+      </View>
     );
+  }
 }
 
+// need absolute fill for proper viewing
 const styles = StyleSheet.create({
-    mapContainer: {
-        width: '100%',
-        height: 200,
-        marginTop: 20
-    },
-    map: {
-        width: '100%',
-        height: '100%'
-    }
+  mapContainer: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  map: {
+    width: '100%',
+    height: '70%'
+  }
 })
-
-export default usersMap;
