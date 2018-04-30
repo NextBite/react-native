@@ -38,7 +38,7 @@ export default class usersMap extends React.Component {
     const usersMarkers = this.props.usersPlaces.map(userPlace => <MapView.Marker coordinate={userPlace} key={userPlace.id} title="User's Location" description="desc" />);
 
     return (
-      <View style={styles.mapContainer}>
+
         <MapView style={styles.map}
           provider="google"
           region={this.state.userLocation}
@@ -49,7 +49,7 @@ export default class usersMap extends React.Component {
           {userLocationMarker}
           {usersMarkers}
         </MapView>
-      </View>
+
     );
   }
 }
@@ -57,10 +57,12 @@ export default class usersMap extends React.Component {
 // need absolute fill for proper viewing
 const styles = StyleSheet.create({
   mapContainer: {
-    ...StyleSheet.absoluteFillObject,
+
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   map: {
     width: '100%',
-    height: '70%'
+    height: '60%'
   }
 })

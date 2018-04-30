@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 
 import FetchLocation from './components/FetchLocation';
 import UsersMap from './components/UsersMap';
+import MapCards from './components/MapCards';
 
 export default class App extends React.Component {
   state = {
@@ -76,10 +77,11 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} />
-        <View style={{marginBottom: 20}}>
-          <Button title="Get User Places" onPress={this.getUserPlacesHandler} />
-        </View>
-        <FetchLocation onGetLocation={this.getUserLocationHandler} />
+
+        <ScrollView style={styles.cards}>
+          <MapCards/>
+          <MapCards/>
+        </ScrollView>
       </View>
     );
   }
@@ -89,7 +91,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
+  cards: {
+    width: '100%',
+    height: '100%',
+  }
 });
