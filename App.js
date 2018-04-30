@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import firebase from 'firebase';
 
 import FetchLocation from './components/FetchLocation';
 import UsersMap from './components/UsersMap';
@@ -8,11 +9,12 @@ import MapCards from './components/MapCards';
 export default class App extends React.Component {
   state = {
     userLocation: null,
-    usersPlaces: []
+    usersPlaces: [],
+    markets: []
   }
 
-  // get user's current location on load of map
   componentDidMount() {
+    // get user's current location on load of map
     navigator.geolocation.getCurrentPosition(position => {
       console.log(position);
       this.setState({
@@ -23,6 +25,21 @@ export default class App extends React.Component {
           longitudeDelta: 0.0421,
         }
       });
+    });
+
+    // get the listings from the database
+    /* Add a listener for changes to the listings object, and save in the state. */
+    let marketsRef = firebase.database().ref('markets');
+    marketsRef.on('value', (snapshot) => {
+      var marketsArray = [];
+      snapshot.forEach(function (child) {
+        var market = child.val();
+        console.log("Market", market.coords);
+        market.key = child.key;
+        marketsArray.push(market);
+      });
+      //listingArray.sort((a,b) => b.time - a.time); //reverse order
+      this.setState({ markets: marketsArray });
     });
   }
 
@@ -48,39 +65,39 @@ export default class App extends React.Component {
           longitude: position.coords.longitude,
         })
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     }, err => console.log(err));
   }
 
   getUserPlacesHandler = () => {
     fetch('https://nextbite-f8314.firebaseio.com/places.json')
-    .then(res => res.json())
-    .then(parsedRes => {
-      const placesArray = [];
-      for(const key in parsedRes) {
-        placesArray.push({
-          latitude: parsedRes[key].latitude,
-          longitude: parsedRes[key].longitude,
-          id: key
-        });
-      }
+      .then(res => res.json())
+      .then(parsedRes => {
+        const placesArray = [];
+        for (const key in parsedRes) {
+          placesArray.push({
+            latitude: parsedRes[key].latitude,
+            longitude: parsedRes[key].longitude,
+            id: key
+          });
+        }
 
-      this.setState({
-        usersPlaces: placesArray
-      });
-    })
-    .catch(err => console.log(err));
+        this.setState({
+          usersPlaces: placesArray
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} />
+        <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markets={this.state.markets}/>
 
         <ScrollView style={styles.cards}>
-          <MapCards/>
-          <MapCards/>
+          <MapCards />
+          <MapCards />
         </ScrollView>
       </View>
     );
