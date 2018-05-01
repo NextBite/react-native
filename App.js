@@ -8,9 +8,15 @@ import MapCards from './components/MapCards';
 
 export default class App extends React.Component {
   state = {
-    userLocation: null,
+    userLocation: {
+      latitude: 0,
+      longitude: 0,
+      latitudeDelta: 0.0622,
+      longitudeDelta: 0.0421,
+    },
     usersPlaces: [],
-    markets: []
+    markets: [],
+    mapCards: []
   }
 
   componentDidMount() {
@@ -29,17 +35,72 @@ export default class App extends React.Component {
 
     // get the listings from the database
     /* Add a listener for changes to the listings object, and save in the state. */
-    let marketsRef = firebase.database().ref('markets');
-    marketsRef.on('value', (snapshot) => {
+    let marketsMarkersRef = firebase.database().ref('markets');
+    marketsMarkersRef.on('value', (snapshot) => {
       var marketsArray = [];
       snapshot.forEach(function (child) {
         var market = child.val();
-        console.log("Market", market.coords);
         market.key = child.key;
         marketsArray.push(market);
       });
       //listingArray.sort((a,b) => b.time - a.time); //reverse order
       this.setState({ markets: marketsArray });
+    });
+
+    let marketsRef = firebase.database().ref('markets');
+
+    marketsRef.on('value', (snapshot) => {
+      let marketsArray = [];
+
+      snapshot.forEach(function (child) {
+        let marketListing = child.val();
+
+        marketListing.key = child.key;
+        marketsArray.push(marketListing);
+      });
+
+      console.log("marketsArray", marketsArray)
+
+      marketsArray.map((market) => {
+        let marketKeys = Object.keys(market);
+
+        // take all keys except "key", which is just the unique id of the db obj, and "coords", which are the coordinates
+        for (let i = 0; i < marketKeys.length - 2; i++) {
+          let currentMarkets = this.state.markets;
+
+          if (!currentMarkets.includes(market.key)) {
+            currentMarkets.push(market.key);
+          }
+
+          var marketListingsRef = firebase.database().ref(`markets/${market.key}/${marketKeys[i]}`);
+          marketListingsRef.on('value', (snapshot) => {
+            var marketListingsArray = [];
+            snapshot.forEach(function (child) {
+              var marketListing = child.val();
+              marketListingsArray.push(marketListing);
+            });
+            console.log("DID WE MAKE IT HERE?")
+
+            console.log("ALL EKYS", marketKeys)
+            console.log("marketKeys", marketKeys[i]);
+            console.log("i", i)
+            console.log("leys lengt", marketKeys.length);
+            if ((i + 3) == marketKeys.length) {
+              console.log("HERE??E?E?E?")
+              let currentMapCards = this.state.mapCards;
+              this.setState({currentMarket: market.key})
+              currentMapCards.push(
+                <MapCards
+                title={market.key}
+                count={marketKeys.length - 2}
+                />
+              )
+              this.setState({ mapCards: currentMapCards })
+              console.log("inner map cardS", this.state.mapCards)
+            }
+          })
+        }
+      })
     });
   }
 
@@ -91,13 +152,13 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log("map cards", this.state.userLocation);
     return (
       <View style={styles.container}>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markets={this.state.markets}/>
 
         <ScrollView style={styles.cards}>
-          <MapCards />
-          <MapCards />
+          {this.state.mapCards}
         </ScrollView>
       </View>
     );

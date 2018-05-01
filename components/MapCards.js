@@ -4,41 +4,41 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Ic
 
 export default class MapCards extends React.Component {
 
-    render() {
-        return (
-            <Card style={styles.card}>
-                <CardItem>
-                    <Left>
-                        <Body>
-                            <Text>NativeBase</Text>
-                            <Text note style={styles.subText}>GeekyAnts</Text>
-                            <Text style={styles.regText}>
-                  //Your text here
-                </Text>
-                        </Body>
-                    </Left>
-                </CardItem>
-                <CardItem>
-                    <Left>
-                        <Button transparent>
-                            <Text>Pickups</Text>
-                        </Button>
-                    </Left>
-                </CardItem>
-            </Card>
-        );
-    }
+  render() {
+    return (
+      <Card style={styles.card}>
+        <CardItem>
+          <Left>
+            <Body>
+              <Text>{this.props.title}</Text>
+              <Text note style={styles.subText}>Sub title</Text>
+              <Text style={styles.regText}>
+                There are {this.props.count} pickup(s) available.
+              </Text>
+            </Body>
+          </Left>
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Button transparent>
+              <Text>Pickups</Text>
+            </Button>
+          </Left>
+        </CardItem>
+      </Card>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    card: {
-        marginBottom: 0,
-        marginTop: 0
-    },
-    subText: {
-        paddingBottom: 10,
-    },
-    regText: {
-        fontSize: 14,
-    }
+  card: {
+    marginBottom: 0,
+    marginTop: 0
+  },
+  subText: {
+    paddingBottom: 10,
+  },
+  regText: {
+    fontSize: 14,
+  }
 });

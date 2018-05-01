@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
+import firebase from 'firebase';
+
+import MapCards from './MapCards';
 
 export default class usersMap extends React.Component {
-
   render() {
     // Create a list of <MapView.Marker /> objects for market locations. 
-    let markers = this.props.markets.map((market) => {
+    /*let markers = this.props.markets.map((market) => {
       let pos = { latitude: market.coords.lat, longitude: market.coords.long }
 
       return (
@@ -16,7 +18,7 @@ export default class usersMap extends React.Component {
           title={market.key}
         />
       );
-    })
+    })*/
 
     return (
       <MapView style={styles.map}
@@ -26,9 +28,8 @@ export default class usersMap extends React.Component {
         showsUserLocation={true}
         showsMyLocationButton={true}
       >
-        {markers}
-      </MapView>
 
+      </MapView>
     );
   }
 }
