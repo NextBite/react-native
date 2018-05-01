@@ -11,7 +11,7 @@ export default class MapCards extends React.Component {
           <Left>
             <Body>
               <Text>{this.props.title}</Text>
-              <Text note style={styles.subText}>Sub title</Text>
+              <Text note style={styles.subText}>{this.props.distance}</Text>
               <Text style={styles.regText}>
                 There are {this.props.count} pickup(s) available.
               </Text>

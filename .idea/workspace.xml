@@ -4,7 +4,13 @@
     <list default="true" id="ff0aa9f8-648c-41fe-b643-e008020f1866" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/App.js" afterPath="$PROJECT_DIR$/App.js" />
-      <change beforePath="$PROJECT_DIR$/components/UsersMap.js" afterPath="$PROJECT_DIR$/components/UsersMap.js" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/android/.gradle/4.1/fileHashes/fileHashes.lock" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.1/taskHistory/fileSnapshots.bin" afterPath="$PROJECT_DIR$/android/.gradle/4.1/taskHistory/fileSnapshots.bin" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/android/.gradle/4.1/taskHistory/taskHistory.bin" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/android/.gradle/4.1/taskHistory/taskHistory.lock" />
+      <change beforePath="$PROJECT_DIR$/components/MapCards.js" afterPath="$PROJECT_DIR$/components/MapCards.js" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,11 +48,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="ProjectPane" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

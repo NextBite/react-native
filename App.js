@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
+import geolib from 'geolib';
 
 import FetchLocation from './components/FetchLocation';
 import UsersMap from './components/UsersMap';
@@ -9,20 +10,18 @@ import MapCards from './components/MapCards';
 
 export default class App extends React.Component {
   state = {
-    userLocation: {
-      latitude: 0,
-      longitude: 0,
-      latitudeDelta: 0.0622,
-      longitudeDelta: 0.0421,
-    },
+    userLocation: null,
     usersPlaces: [],
     markets: [],
-    mapCards: []
+    mapCards: [],
+    marketDistance: [],
   }
 
   componentDidMount() {
+    let usersPosition = {};
     // get user's current location on load of map
     navigator.geolocation.getCurrentPosition(position => {
+      usersPosition = position;
       this.setState({
         userLocation: {
           latitude: position.coords.latitude,
@@ -37,9 +36,9 @@ export default class App extends React.Component {
     /* Add a listener for changes to the listings object, and save in the state. */
     let marketsMarkersRef = firebase.database().ref('markets');
     marketsMarkersRef.on('value', (snapshot) => {
-      var marketsArray = [];
+      let marketsArray = [];
       snapshot.forEach(function (child) {
-        var market = child.val();
+        let market = child.val();
         market.key = child.key;
         marketsArray.push(market);
       });
@@ -66,29 +65,54 @@ export default class App extends React.Component {
         for (let i = 0; i < marketKeys.length - 2; i++) {
           let currentMarkets = this.state.markets;
 
+          // only add market to the current markets if it hasn't been already
           if (!currentMarkets.includes(market.key)) {
             currentMarkets.push(market.key);
           }
 
-          var marketListingsRef = firebase.database().ref(`markets/${market.key}/${marketKeys[i]}`);
+          let marketListingsRef = firebase.database().ref(`markets/${market.key}/${marketKeys[i]}`);
           marketListingsRef.on('value', (snapshot) => {
-            var marketListingsArray = [];
+            let marketListingsArray = [];
             snapshot.forEach(function (child) {
-              var marketListing = child.val();
+              let marketListing = child.val();
               marketListingsArray.push(marketListing);
             });
 
+            // last two entires are the coords and keys, so skip over those to check
+            // if ending has been reached yet
             if ((i + 3) == marketKeys.length) {
               let currentMapCards = this.state.mapCards;
-              this.setState({currentMarket: market.key})
-              currentMapCards.push(
-                <MapCards
-                title={market.key}
-                count={marketKeys.length - 2}
-                key={market.key}
-                />
-              )
-              this.setState({ mapCards: currentMapCards })
+              this.setState({ currentMarket: market.key })
+              console.log("market before card", market);
+              console.log(usersPosition.coords)
+              console.log("geolib", geolib.getDistance(usersPosition.coords, { latitude: market.coords.lat, longitude: market.coords.long }, 1, 3));
+
+              // calls the google api to calculate distance between user's location 
+              // and the geo markers (markets)
+              let responseDistance = "";
+              fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${usersPosition.coords.latitude},${usersPosition.coords.longitude}&destinations=${market.coords.lat},${market.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
+                .then(res => res.json())
+                .then(parsedRes => {
+                  responseDistance = parsedRes.rows[0].elements[0].distance.text;
+                })
+                .then(() => {
+                  currentMapCards.push(
+                    <MapCards
+                      title={market.key}
+                      count={marketKeys.length - 2}
+                      key={market.key}
+                      distance={responseDistance}
+                    />
+                  )
+
+                  // sort the cards by smallest to largest according to distance away from user
+                  currentMapCards.sort(function(a, b) {
+                    return parseFloat(a.props.distance) - parseFloat(b.props.distance);
+                  });
+
+                  this.setState({ mapCards: currentMapCards })
+                })
+                .catch(err => console.log(err));
             }
           })
         }
@@ -144,7 +168,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    let markers = this.state.markets.slice(0, this.state.markets.length/2).map((market) => {
+    // generate markers for markets with current listings for the map
+    // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
+    let markers = this.state.markets.slice(0, this.state.markets.length / 2).map((market) => {
       let pos = { latitude: market.coords.lat, longitude: market.coords.long }
 
       return (
@@ -159,7 +185,7 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers}/>
+        <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
 
         <ScrollView style={styles.cards}>
           {this.state.mapCards}
