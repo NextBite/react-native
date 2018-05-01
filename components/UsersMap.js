@@ -28,7 +28,7 @@ export default class usersMap extends React.Component {
         showsUserLocation={true}
         showsMyLocationButton={true}
       >
-
+        {this.props.markers}
       </MapView>
     );
   }

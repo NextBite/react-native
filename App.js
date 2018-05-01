@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import MapView from 'react-native-maps';
 import firebase from 'firebase';
 
 import FetchLocation from './components/FetchLocation';
@@ -22,7 +23,6 @@ export default class App extends React.Component {
   componentDidMount() {
     // get user's current location on load of map
     navigator.geolocation.getCurrentPosition(position => {
-      console.log(position);
       this.setState({
         userLocation: {
           latitude: position.coords.latitude,
@@ -59,8 +59,6 @@ export default class App extends React.Component {
         marketsArray.push(marketListing);
       });
 
-      console.log("marketsArray", marketsArray)
-
       marketsArray.map((market) => {
         let marketKeys = Object.keys(market);
 
@@ -79,24 +77,18 @@ export default class App extends React.Component {
               var marketListing = child.val();
               marketListingsArray.push(marketListing);
             });
-            console.log("DID WE MAKE IT HERE?")
 
-            console.log("ALL EKYS", marketKeys)
-            console.log("marketKeys", marketKeys[i]);
-            console.log("i", i)
-            console.log("leys lengt", marketKeys.length);
             if ((i + 3) == marketKeys.length) {
-              console.log("HERE??E?E?E?")
               let currentMapCards = this.state.mapCards;
               this.setState({currentMarket: market.key})
               currentMapCards.push(
                 <MapCards
                 title={market.key}
                 count={marketKeys.length - 2}
+                key={market.key}
                 />
               )
               this.setState({ mapCards: currentMapCards })
-              console.log("inner map cardS", this.state.mapCards)
             }
           })
         }
@@ -152,10 +144,22 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log("map cards", this.state.userLocation);
+    let markers = this.state.markets.slice(0, this.state.markets.length/2).map((market) => {
+      let pos = { latitude: market.coords.lat, longitude: market.coords.long }
+
+      return (
+        <MapView.Marker
+          coordinate={pos}
+          key={market.key}
+          title={market.key}
+        />
+      );
+    })
+
+
     return (
       <View style={styles.container}>
-        <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markets={this.state.markets}/>
+        <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers}/>
 
         <ScrollView style={styles.cards}>
           {this.state.mapCards}
