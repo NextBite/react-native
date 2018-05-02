@@ -1,43 +1,46 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
+import firebase from 'firebase';
 
-const usersMap = props => {
-    let userLocationMarker = null;
+import MapCards from './MapCards';
 
-    if(props.userLocation) {
-        userLocationMarker = <MapView.Marker coordinate={props.userLocation} />;
-    }
+export default class usersMap extends React.Component {
+  render() {
+    // Create a list of <MapView.Marker /> objects for market locations. 
+    /*let markers = this.props.markets.map((market) => {
+      let pos = { latitude: market.coords.lat, longitude: market.coords.long }
 
-    const usersMarkers = props.usersPlaces.map(userPlace => <MapView.Marker coordinate={userPlace} key={userPlace.id} />);
+      return (
+        <MapView.Marker
+          coordinate={pos}
+          key={market.key}
+          title={market.key}
+        />
+      );
+    })*/
 
     return (
-        <View style={styles.mapContainer}>
-            <MapView style={styles.map}
-                initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.0622,
-                    longitudeDelta: 0.0421,
-                }}
-                region={props.userLocation} >
-                {userLocationMarker}
-                {usersMarkers}
-            </MapView>
-        </View>
+      <MapView style={styles.map}
+        provider="google"
+        initialRegion={this.props.userLocation}
+        region={this.props.userLocation}
+        showsUserLocation={true}
+        showsMyLocationButton={true}
+      >
+        {this.props.markers}
+      </MapView>
     );
+  }
 }
 
 const styles = StyleSheet.create({
-    mapContainer: {
-        width: '100%',
-        height: 200,
-        marginTop: 20
-    },
-    map: {
-        width: '100%',
-        height: '100%'
-    }
+  mapContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  map: {
+    width: '100%',
+    height: '60%'
+  }
 })
-
-export default usersMap;

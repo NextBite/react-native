@@ -18,8 +18,12 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "firebase": "^4.13.1",
+    "geolib": "^2.0.24",
+    "native-base": "^2.4.3",
     "react": "16.3.1",
     "react-native": "^0.54.4",
-    "react-native-maps": "^0.21.0"
+    "react-native-maps": "^0.21.0",
+    "react-navigation": "^1.5.11"
   }
 }
