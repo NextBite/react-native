@@ -2,11 +2,11 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import MarketMap from './components/MarketMap';
-import LocationPickups from './components/LocationPickups';
+import MarketPickups from './components/MarketPickups';
 
 const App = StackNavigator({
   Home: { screen: MarketMap },
-  LocationPickups: { screen: LocationPickups }
+  MarketPickups: { screen: MarketPickups }
 },
   {
     initialRouteName: 'Home',

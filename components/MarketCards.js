@@ -3,17 +3,20 @@ import { StyleSheet, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 
-export default class MapCards extends React.Component {
+export default class MarketCards extends React.Component {
   render() {
     return (
       <Card style={styles.card}>
         <CardItem>
           <Left>
             <Body>
-              <Text>{this.props.title}</Text>
-              <Text note style={styles.subText}>{this.props.distance}</Text>
+              <Text>{this.props.vendor}</Text>
+              <Text note style={styles.subText}>{this.props.expiration}</Text>
               <Text style={styles.regText}>
-                There are {this.props.count} pickup(s) available.
+                This pickup has {this.props.boxes} boxes and weighs {this.props.weight}.
+              </Text>
+              <Text style={styles.regText}>
+                Tags: {this.props.tags}
               </Text>
             </Body>
           </Left>
@@ -21,8 +24,8 @@ export default class MapCards extends React.Component {
         <CardItem>
           <Left>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('MarketPickups', {marketName: this.props.title})}
-              >
+              onPress={() => this.props.navigation.navigate('MarketPickups')}
+            >
               <Text>Pickups</Text>
             </Button>
           </Left>
