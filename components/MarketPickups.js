@@ -60,6 +60,7 @@ export default class MarketPickups extends React.Component {
               weight={pickupsObj.weight}
               tags={pickupsObj.tags}
               pickupId={pickup}
+              key={pickup}
             />);
 
             this.setState({ marketCards: currentMarketCards })

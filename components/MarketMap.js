@@ -86,8 +86,6 @@ export default class MarketMap extends React.Component {
             if ((i + 3) == marketKeys.length) {
               let currentMapCards = this.state.mapCards;
               this.setState({ currentMarket: market.key })
-              console.log("market before card", market);
-              console.log(usersPosition.coords)
 
               // calls the google api to calculate distance between user's location 
               // and the geo markers (markets)
@@ -127,7 +125,6 @@ export default class MarketMap extends React.Component {
   // plus coords are added to db
   getUserLocationHandler = () => {
     navigator.geolocation.getCurrentPosition(position => {
-      console.log(position);
       this.setState({
         userLocation: {
           latitude: position.coords.latitude,
