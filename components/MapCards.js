@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 
 export default class MapCards extends React.Component {
-
   render() {
     return (
       <Card style={styles.card}>
@@ -20,7 +20,9 @@ export default class MapCards extends React.Component {
         </CardItem>
         <CardItem>
           <Left>
-            <Button transparent>
+            <Button transparent
+              onPress={() => this.props.navigation.navigate('LocationPickups')
+              }>
               <Text>Pickups</Text>
             </Button>
           </Left>
