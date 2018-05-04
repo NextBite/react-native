@@ -15,6 +15,7 @@ export default class MarketMap extends React.Component {
     markets: [],
     mapCards: [],
     marketDistance: [],
+    countOfPickups: 0,
   }
 
   static navigationOptions = {
@@ -23,6 +24,7 @@ export default class MarketMap extends React.Component {
 
   componentDidMount() {
     let usersPosition = {};
+    let countOfPickups = this.state.countOfPickups;
     // get user's current location on load of map
     navigator.geolocation.getCurrentPosition(position => {
       usersPosition = position;
@@ -106,6 +108,9 @@ export default class MarketMap extends React.Component {
                       navigation={this.props.navigation}
                     />
                   )
+
+                  countOfPickups += (marketKeys.length - 2);
+                  this.setState({countOfPickups: countOfPickups });
 
                   // sort the cards by smallest to largest according to distance away from user
                   currentMapCards.sort(function (a, b) {
@@ -192,7 +197,7 @@ export default class MarketMap extends React.Component {
             style={styles.innerButton}
             onPress={() => this.props.navigation.navigate('MarketList', { marketCards: this.state.mapCards })}
           >
-            <Text style={styles.buttonText}>6 Pickups Available</Text>
+            <Text style={styles.buttonText}>{this.state.countOfPickups} Pickups Available</Text>
           </Button>
         </View>
       </View>
