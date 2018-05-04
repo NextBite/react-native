@@ -24,9 +24,9 @@ export default class MarketCards extends React.Component {
         <CardItem>
           <Left>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('MarketPickups')}
+  onPress={() => this.props.navigation.navigate('ClaimListing', {listingId: this.props.listingId})}
             >
-              <Text>Pickups</Text>
+              <Text>Claim Pickup</Text>
             </Button>
           </Left>
         </CardItem>

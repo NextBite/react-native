@@ -8,7 +8,7 @@ export default class MarketPickups extends React.Component {
   state = {};
 
   static navigationOptions = {
-    title: 'Market Pickups Available',
+    title: 'Pickups Available',
   };
 
   componentDidMount() {
@@ -59,8 +59,9 @@ export default class MarketPickups extends React.Component {
               expiration={pickupsObj.expirationDate}
               weight={pickupsObj.weight}
               tags={pickupsObj.tags}
-              pickupId={pickup}
+              listingId={pickup}
               key={pickup}
+              navigation={this.props.navigation}
             />);
 
             this.setState({ marketCards: currentMarketCards })

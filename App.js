@@ -3,10 +3,12 @@ import { StackNavigator } from 'react-navigation';
 
 import MarketMap from './components/MarketMap';
 import MarketPickups from './components/MarketPickups';
+import ClaimListing from './components/ClaimListing';
 
 const App = StackNavigator({
   Home: { screen: MarketMap },
-  MarketPickups: { screen: MarketPickups }
+  MarketPickups: { screen: MarketPickups },
+  ClaimListing: { screen: ClaimListing },
 },
   {
     initialRouteName: 'Home',

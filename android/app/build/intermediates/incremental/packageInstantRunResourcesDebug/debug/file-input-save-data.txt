@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Thu May 03 19:47:41 PDT 2018
+0.baseType=DIRECTORY
+0.base=/Users/Lisa/Desktop/react-native/android/app/build/intermediates/assets/debug
+0.path=ula.kml
+0.set=ASSET
+count=1
