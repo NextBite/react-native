@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'native-base';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
 
@@ -107,7 +108,7 @@ export default class MarketMap extends React.Component {
                   )
 
                   // sort the cards by smallest to largest according to distance away from user
-                  currentMapCards.sort(function(a, b) {
+                  currentMapCards.sort(function (a, b) {
                     return parseFloat(a.props.distance) - parseFloat(b.props.distance);
                   });
 
@@ -186,10 +187,14 @@ export default class MarketMap extends React.Component {
     return (
       <View style={styles.container}>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
-
-        <ScrollView style={styles.cards}>
-          {this.state.mapCards}
-        </ScrollView>
+        <View style={styles.button}>
+          <Button transparent
+            style={styles.innerButton}
+            onPress={() => this.props.navigation.navigate('MarketList', { marketCards: this.state.mapCards })}
+          >
+            <Text style={styles.buttonText}>6 Pickups Available</Text>
+          </Button>
+        </View>
       </View>
     );
   }
@@ -198,12 +203,28 @@ export default class MarketMap extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    backgroundColor: '#f6f6f6',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cards: {
     width: '100%',
     height: '100%',
+  }, 
+  button: {
+    backgroundColor: '#44beac',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: '10%'
+  },
+  innerButton: {
+    alignSelf: 'center',
+    flex: 1,
+    alignItems: 'center'
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 18,
   }
 });

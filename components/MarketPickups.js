@@ -3,18 +3,20 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import firebase from 'firebase';
 
 import MarketCards from './MarketCards';
+import MarketTitleCard from './MarketTitleCard'
 
 export default class MarketPickups extends React.Component {
   state = {};
 
   static navigationOptions = {
-    title: 'Pickups Available',
+    title: 'Market Details',
   };
 
   componentDidMount() {
     // basically this.props.{name}, but navigator requires this
     const { params } = this.props.navigation.state;
     const marketName = params ? params.marketName : null;
+    this.setState({marketName: marketName});
 
     let marketPickups = [];
     let currentMarketCards = [];
@@ -75,6 +77,9 @@ export default class MarketPickups extends React.Component {
     return (
       <View>
         <ScrollView style={styles.cards}>
+        <MarketTitleCard
+          marketName={this.state.marketName}
+        />
           {this.state.marketCards}
         </ScrollView>
       </View>

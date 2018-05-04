@@ -6,9 +6,7 @@ import MarketCards from './MarketCards';
 
 export default class MarketPickups extends React.Component {
   state = {};
-
-
-
+  
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
     
