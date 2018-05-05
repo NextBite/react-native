@@ -25,6 +25,7 @@ export default class MarketMap extends React.Component {
   componentDidMount() {
     let usersPosition = {};
     let countOfPickups = this.state.countOfPickups;
+    
     // get user's current location on load of map
     navigator.geolocation.getCurrentPosition(position => {
       usersPosition = position;
