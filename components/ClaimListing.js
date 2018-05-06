@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
 
@@ -44,7 +44,6 @@ export default class MarketPickups extends React.Component {
   }
 
   render() {
-    console.log(this.state.boxes)
     return (
       <View style={styles.container}>
         <Text>Are you sure you want to claim this pickup?</Text>
@@ -58,7 +57,7 @@ export default class MarketPickups extends React.Component {
         <View style={styles.button}>
           <Button transparent
             style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('MarketList', { marketCards: this.state.mapCards })}
+            onPress={() => this.props.navigation.navigate('DropOffLocation', { location: this.state.location })}
           >
             <Text style={styles.buttonText}>Next</Text>
           </Button>
