@@ -23,6 +23,28 @@
             ]
         },
         {
+            "outputFile": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-land-v4/values-xlarge-land-v4.xml",
+            "map": [
+                {
+                    "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/feafe421ffff4d685e5c37f83a53d1ae/res/values-xlarge-land/values-xlarge-land.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "288",
+                        "endColumns": "63",
+                        "endOffsets": "347"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "63",
+                        "endOffsets": "114"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/Lisa/Desktop/NextBite/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-land-v4/values-xlarge-land-v4.xml",
             "map": [
                 {

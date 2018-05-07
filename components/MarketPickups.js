@@ -3,13 +3,15 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import firebase from 'firebase';
 
 import MarketCards from './MarketCards';
-import MarketTitleCard from './MarketTitleCard'
+import MarketTitleCard from './MarketTitleCard';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class MarketPickups extends React.Component {
   state = {};
 
   static navigationOptions = {
     title: 'Market Details',
+    headerLeft: <Icon onPress={() => props.navigation.navigate('DrawerOpen')} name= "menu" style={{marginLeft: 20}} size={28} color="#ffffff" />
   };
 
   componentDidMount() {
