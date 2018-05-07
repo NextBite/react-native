@@ -6,6 +6,7 @@ import MarketPickups from './components/MarketPickups';
 import ClaimListing from './components/ClaimListing';
 import MarketList from './components/MarketList';
 import DropOffLocation from './components/DropOffLocation';
+import SuccessfulClaim from './components/SuccessfulClaim';
 
 const App = StackNavigator({
   Home: { screen: MarketMap,
@@ -15,7 +16,8 @@ const App = StackNavigator({
   MarketPickups: { screen: MarketPickups },
   ClaimListing: { screen: ClaimListing },
   MarketList: { screen: MarketList },
-  DropOffLocation: { screen: DropOffLocation }
+  DropOffLocation: { screen: DropOffLocation },
+  SuccessfulClaim: { screen: SuccessfulClaim },
 },
   {
     initialRouteName: 'Home',

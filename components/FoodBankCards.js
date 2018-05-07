@@ -13,7 +13,7 @@ export default class FoodBankCards extends React.Component {
               <Text>{this.props.title}</Text>
               <Text note style={styles.subText}>{this.props.distance}</Text>
               <Text style={styles.regText}>
-                text
+                food bank info 
               </Text>
             </Body>
           </Left>
@@ -21,7 +21,7 @@ export default class FoodBankCards extends React.Component {
         <CardItem>
           <Left>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('ClaimListing')}
+              onPress={() => this.props.navigation.navigate('SuccessfulClaim', { nonprofit: this.props.title, coords: this.props.coords })}
             >
               <Text>Choose Location</Text>
             </Button>

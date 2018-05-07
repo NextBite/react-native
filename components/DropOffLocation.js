@@ -25,9 +25,6 @@ export default class DropOffLocation extends React.Component {
     fetch('https://raw.githubusercontent.com/lisakoss/NextBite/claim-donation/FoodBanks.json')
       .then(res => res.json())
       .then(parsedRes => {
-        console.log("parsedres", parsedRes);
-        console.log(Object.keys(parsedRes));
-
         for (let key = 0; key < Object.keys(parsedRes).length; key++) {
           let responseDistance = "";
           fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${marketLat},${marketLong}&destinations=${parseFloat(parsedRes[key].latitude)},${parseFloat(parsedRes[key].longitude)}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
@@ -35,7 +32,6 @@ export default class DropOffLocation extends React.Component {
             .then(parsedDistance => {
               foodBankInfo.push([parsedRes[key].name, parsedDistance.rows[0].elements[0].distance.text]);
               this.setState({ foodBankDistance: foodBankInfo });
-              console.log("ds", foodBankInfo)
 
               if ((key + 1) == Object.keys(parsedRes).length) {
                 let sortableDistance = this.state.foodBankDistance;
@@ -52,7 +48,9 @@ export default class DropOffLocation extends React.Component {
                     <FoodBankCards
                       title={sortableDistance[i][0]}
                       distance={sortableDistance[i][1]}
+                      coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
                       key={sortableDistance[i][0]}
+                      navigation={this.props.navigation}
                     />
                   );
                 }
@@ -62,8 +60,6 @@ export default class DropOffLocation extends React.Component {
             .catch(err => console.log(err));
         }
       })
-      .then(() => {
-      })
   }
 
   render() {
@@ -72,14 +68,6 @@ export default class DropOffLocation extends React.Component {
         <ScrollView style={styles.cards}>
           {this.state.foodBankCards}
         </ScrollView>
-        <View style={styles.button}>
-          <Button transparent
-            style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('MarketList')}
-          >
-            <Text style={styles.buttonText}>Next</Text>
-          </Button>
-        </View>
       </View>
     );
   }
@@ -89,22 +77,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f6f6f6',
-  },
-  button: {
-    backgroundColor: '#44beac',
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    height: '10%'
-  },
-  innerButton: {
-    alignSelf: 'center',
-    flex: 1,
-    alignItems: 'center'
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: 18,
   },
   cards: {
     width: '100%',
