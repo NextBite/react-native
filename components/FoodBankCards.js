@@ -13,6 +13,8 @@ export default class FoodBankCards extends React.Component {
               <Text>{this.props.title}</Text>
               <Text note style={styles.subText}>{this.props.distance}</Text>
               <Text style={styles.regText}>
+                 {this.props.coords.lat}
+                 {this.props.coords.long}
                 food bank info 
               </Text>
             </Body>

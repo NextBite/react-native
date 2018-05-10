@@ -25,7 +25,7 @@ export default class SuccessfulClaim extends React.Component {
       <View style={styles.container}>
         <Image
           style={{width: '100%', height: '50%'}}
-          source={{uri: 'https://maps.googleapis.com/maps/api/staticmap?center=47.564761,-122.376998&zoom=13&size=400x400&scale=2&maptype=roadmap&markers=color:red|label:D|47.564761,-122.376998&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE'}}
+          source={{uri: `https://maps.googleapis.com/maps/api/staticmap?center=${coords.lat},${coords.long}&zoom=16&size=400x400&scale=2&maptype=roadmap&markers=color:red|label:S|${coords.lat},${coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`}}
         />
         <Text>You're delivering this box of donations to {nonprofit}!</Text>
       </View>

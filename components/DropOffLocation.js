@@ -20,6 +20,7 @@ export default class DropOffLocation extends React.Component {
     let marketLat = parseFloat(location.split(",")[1]);
     let marketLong = parseFloat(location.split(",")[2]);
     let foodBankInfo = []; // holds the name and distance of non-profit from current user's market
+    let currentFoodBankCards = [];
 
     // fetch the non-profits
     fetch('https://raw.githubusercontent.com/lisakoss/NextBite/claim-donation/FoodBanks.json')
@@ -30,31 +31,32 @@ export default class DropOffLocation extends React.Component {
           fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${marketLat},${marketLong}&destinations=${parseFloat(parsedRes[key].latitude)},${parseFloat(parsedRes[key].longitude)}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
             .then(res => res.json())
             .then(parsedDistance => {
-              foodBankInfo.push([parsedRes[key].name, parsedDistance.rows[0].elements[0].distance.text]);
-              this.setState({ foodBankDistance: foodBankInfo });
+                currentFoodBankCards.push(
+                  <FoodBankCards
+                    title={parsedRes[key].name}
+                    distance={parseFloat(parsedDistance.rows[0].elements[0].distance.text)}
+                    coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
+                    key={parsedRes[key].name}
+                    navigation={this.props.navigation}
+                  />
+                );
 
-              if ((key + 1) == Object.keys(parsedRes).length) {
-                let sortableDistance = this.state.foodBankDistance;
 
-                sortableDistance.sort(function (a, b) {
-                  return parseFloat(a[1].split(" ")[0]) - parseFloat(b[1].split(" ")[0]);
+              if (key + 1 == Object.keys(parsedRes).length) {
+                // sort the cards by smallest to largest according to distance away 
+                // from the market the user picked
+                currentFoodBankCards.sort(function (a, b) {
+                  return parseFloat(a.props.distance) - parseFloat(b.props.distance);
                 });
 
-                let currentFoodBankCards = [];
 
+                let foodBankCardsShown = [];
                 // show closest 5; abitrary number
                 for (let i = 0; i < 5; i++) {
-                  currentFoodBankCards.push(
-                    <FoodBankCards
-                      title={sortableDistance[i][0]}
-                      distance={sortableDistance[i][1]}
-                      coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
-                      key={sortableDistance[i][0]}
-                      navigation={this.props.navigation}
-                    />
-                  );
+                  /// code here
                 }
-                this.setState({ foodBankCards: currentFoodBankCards });
+
+                this.setState({ foodBankCards: currentFoodBankCards })
               }
             })
             .catch(err => console.log(err));
