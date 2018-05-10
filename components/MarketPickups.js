@@ -10,8 +10,9 @@ export default class MarketPickups extends React.Component {
   state = {};
 
   static navigationOptions = {
+    drawerLabel: 'Home',
     title: 'Market Details',
-    headerLeft: <Icon onPress={() => props.navigation.navigate('DrawerOpen')} name= "menu" style={{marginLeft: 20}} size={28} color="#ffffff" />
+    headerLeft: <Icon onPress={() => navigation.navigate('DrawerOpen')} name= "menu" style={{marginLeft: 20, color: "#fff"}} size={28} />
   };
 
   componentDidMount() {

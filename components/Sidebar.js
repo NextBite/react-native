@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
-import { Drawer } from 'native-base';
-import SideBar from './yourPathToSideBar';
+import {
+  Text,
+} from 'react-native';
+import {Content} from 'native-base';
 
-export default class DrawerExample extends Component {
+export default class Sidebar extends Component {
   render() {
-    closeDrawer = () => {
-      this.drawer._root.close()
-    };
-    openDrawer = () => {
-      this.drawer._root.open()
-    };
     return (
-      <Drawer
-        ref={(ref) => { this.drawer = ref; }}
-        content={<SideBar navigator={this.navigator} />}
-        onClose={() => this.closeDrawer()} >
-      // Main View
-      </Drawer>
+            <Text>Drawer</Text>
     );
   }
 }

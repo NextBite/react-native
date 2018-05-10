@@ -1,13 +1,17 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, Button, Text } from 'react-native';
 import { Icon } from 'native-base';
+import { StackNavigator, NavigationActions } from 'react-navigation';
+
+import DrawerExample from './Drawer';
+
 
 export default class MarketList extends React.Component {
   state = {};
 
   static navigationOptions = {
     title: 'Markets with Pickups',
-    headerLeft: <Icon onPress={() => props.navigation.navigate('DrawerOpen')} name= "menu" style={{marginLeft: 20}} size={28} color="#ffffff" />
+    headerLeft: <Icon onPress={() => this.props.navigation.navigate('DrawerOpen')} name= "menu" style={{marginLeft: 20, color: "#fff"}} size={28} />
   };
 
   render() {
@@ -16,7 +20,12 @@ export default class MarketList extends React.Component {
     const marketCards = params ? params.marketCards : null;
 
     return (
+      
       <ScrollView style={styles.cards}>
+      <Button
+        onPress={() => this.props.navigation.navigate('DrawerOpen')}
+        title="Go back home"
+      />
         {marketCards}
       </ScrollView>
     );

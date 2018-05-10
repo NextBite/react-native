@@ -1,22 +1,22 @@
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
+
+import MapNavigator from './components/MapNavigator';
+import MarketNavigator from './components/MarketNavigator';
+import ProfileNavigator from './components/ProfileNavigator';
 
 import MarketMap from './components/MarketMap';
 import MarketPickups from './components/MarketPickups';
 import ClaimListing from './components/ClaimListing';
 import MarketList from './components/MarketList';
 
-const App = StackNavigator({
-  Home: { screen: MarketMap,
-    navigationOptions: {
-      header: null,
-    } },
-  MarketPickups: { screen: MarketPickups },
-  ClaimListing: { screen: ClaimListing },
-  MarketList: { screen: MarketList },
+const App = DrawerNavigator({
+  RescueFood: { screen: MapNavigator },
+  Markets: { screen: MarketNavigator },
+  Profile: { screen: ProfileNavigator }
 },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'RescueFood',
     /* The header config from HomeScreen is now here */
     navigationOptions: {
       headerStyle: {

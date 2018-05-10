@@ -28,6 +28,7 @@ export default class usersMap extends React.Component {
         region={this.props.userLocation}
         showsUserLocation={true}
         showsMyLocationButton={true}
+        onMapReady = { () => console.log("xxxx") }
       >
         {this.props.markers}
       </MapView>

@@ -22,21 +22,49 @@ export default class MarketMap extends React.Component {
     title: 'Rescue Food',
   };
 
-  componentDidMount() {
+  componentWillMount() {
     let usersPosition = {};
     let countOfPickups = this.state.countOfPickups;
     // get user's current location on load of map
+
     navigator.geolocation.getCurrentPosition(position => {
-      usersPosition = position;
-      this.setState({
-        userLocation: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          latitudeDelta: 0.0622,
-          longitudeDelta: 0.0421,
+      console.log("possssss", position);
+      if (position.coords.latitude != undefined) {
+        console.log("pos", position);
+        usersPosition = position;
+        this.setState({
+          userLocation: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.0622,
+            longitudeDelta: 0.0421,
+          }
+        });
+      } else {
+        
+        usersPosition = {
+          coords: {
+            accuracy: 20,
+            altitude: 0,
+            heading: 0,
+            latitude: 47.7196,
+            longitude: -122.297,
+            speed: 0
+          },
+          mocked: false,
+          timestamp: 1525895041000,
         }
-      });
+        this.setState({
+          userLocation: {
+            latitude: 47.7196,
+            longitude: -122.297,
+            latitudeDelta: 0.0622,
+            longitudeDelta: 0.0421,
+          }
+        });
+      }
     });
+
 
     // get the listings from the database
     /* Add a listener for changes to the listings object, and save in the state. */
@@ -110,7 +138,7 @@ export default class MarketMap extends React.Component {
                   )
 
                   countOfPickups += (marketKeys.length - 2);
-                  this.setState({countOfPickups: countOfPickups });
+                  this.setState({ countOfPickups: countOfPickups });
 
                   // sort the cards by smallest to largest according to distance away from user
                   currentMapCards.sort(function (a, b) {
@@ -125,32 +153,6 @@ export default class MarketMap extends React.Component {
         }
       })
     });
-  }
-
-  // when get location button is pressed, new location is calculated
-  // plus coords are added to db
-  getUserLocationHandler = () => {
-    navigator.geolocation.getCurrentPosition(position => {
-      this.setState({
-        userLocation: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          latitudeDelta: 0.0622,
-          longitudeDelta: 0.0421,
-        }
-      });
-
-      // one argument only would send a GET request instead
-      fetch('https://nextbite-f8314.firebaseio.com/places.json', {
-        method: 'POST',
-        body: JSON.stringify({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        })
-      })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-    }, err => console.log(err));
   }
 
   getUserPlacesHandler = () => {
@@ -215,7 +217,7 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     height: '100%',
-  }, 
+  },
   button: {
     backgroundColor: '#44beac',
     position: 'absolute',
