@@ -53,10 +53,10 @@ export default class DropOffLocation extends React.Component {
                 let foodBankCardsShown = [];
                 // show closest 5; abitrary number
                 for (let i = 0; i < 5; i++) {
-                  /// code here
+                  foodBankCardsShown.push(currentFoodBankCards[i]);
                 }
 
-                this.setState({ foodBankCards: currentFoodBankCards })
+                this.setState({ foodBankCards: foodBankCardsShown })
               }
             })
             .catch(err => console.log(err));
