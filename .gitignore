@@ -19,6 +19,7 @@ build/
 .gradle
 local.properties
 *.iml
+/android/
 
 npm-debug.log*
 yarn-debug.log*
