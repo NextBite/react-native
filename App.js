@@ -29,9 +29,8 @@ const DrawerNavigation = StackNavigator({
 })
 
 // login stack
-const LoginStack = StackNavigator({
+const MarketStack = StackNavigator({
   MarketMap: { screen: MapNavigator },
-  MarketList: { screen: MarketNavigator }
 }, {
   navigationOptions: {
     headerStyle: {backgroundColor: 'red'},
@@ -42,13 +41,13 @@ const LoginStack = StackNavigator({
 
 // Manifest of possible screens
 const App = StackNavigator({
-  loginStack: { screen: LoginStack },
+  MarketMap: { screen: MarketStack },
   drawerStack: { screen: DrawerNavigation }
 }, {
   // Default config for all screens
   headerMode: 'none',
   title: 'Main',
-  initialRouteName: 'loginStack'
+  initialRouteName: 'MarketMap'
 })
 
 export default App
