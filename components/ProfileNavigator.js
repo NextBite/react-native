@@ -6,7 +6,7 @@ import MarketMap from './MarketMap';
 
 const ProfileNavigator = StackNavigator({
     Profile: { screen: Profile },
-    MarketMap: { screen: MarketMap },
+
   },
     {
       initialRouteName: 'Profile',

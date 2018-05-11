@@ -1,54 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/Lisa/Desktop/NextBite/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w480dp-v13/values-w480dp-v13.xml",
-            "map": [
-                {
-                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/res/values-w480dp/values-w480dp.xml",
-                    "from": {
-                        "startLines": "4,7",
-                        "startColumns": "4,4",
-                        "startOffsets": "282,572",
-                        "endColumns": "61,71",
-                        "endOffsets": "339,639"
-                    },
-                    "to": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,117",
-                        "endColumns": "61,71",
-                        "endOffsets": "112,184"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w480dp-v13/values-w480dp-v13.xml",
             "map": [
                 {
                     "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/feafe421ffff4d685e5c37f83a53d1ae/res/values-w480dp/values-w480dp.xml",
-                    "from": {
-                        "startLines": "4,7",
-                        "startColumns": "4,4",
-                        "startOffsets": "282,572",
-                        "endColumns": "61,71",
-                        "endOffsets": "339,639"
-                    },
-                    "to": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,117",
-                        "endColumns": "61,71",
-                        "endOffsets": "112,184"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w480dp-v13/values-w480dp-v13.xml",
-            "map": [
-                {
-                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/res/values-w480dp/values-w480dp.xml",
                     "from": {
                         "startLines": "4,7",
                         "startColumns": "4,4",

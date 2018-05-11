@@ -3,16 +3,9 @@ import { StyleSheet, ScrollView, Button, Text } from 'react-native';
 import { Icon } from 'native-base';
 import { StackNavigator, NavigationActions } from 'react-navigation';
 
-import DrawerExample from './Drawer';
-
 
 export default class MarketList extends React.Component {
   state = {};
-
-  static navigationOptions = {
-    title: 'Markets with Pickups',
-    headerLeft: <Icon onPress={() => this.props.navigation.navigate('DrawerOpen')} name= "menu" style={{marginLeft: 20, color: "#fff"}} size={28} />
-  };
 
   render() {
     // basically this.props.{name}, but navigator requires this

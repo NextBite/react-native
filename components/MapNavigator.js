@@ -2,6 +2,7 @@ import React from 'react';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
 import MarketMap from './MarketMap';
+import MarketNavigator from './MarketNavigator';
 
 const MapNavigator = StackNavigator({
     MarketMap: { screen: MarketMap },

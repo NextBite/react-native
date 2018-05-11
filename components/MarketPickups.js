@@ -9,11 +9,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 export default class MarketPickups extends React.Component {
   state = {};
 
-  static navigationOptions = {
-    drawerLabel: 'Home',
-    title: 'Market Details',
-    headerLeft: <Icon onPress={() => navigation.navigate('DrawerOpen')} name= "menu" style={{marginLeft: 20, color: "#fff"}} size={28} />
-  };
 
   componentDidMount() {
     // basically this.props.{name}, but navigator requires this

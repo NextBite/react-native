@@ -10,21 +10,7 @@ const MarketNavigator = StackNavigator({
     MarketList: { screen: MarketList },
     MarketPickups: { screen: MarketPickups },
     ClaimListing: { screen: ClaimListing },
-    MarketMap: { screen: MarketMap },
   },
-    {
-      initialRouteName: 'MarketList',
-      /* The header config from HomeScreen is now here */
-      navigationOptions: {
-        headerStyle: {
-          backgroundColor: '#44beac',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      },
-    }
   );
 
   export default MarketNavigator;
