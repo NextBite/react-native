@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'native-base';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
 
@@ -14,6 +15,7 @@ export default class MarketMap extends React.Component {
     markets: [],
     mapCards: [],
     marketDistance: [],
+    countOfPickups: 0,
   }
 
   static navigationOptions = {
@@ -22,6 +24,8 @@ export default class MarketMap extends React.Component {
 
   componentDidMount() {
     let usersPosition = {};
+    let countOfPickups = this.state.countOfPickups;
+    
     // get user's current location on load of map
     navigator.geolocation.getCurrentPosition(position => {
       usersPosition = position;
@@ -86,8 +90,6 @@ export default class MarketMap extends React.Component {
             if ((i + 3) == marketKeys.length) {
               let currentMapCards = this.state.mapCards;
               this.setState({ currentMarket: market.key })
-              console.log("market before card", market);
-              console.log(usersPosition.coords)
 
               // calls the google api to calculate distance between user's location 
               // and the geo markers (markets)
@@ -108,8 +110,11 @@ export default class MarketMap extends React.Component {
                     />
                   )
 
+                  countOfPickups += (marketKeys.length - 2);
+                  this.setState({countOfPickups: countOfPickups });
+
                   // sort the cards by smallest to largest according to distance away from user
-                  currentMapCards.sort(function(a, b) {
+                  currentMapCards.sort(function (a, b) {
                     return parseFloat(a.props.distance) - parseFloat(b.props.distance);
                   });
 
@@ -127,7 +132,6 @@ export default class MarketMap extends React.Component {
   // plus coords are added to db
   getUserLocationHandler = () => {
     navigator.geolocation.getCurrentPosition(position => {
-      console.log(position);
       this.setState({
         userLocation: {
           latitude: position.coords.latitude,
@@ -189,10 +193,14 @@ export default class MarketMap extends React.Component {
     return (
       <View style={styles.container}>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
-
-        <ScrollView style={styles.cards}>
-          {this.state.mapCards}
-        </ScrollView>
+        <View style={styles.button}>
+          <Button transparent
+            style={styles.innerButton}
+            onPress={() => this.props.navigation.navigate('MarketList', { marketCards: this.state.mapCards })}
+          >
+            <Text style={styles.buttonText}>{this.state.countOfPickups} Pickups Available</Text>
+          </Button>
+        </View>
       </View>
     );
   }
@@ -201,12 +209,28 @@ export default class MarketMap extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    backgroundColor: '#f6f6f6',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cards: {
     width: '100%',
     height: '100%',
+  }, 
+  button: {
+    backgroundColor: '#44beac',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: '10%'
+  },
+  innerButton: {
+    alignSelf: 'center',
+    flex: 1,
+    alignItems: 'center'
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 18,
   }
 });

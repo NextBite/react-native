@@ -21,6 +21,7 @@ export default class usersMap extends React.Component {
     })*/
 
     return (
+      <View style={styles.mapContainer}>
       <MapView style={styles.map}
         provider="google"
         initialRegion={this.props.userLocation}
@@ -30,17 +31,18 @@ export default class usersMap extends React.Component {
       >
         {this.props.markers}
       </MapView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   mapContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    width: '100%',
+    height: '100%',
   },
   map: {
     width: '100%',
-    height: '60%'
+    height: '100%'
   }
 })

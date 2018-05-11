@@ -21,8 +21,8 @@ export default class MapCards extends React.Component {
         <CardItem>
           <Left>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('LocationPickups')
-              }>
+              onPress={() => this.props.navigation.navigate('MarketPickups', { marketName: this.props.title })}
+            >
               <Text>Pickups</Text>
             </Button>
           </Left>
