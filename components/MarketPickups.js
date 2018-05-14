@@ -12,7 +12,7 @@ export default class MarketPickups extends React.Component {
     title: 'Market Details',
   };
 
-  componentDidMount() {
+  componentWillMount() {
     // basically this.props.{name}, but navigator requires this
     const { params } = this.props.navigation.state;
     const marketName = params ? params.marketName : null;
@@ -20,12 +20,15 @@ export default class MarketPickups extends React.Component {
 
     let marketPickups = [];
     let currentMarketCards = [];
+    let pickupObj = "";
 
     // query the pickup listings within a particular market
     let marketRef = firebase.database().ref(`markets/${marketName}`);
     marketRef.on('value', (snapshot) => {
       snapshot.forEach(function (child) {
-        let pickupObj = child.val();
+        pickupObj = child.val();
+
+        console.log("sdfkjsd", snapshot.child("-LCRYP9WHktOMrf_hp5A").val())
 
         // this ensures that the coords of the market aren't added to
         // the cards
@@ -45,6 +48,16 @@ export default class MarketPickups extends React.Component {
             pickupsObj[child.key] = child.val();
           });
 
+          // check if any of the listings are expired
+          // when a user visits a page that is when listings must be deleted
+          // ***** no db func for this feature
+          if(new Date(pickupsObj["expirationDate"]) <  new Date()) {
+            console.log("expired");
+
+            console.log("id?", pickupObj);
+            //listingsRef.remove();
+            //marketRef.child(pickupObj.toString()).remove();
+          } else {
           // retrieve vendor's name for the listing
           let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
           usersRef.on('value', (snapshot) => {
@@ -72,6 +85,7 @@ export default class MarketPickups extends React.Component {
 
             this.setState({ marketCards: currentMarketCards });
           });
+          }
         });
       });
     });
