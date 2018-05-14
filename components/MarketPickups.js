@@ -66,7 +66,11 @@ export default class MarketPickups extends React.Component {
               navigation={this.props.navigation}
             />);
 
-            this.setState({ marketCards: currentMarketCards })
+            currentMarketCards.sort(function (a, b) {
+              return new Date(a.props.expiration) - new Date(b.props.expiration);
+            });
+
+            this.setState({ marketCards: currentMarketCards });
           });
         });
       });

@@ -56,7 +56,7 @@ export default class DropOffLocation extends React.Component {
                   foodBankCardsShown.push(currentFoodBankCards[i]);
                 }
 
-                this.setState({ foodBankCards: foodBankCardsShown })
+                this.setState({ foodBankCards: foodBankCardsShown });
               }
             })
             .catch(err => console.log(err));
