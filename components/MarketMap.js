@@ -4,9 +4,11 @@ import { Button } from 'native-base';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
 
+import { Icon } from 'native-base';
 import FetchLocation from './FetchLocation';
 import UsersMap from './UsersMap';
 import MapCards from './MapCards';
+import HeaderComponent from './HeaderComponent';
 
 export default class MarketMap extends React.Component {
   state = {
@@ -18,9 +20,19 @@ export default class MarketMap extends React.Component {
     countOfPickups: 0,
   }
 
-  static navigationOptions = {
-    title: 'Rescue Food',
-  };
+  /*static navigationOptions = ({ navigation }) => {
+    let drawerLabel = 'Rescue Food';
+    let drawerIcon = () => (
+      <Icon 
+        name= "menu" 
+        style={{marginLeft: 20, color: "#fff", backgroundColor: '#44beac'}} 
+        size={28} 
+      />
+    );
+    return { drawerLabel, drawerIcon};
+  }
+
+  <HeaderComponent {...this.props} />*/
 
   componentWillMount() {
     let usersPosition = {};
@@ -192,6 +204,8 @@ export default class MarketMap extends React.Component {
 
 
     return (
+
+      
       <View style={styles.container}>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
         <View style={styles.button}>

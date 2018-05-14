@@ -7,6 +7,18 @@ import { StackNavigator, NavigationActions } from 'react-navigation';
 export default class MarketList extends React.Component {
   state = {};
 
+  static navigationOptions = ({ navigation }) => {
+    let drawerLabel = 'Market List';
+    let drawerIcon = () => (
+      <Icon 
+        name= "menu" 
+        style={{marginLeft: 20, color: "#fff", backgroundColor: '#44beac'}} 
+        size={28} 
+      />
+    );
+    return { drawerLabel, drawerIcon};
+  }
+
   render() {
     // basically this.props.{name}, but navigator requires this
     const { params } = this.props.navigation.state;
