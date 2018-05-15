@@ -41,76 +41,95 @@ export default class MarketMap extends React.Component {
 
     // get the listings from the database
     /* Add a listener for changes to the listings object, and save in the state. */
-    let marketsMarkersRef = firebase.database().ref('markets');
-    marketsMarkersRef.on('value', (snapshot) => {
-      let marketsArray = [];
-      snapshot.forEach(function (child) {
-        let market = child.val();
-        market.key = child.key;
-        marketsArray.push(market);
-      });
-      //listingArray.sort((a,b) => b.time - a.time); //reverse order
-      this.setState({ markets: marketsArray });
-    });
-
+    let marketsArray = [];
     let marketsRef = firebase.database().ref('markets');
-
     marketsRef.on('value', (snapshot) => {
-      let marketsArray = [];
+
 
       snapshot.forEach(function (child) {
-        let marketListing = child.val();
+        console.log("child val dsfjkdsljfkdsf", child.val())
+        let marketListing = {};
+        
+        marketListing["contents"] = child.val();
 
-        marketListing.key = child.key;
+        marketListing["key"] = child.key;
+        console.log("SINGLELSLISTINH", marketListing);
         marketsArray.push(marketListing);
+        console.log("maklefdslkfgdksgldfgklfd", marketsArray)
       });
 
+      this.setState({ markets: marketsArray });
+
+      console.log("BEFORE", marketsArray);
       marketsArray.map((market) => {
-        let marketKeys = Object.keys(market);
+        console.log("SINDIIEJFSDKLJFLKSDJFLJSDFLKSJDLFSDKF", market)
+        let marketKeys = Object.keys(market.contents);
+        console.log(marketKeys);
 
         // take all keys except "key", which is just the unique id of the db obj, and "coords", which are the coordinates
-        for (let i = 0; i < marketKeys.length - 2; i++) {
-          let currentMarkets = this.state.markets;
+        for (let i = 0; i < marketKeys.length - 1; i++) {
+          let marketListing = "";
 
-          // only add market to the current markets if it hasn't been already
-          if (!currentMarkets.includes(market.key)) {
-            currentMarkets.push(market.key);
-          }
+          console.log("WHAT IS MARKET", market);
 
           let marketListingsRef = firebase.database().ref(`markets/${market.key}/${marketKeys[i]}`);
-          marketListingsRef.on('value', (snapshot) => {
-            let marketListingsArray = [];
+          console.log("fot loop", marketKeys[i])
+
+
+
+          // not doing anything
+          marketListingsRef.once('value')
+          .then(snapshot => {
+
+            console.log("ONCE SNAPSHOT", snapshot.child("expirationDate").val());
+            console.log("snapshot2", snapshot.child("expired").val())
+
+            // checks all posts to determine if expired
+            if(new Date(snapshot.child("expirationDate").val()) <  new Date()) {
+              //marketListingsRef.update({expired: "yes"})
+              marketListingsRef.remove();
+            }
+            
+            /*let marketListingsArray = [];
             snapshot.forEach(function (child) {
-              let marketListing = child.val();
+              marketListing = child.val();
+              console.log("child vallllll33", child.val());
               marketListingsArray.push(marketListing);
-            });
+            });*/
+
 
             // last two entires are the coords and keys, so skip over those to check
             // if ending has been reached yet
-            if ((i + 3) == marketKeys.length) {
+            console.log("WHAT IS THIS MARKET KEYS", marketKeys)
+            console.log("the length", marketKeys.length);
+            console.log("the i", i + 2);
+            if ((i + 2) == marketKeys.length) {
+              console.log("AM I INSIDIEI EITJDLJFKSD??")
               let currentMapCards = this.state.mapCards;
               this.setState({ currentMarket: market.key })
 
               // calls the google api to calculate distance between user's location 
               // and the geo markers (markets)
               let responseDistance = "";
-              fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${usersPosition.coords.latitude},${usersPosition.coords.longitude}&destinations=${market.coords.lat},${market.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
+              fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${usersPosition.coords.latitude},${usersPosition.coords.longitude}&destinations=${market.contents.coords.lat},${market.contents.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
                 .then(res => res.json())
                 .then(parsedRes => {
                   responseDistance = parsedRes.rows[0].elements[0].distance.text;
                 })
                 .then(() => {
+                  console.log("keys", marketKeys);
+                  console.log("length", marketKeys.length)
                   currentMapCards.push(
                     <MapCards
                       title={market.key}
-                      count={marketKeys.length - 2}
+                      count={marketKeys.length - 1}
                       key={market.key}
                       distance={responseDistance}
                       navigation={this.props.navigation}
                     />
                   )
 
-                  countOfPickups += (marketKeys.length - 2);
+                  countOfPickups += (marketKeys.length - 1);
                   this.setState({countOfPickups: countOfPickups });
 
                   // sort the cards by smallest to largest according to distance away from user
@@ -177,8 +196,11 @@ export default class MarketMap extends React.Component {
   render() {
     // generate markers for markets with current listings for the map
     // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
-    let markers = this.state.markets.slice(0, (this.state.markets.length / 2) + 1).map((market) => {
-      let pos = { latitude: market.coords.lat, longitude: market.coords.long }
+    console.log("STATE", this.state.markets);
+    console.log("count", Math.ceil((this.state.markets.length / 2)))
+    let markers = this.state.markets.slice(0, this.state.markets.length).map((market) => {
+      console.log("NENWNNEW MARKET", market);
+      let pos = { latitude: market.contents.coords.lat, longitude: market.contents.coords.long }
 
       return (
         <MapView.Marker

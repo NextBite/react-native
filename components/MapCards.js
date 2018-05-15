@@ -21,9 +21,10 @@ export default class MapCards extends React.Component {
         <CardItem>
           <Left>
             <Button transparent
+              style={styles.innerButton}
               onPress={() => this.props.navigation.navigate('MarketPickups', { marketName: this.props.title })}
             >
-              <Text>Pickups</Text>
+              <Text style={styles.buttonText}>View</Text>
             </Button>
           </Left>
         </CardItem>
@@ -42,5 +43,15 @@ const styles = StyleSheet.create({
   },
   regText: {
     fontSize: 14,
-  }
+  },
+  innerButton: {
+    backgroundColor: '#44beac',
+    alignSelf: 'center',
+    alignItems: 'center',
+    paddingRight: 0
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 14
+  },
 });
