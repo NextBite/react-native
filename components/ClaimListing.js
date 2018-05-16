@@ -57,7 +57,7 @@ export default class MarketPickups extends React.Component {
         <View style={styles.button}>
           <Button transparent
             style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('DropOffLocation', { location: this.state.location })}
+            onPress={() => this.props.navigation.navigate('DropOffLocation', { location: this.state.location, listingId: this.state.listingId })}
           >
             <Text style={styles.buttonText}>Next</Text>
           </Button>

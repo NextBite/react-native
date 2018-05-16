@@ -16,6 +16,7 @@ export default class DropOffLocation extends React.Component {
     const { params } = this.props.navigation.state;
     // includes name, lat, long separated by commas
     const location = params ? params.location : null;
+    const listingId = params ? params.listingId : null;
 
     let marketLat = parseFloat(location.split(",")[1]);
     let marketLong = parseFloat(location.split(",")[2]);
@@ -36,6 +37,7 @@ export default class DropOffLocation extends React.Component {
                     title={parsedRes[key].name}
                     distance={parseFloat(parsedDistance.rows[0].elements[0].distance.text)}
                     coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
+                    listingId={listingId}
                     key={parsedRes[key].name}
                     navigation={this.props.navigation}
                   />
@@ -60,7 +62,7 @@ export default class DropOffLocation extends React.Component {
               }
             })
             .catch(err => console.log(err));
-        }
+        } 
       })
   }
 

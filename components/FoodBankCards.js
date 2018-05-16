@@ -21,7 +21,7 @@ export default class FoodBankCards extends React.Component {
         <CardItem>
           <Left>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('SuccessfulClaim', { nonprofit: this.props.title, coords: this.props.coords })}
+              onPress={() => this.props.navigation.navigate('SuccessfulClaim', { nonprofit: this.props.title, coords: this.props.coords, listingId: this.props.listingId })}
             >
               <Text>Choose Location</Text>
             </Button>
