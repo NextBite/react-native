@@ -39,10 +39,10 @@ let drawerNavigatorConfig = {
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',  
-    // drawerBackgroundColor: 'orange',
+    drawerBackgroundColor: 'orange',
     contentOptions: {
         activeTintColor: 'red',
-    },
+    }
 };
 
 const App = DrawerNavigator(routeConfigs, drawerNavigatorConfig);

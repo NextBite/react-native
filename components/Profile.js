@@ -17,8 +17,9 @@ static navigationOptions = ({ navigation }) => {
         size={28} 
       />
     );
-    return { drawerLabel, };
+    return { drawerLabel, drawerLabel };
   }
+
 
   render() {
     return (<View style={{
