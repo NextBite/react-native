@@ -18,8 +18,13 @@ export default class SuccessfulClaim extends React.Component {
 
     this.setState({nonprofit: nonprofit, coords: coords, listingId: listingId});
 
+    // update the listing entry to reflect that it's been 
+    // claimed by a volunteer
     firebase.database().ref().child(`listings/${listingId}`)
         .update({ claimed: "yes", dropoffLocation: coords });
+
+    // remove it from entires that are shown for each market
+    let marketListingsRef = firebase.database().ref(`markets/${market.key}/${marketKeys[i]}`);
   }
 
   render() {

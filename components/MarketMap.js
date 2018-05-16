@@ -47,64 +47,36 @@ export default class MarketMap extends React.Component {
 
 
       snapshot.forEach(function (child) {
-        console.log("child val dsfjkdsljfkdsf", child.val())
         let marketListing = {};
         
         marketListing["contents"] = child.val();
-
         marketListing["key"] = child.key;
-        console.log("SINGLELSLISTINH", marketListing);
         marketsArray.push(marketListing);
-        console.log("maklefdslkfgdksgldfgklfd", marketsArray)
       });
 
       this.setState({ markets: marketsArray });
 
-      console.log("BEFORE", marketsArray);
       marketsArray.map((market) => {
-        console.log("SINDIIEJFSDKLJFLKSDJFLJSDFLKSJDLFSDKF", market)
         let marketKeys = Object.keys(market.contents);
-        console.log(marketKeys);
+
+        console.log("Market Keys", marketKeys);
 
         // take all keys except "key", which is just the unique id of the db obj, and "coords", which are the coordinates
         for (let i = 0; i < marketKeys.length - 1; i++) {
           let marketListing = "";
-
-          console.log("WHAT IS MARKET", market);
-
           let marketListingsRef = firebase.database().ref(`markets/${market.key}/${marketKeys[i]}`);
-          console.log("fot loop", marketKeys[i])
-
-
 
           // not doing anything
           marketListingsRef.once('value')
           .then(snapshot => {
-
-            console.log("ONCE SNAPSHOT", snapshot.child("expirationDate").val());
-            console.log("snapshot2", snapshot.child("expired").val())
-
             // checks all posts to determine if expired
             if(new Date(snapshot.child("expirationDate").val()) <  new Date()) {
-              //marketListingsRef.update({expired: "yes"})
               marketListingsRef.remove();
             }
-            
-            /*let marketListingsArray = [];
-            snapshot.forEach(function (child) {
-              marketListing = child.val();
-              console.log("child vallllll33", child.val());
-              marketListingsArray.push(marketListing);
-            });*/
-
 
             // last two entires are the coords and keys, so skip over those to check
             // if ending has been reached yet
-            console.log("WHAT IS THIS MARKET KEYS", marketKeys)
-            console.log("the length", marketKeys.length);
-            console.log("the i", i + 2);
             if ((i + 2) == marketKeys.length) {
-              console.log("AM I INSIDIEI EITJDLJFKSD??")
               let currentMapCards = this.state.mapCards;
               this.setState({ currentMarket: market.key })
 
@@ -119,6 +91,7 @@ export default class MarketMap extends React.Component {
                 .then(() => {
                   console.log("keys", marketKeys);
                   console.log("length", marketKeys.length)
+                  console.log("THE KEY", market.key);
                   currentMapCards.push(
                     <MapCards
                       title={market.key}
@@ -196,10 +169,7 @@ export default class MarketMap extends React.Component {
   render() {
     // generate markers for markets with current listings for the map
     // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
-    console.log("STATE", this.state.markets);
-    console.log("count", Math.ceil((this.state.markets.length / 2)))
     let markers = this.state.markets.slice(0, this.state.markets.length).map((market) => {
-      console.log("NENWNNEW MARKET", market);
       let pos = { latitude: market.contents.coords.lat, longitude: market.contents.coords.long }
 
       return (
