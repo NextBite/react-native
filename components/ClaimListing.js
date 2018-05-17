@@ -23,8 +23,9 @@ export default class MarketPickups extends React.Component {
   componentWillMount() {
     const { params } = this.props.navigation.state;
     const listingId = params ? params.listingId : null;
+    const marketId = params ? params.marketId : null;
 
-    this.setState({ listingId: listingId })
+    this.setState({ listingId: listingId, marketId: marketId })
 
     // get information on the listing the volunteer is wanting to claim
     let listingRef = firebase.database().ref(`listings/${listingId}`);
@@ -57,7 +58,7 @@ export default class MarketPickups extends React.Component {
         <View style={styles.button}>
           <Button transparent
             style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('DropOffLocation', { location: this.state.location, listingId: this.state.listingId })}
+            onPress={() => this.props.navigation.navigate('DropOffLocation', { location: this.state.location, listingId: this.state.listingId, marketId: this.state.marketId })}
           >
             <Text style={styles.buttonText}>Next</Text>
           </Button>

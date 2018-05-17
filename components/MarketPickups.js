@@ -45,8 +45,9 @@ export default class MarketPickups extends React.Component {
       this.setState({ pickups: marketPickups });
 
       // query for all pickup listing details
-      let pickups = marketPickups.map((pickup) => {
-        let listingsRef = firebase.database().ref(`listings/${pickup}`);
+      let pickups = marketIds.map((pickup) => {
+        console.log("NEW PICKUP", pickup["listingId"])
+        let listingsRef = firebase.database().ref(`listings/${pickup["listingId"]}`);
         listingsRef.on('value', (snapshot) => {
           let pickupsObj = {};
           console.log("pickup", pickup);
@@ -54,9 +55,9 @@ export default class MarketPickups extends React.Component {
             pickupsObj[child.key] = child.val();
           });
 
-          pickupsObj["listingId"] = pickup;
+          pickupsObj["listingId"] = pickup["listingId"];
 
-          if (new Date(pickupsObj["expirationDate"]) > new Date() && pickupsObj["claimed"] === "no") {
+          if (new Date(pickupsObj["expirationDate"]) > new Date() /*&& pickupsObj["claimed"] === "no"*/) {
             // retrieve vendor's name for the listing
             let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
             usersRef.on('value', (snapshot) => {
@@ -67,14 +68,17 @@ export default class MarketPickups extends React.Component {
                 }
               });
 
+              console.log("MARKET ID DB KEY", pickup["dbKey"])
+
               currentMarketCards.push(<MarketCards
                 boxes={pickupsObj.boxes}
                 vendor={vendor}
                 expiration={pickupsObj.expirationDate}
                 weight={pickupsObj.weight}
                 tags={pickupsObj.tags}
-                listingId={pickup}
-                key={pickup}
+                marketId={pickup["dbKey"]}
+                listingId={pickup["listingId"]}
+                key={pickup["listingId"]}
                 navigation={this.props.navigation}
               />);
 

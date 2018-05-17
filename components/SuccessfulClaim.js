@@ -15,6 +15,11 @@ export default class SuccessfulClaim extends React.Component {
     const nonprofit = params ? params.nonprofit : null;
     const coords = params ? params.coords : null;
     const listingId = params ? params.listingId : null;
+    const marketId = params ? params.marketId : null;
+    const marketName = params ? params.marketName : null;
+
+    console.log("marketName", marketName.split(",")[0]);
+    console.log("marketId", marketId);
 
     this.setState({nonprofit: nonprofit, coords: coords, listingId: listingId});
 
@@ -24,7 +29,7 @@ export default class SuccessfulClaim extends React.Component {
         .update({ claimed: "yes", dropoffLocation: coords });
 
     // remove it from entires that are shown for each market
-    let marketListingsRef = firebase.database().ref(`markets/${market.key}/${marketKeys[i]}`);
+    firebase.database().ref(`markets/${marketName.split(",")[0]}/${marketId}`).remove();
   }
 
   render() {
