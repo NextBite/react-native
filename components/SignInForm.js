@@ -78,7 +78,7 @@ export default class SignInForm extends Component {
         return (
             <KeyboardAvoidingView style={styles.container} >
                 <Content>
-                    <Image source={require('../resources/img/logo.png')} style={styles.logo}/>
+                    <Image source={require('./resources/img/logo.png')} style={styles.logo}/>
                     <Form>
                         <InputField
                             label='Email'
@@ -111,7 +111,7 @@ export default class SignInForm extends Component {
                         style={styles.signUp}
                         onPress={() => this.props.navigation.navigate('SignUp')}
                     >
-                        <Text style={{ fontSize: 20, color: '#3E7C6D' }}>Sign up here</Text>
+                        <Text style={{ fontSize: 20, color: 'white' }}>Sign up here</Text>
                     </Button>
                 </Content>
             </KeyboardAvoidingView>
@@ -134,21 +134,23 @@ const InputField = props => (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#44beac'
     },
     signInButton: {
         width: '70%',
         marginTop: 50,
         justifyContent: 'center',
         alignSelf: 'center',
-        borderRadius: 10
+        borderRadius: 10,
+        elevation: 0,
+        backgroundColor: '#CCCCCC'
     },
     signInButtonAlt: { //when button is enabled
-        backgroundColor: '#3E7C6D'
+        backgroundColor: '#f6f6f6'
     },
     buttonText: {
         fontSize: 24,
-        color: 'white',
+        color: '#474748',
     },
     noAccount: {
         marginTop: 10,
@@ -169,13 +171,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     input: {
-        color: '#3E7C6D'
+        color: 'white'
     },
     inputLabel: {
-        fontSize: 16
+        fontSize: 16,
+        color: 'white'
     },
     errorText: {
         fontSize: 16,
-        marginLeft: '10%'
+        marginLeft: '10%',
+        color: '#5F174F'
     }
 });

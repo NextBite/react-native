@@ -94,8 +94,6 @@ export default class SignUpFrom extends Component {
             return <Text style={styles.errorText}>Passwords do not match.</Text>
         } else if (error.phone) {
             return <Text style={styles.errorText}>This is not a valid phone number</Text>
-        } else if (error.required) {
-            return <Text>This field is required</Text>
         }
         return null
     }
@@ -128,7 +126,7 @@ export default class SignUpFrom extends Component {
         return (
             <KeyboardAvoidingView style={styles.container}>
                 <Content>
-                <Image source={require('../resources/img/logo.png')} style={styles.logo}/>
+                <Image source={require('./resources/img/logo.png')} style={styles.logo}/>
                     <Form>
                         <InputField
                             label='First Name'
@@ -188,14 +186,14 @@ export default class SignUpFrom extends Component {
                                     borderWidth={1}
                                     buttonSize={20}
                                     buttonWrapStyle={{ marginLeft: 10}}
-                                    buttonColor={'#3E7C6D'}
+                                    buttonColor={'white'}
                                 />
                                 <RadioButtonLabel
                                     obj={{ label: 'Vendor', value: 'vendor' }}
                                     index={0}
                                     labelHorizontal={true}
                                     onPress={(value) => this.setState({ personType: value })}
-                                    labelStyle={{ fontSize: 16 }}
+                                    labelStyle={{ fontSize: 16, color:'white' }}
                                     labelWrapStyle={{}}
                                 />
                             </RadioButton>
@@ -208,14 +206,14 @@ export default class SignUpFrom extends Component {
                                     borderWidth={1}
                                     buttonSize={20}
                                     buttonWrapStyle={{ marginLeft: 10 }}
-                                    buttonColor={'#3E7C6D'}
+                                    buttonColor={'white'}
                                 />
                                 <RadioButtonLabel
                                     obj={{ label: 'Volunteer', value: 'volunteer' }}
                                     index={1}
                                     labelHorizontal={true}
                                     onPress={(value) => this.setState({ personType: value })}
-                                    labelStyle={{ fontSize: 16 }}
+                                    labelStyle={{ fontSize: 16, color: 'white' }}
                                     labelWrapStyle={{}}
                                 />
                             </RadioButton>
@@ -236,7 +234,7 @@ export default class SignUpFrom extends Component {
                         style={styles.signIn}
                         onPress={() => this.props.navigation.navigate('SignIn')}
                     >
-                        <Text style={{ fontSize: 20, color: '#3E7C6D', marginBottom: 10}}>Sign In Here</Text>
+                        <Text style={{ fontSize: 20, color: 'white', marginBottom: 10}}>Sign In Here</Text>
                     </Button>
                 </Content>
             </KeyboardAvoidingView>
@@ -259,21 +257,23 @@ const InputField = props => (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#44beac',
     },
     signUpButton: {
         width: '70%',
         marginTop: 50,
         justifyContent: 'center',
         alignSelf: 'center',
-        borderRadius: 10
+        borderRadius: 10,
+        elevation: 0,
+        backgroundColor: '#CCCCCC'
     },
     signUpButtonAlt: { //when button is enabled
-        backgroundColor: '#3E7C6D'
+        backgroundColor: '#f6f6f6'
     },
     buttonText: {
         fontSize: 24,
-        color: 'white',
+        color: '#474748',
     },
     errorText: {
         fontSize: 16,
@@ -296,17 +296,19 @@ const styles = StyleSheet.create({
         marginLeft: "10%",
         fontSize: 16,
         marginTop: '10%',
-        marginBottom: '5%'
+        marginBottom: '5%',
+        color: 'white'
     },
     inputField: {
         width: '80%',
         alignSelf: 'center'
     },
     inputLabel: {
-        fontSize: 16
+        fontSize: 16,
+        color: 'white'
     },
     input: {
-        color: '#3E7C6D'
+        color: 'white'
     },
     logo: {
         alignSelf: 'center',
