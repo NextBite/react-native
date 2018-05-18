@@ -5,6 +5,7 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Ic
 
 export default class MapCards extends React.Component {
   render() {
+    console.log("THIS PROPS DIST", this.props.distance);
     return (
       <Card style={styles.card}>
         <CardItem>
@@ -14,7 +15,7 @@ export default class MapCards extends React.Component {
               <Text note style={styles.subText}>{this.props.distance}</Text>
               <Text style={styles.regText}>
                 There are {this.props.count} pickup(s) available.
-              </Text>
+              </Text> 
             </Body>
           </Left>
         </CardItem>

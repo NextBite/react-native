@@ -5,21 +5,14 @@ import Profile from './Profile';
 import MarketMap from './MarketMap';
 
 const ProfileNavigator = StackNavigator({
-    Profile: { screen: Profile },
+    Profile: { screen: Profile, 
+      navigationOptions: {
+      header: null,
+      } },
 
   },
     {
       initialRouteName: 'Profile',
-      /* The header config from HomeScreen is now here */
-      navigationOptions: {
-        headerStyle: {
-          backgroundColor: '#44beac',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      },
     }
   );
 

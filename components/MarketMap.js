@@ -38,59 +38,36 @@ export default class MarketMap extends React.Component {
     let usersPosition = {};
     let countOfPickups = this.state.countOfPickups;
     // get user's current location on load of map
-
     navigator.geolocation.getCurrentPosition(position => {
       console.log("possssss", position);
-      if (position.coords.latitude != undefined) {
-        console.log("pos", position);
-        usersPosition = position;
-        this.setState({
-          userLocation: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.0622,
-            longitudeDelta: 0.0421,
-          }
-        });
-      } else {
-        
-        usersPosition = {
-          coords: {
-            accuracy: 20,
-            altitude: 0,
-            heading: 0,
-            latitude: 47.7196,
-            longitude: -122.297,
-            speed: 0
-          },
-          mocked: false,
-          timestamp: 1525895041000,
+      //if (position.coords.latitude !== undefined) {
+      console.log("pos", position);
+      usersPosition = position;
+      this.setState({
+        userLocation: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.0622,
+          longitudeDelta: 0.0421,
         }
-        this.setState({
-          userLocation: {
-            latitude: 47.7196,
-            longitude: -122.297,
-            latitudeDelta: 0.0622,
-            longitudeDelta: 0.0421,
-          }
-        });
-      }
-    });
-
-
-    // get the listings from the database
-    /* Add a listener for changes to the listings object, and save in the state. */
-    let marketsMarkersRef = firebase.database().ref('markets');
-    marketsMarkersRef.on('value', (snapshot) => {
-      let marketsArray = [];
-      snapshot.forEach(function (child) {
-        let market = child.val();
-        market.key = child.key;
-        marketsArray.push(market);
       });
-      //listingArray.sort((a,b) => b.time - a.time); //reverse order
-      this.setState({ markets: marketsArray });
+
+      // get the listings from the database
+      /* Add a listener for changes to the listings object, and save in the state. */
+      let marketsMarkersRef = firebase.database().ref('markets');
+      marketsMarkersRef.on('value', (snapshot) => {
+        let marketsArray = [];
+        snapshot.forEach(function (child) {
+          let market = child.val();
+          market.key = child.key;
+          marketsArray.push(market);
+        });
+        //listingArray.sort((a,b) => b.time - a.time); //reverse order
+        this.setState({ markets: marketsArray });
+      })
     });
+
+
 
     let marketsRef = firebase.database().ref('markets');
 
@@ -124,48 +101,15 @@ export default class MarketMap extends React.Component {
               marketListingsArray.push(marketListing);
             });
 
-            // last two entires are the coords and keys, so skip over those to check
-            // if ending has been reached yet
-            if ((i + 3) == marketKeys.length) {
-              let currentMapCards = this.state.mapCards;
-              this.setState({ currentMarket: market.key })
 
-              // calls the google api to calculate distance between user's location 
-              // and the geo markers (markets)
-              let responseDistance = "";
-              fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${usersPosition.coords.latitude},${usersPosition.coords.longitude}&destinations=${market.coords.lat},${market.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
-                .then(res => res.json())
-                .then(parsedRes => {
-                  responseDistance = parsedRes.rows[0].elements[0].distance.text;
-                })
-                .then(() => {
-                  currentMapCards.push(
-                    <MapCards
-                      title={market.key}
-                      count={marketKeys.length - 2}
-                      key={market.key}
-                      distance={responseDistance}
-                      navigation={this.props.navigation}
-                    />
-                  )
-
-                  countOfPickups += (marketKeys.length - 2);
-                  this.setState({ countOfPickups: countOfPickups });
-
-                  // sort the cards by smallest to largest according to distance away from user
-                  currentMapCards.sort(function (a, b) {
-                    return parseFloat(a.props.distance) - parseFloat(b.props.distance);
-                  });
-
-                  this.setState({ mapCards: currentMapCards })
-                })
-                .catch(err => console.log(err));
-            }
           })
         }
       })
-    });
-  }
+    })
+
+
+
+  } //end of component willmount
 
   getUserPlacesHandler = () => {
     fetch('https://nextbite-f8314.firebaseio.com/places.json')
@@ -187,7 +131,13 @@ export default class MarketMap extends React.Component {
       .catch(err => console.log(err));
   }
 
+
+
+
+
   render() {
+
+    console.log("MARKET CAARDS", this.state.mapCards)
     // generate markers for markets with current listings for the map
     // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
     let markers = this.state.markets.slice(0, this.state.markets.length / 2).map((market) => {
@@ -205,13 +155,13 @@ export default class MarketMap extends React.Component {
 
     return (
 
-      
-      <View style={styles.container}>
+
+      <View style={styles.container} >
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
         <View style={styles.button}>
           <Button transparent
             style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('MarketList', { marketCards: this.state.mapCards })}
+            onPress={() => this.props.navigation.navigate('MarketList', {})}
           >
             <Text style={styles.buttonText}>{this.state.countOfPickups} Pickups Available</Text>
           </Button>

@@ -18,8 +18,7 @@ export default class HeaderComponent extends Component {
             </Button>
           </Left>
           <Body>
-            <Title style={{
-        marginLeft: -40}}>{this.props.title}</Title>
+            <Title style={{ marginLeft: -40 }}>{this.props.title}</Title>
           </Body>
         </Header>
     );

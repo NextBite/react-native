@@ -5,7 +5,9 @@ import { DrawerNavigator } from 'react-navigation';
 
 import MarketMap from './components/MarketMap';
 import MarketList from './components/MarketList';
-import Profile from './components/Profile';
+import MarketNavigator from './components/MarketNavigator';
+import ProfileNavigator from './components/ProfileNavigator';
+import MapNavigator from './components/MapNavigator';
 
 var {height, width} = Dimensions.get('window');
 
@@ -22,13 +24,10 @@ firebase.initializeApp(config);
 
 let routeConfigs = {
     MarketMap: { 
-        screen: MarketMap,
-    },
-    MarketList: {
-        screen: MarketList,
+        screen: MapNavigator,
     },
     Profile: {
-        screen: Profile,
+        screen: ProfileNavigator,
     }
 }
 
