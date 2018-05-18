@@ -28,10 +28,6 @@ export default class MarketPickups extends React.Component {
       let pickupObj = "";
       snapshot.forEach(function (child) {
         pickupObj = child.val();
-        console.log("FIRST PRINT", currentMarketCards)
-        console.log("child key", child.key);
-        console.log("child", child)
-        console.log("child val", child.val())
 
         // this ensures that the coords of the market aren't added to
         // the cards
@@ -41,16 +37,13 @@ export default class MarketPickups extends React.Component {
         }
       });
 
-      console.log("??????", marketIds)
       this.setState({ pickups: marketPickups });
 
       // query for all pickup listing details
       let pickups = marketIds.map((pickup) => {
-        console.log("NEW PICKUP", pickup["listingId"])
         let listingsRef = firebase.database().ref(`listings/${pickup["listingId"]}`);
         listingsRef.on('value', (snapshot) => {
           let pickupsObj = {};
-          console.log("pickup", pickup);
           snapshot.forEach(function (child) {
             pickupsObj[child.key] = child.val();
           });
@@ -67,8 +60,6 @@ export default class MarketPickups extends React.Component {
                   vendor = child.val();
                 }
               });
-
-              console.log("MARKET ID DB KEY", pickup["dbKey"])
 
               currentMarketCards.push(<MarketCards
                 boxes={pickupsObj.boxes}

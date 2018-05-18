@@ -70,6 +70,9 @@ export default class MarketMap extends React.Component {
           marketListingsRef.once('value')
           .then(snapshot => {
             // checks all posts to determine if expired
+            console.log("MY CURRENT DATE", new Date());
+            console.log("DATE OF DATABASE ENTRY", new Date(snapshot.child("expirationDate").val()));
+            
             if(new Date(snapshot.child("expirationDate").val()) <  new Date()) {
               marketListingsRef.remove();
             }

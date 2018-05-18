@@ -18,9 +18,6 @@ export default class SuccessfulClaim extends React.Component {
     const marketId = params ? params.marketId : null;
     const marketName = params ? params.marketName : null;
 
-    console.log("marketName", marketName.split(",")[0]);
-    console.log("marketId", marketId);
-
     this.setState({nonprofit: nonprofit, coords: coords, listingId: listingId});
 
     // update the listing entry to reflect that it's been 
@@ -30,6 +27,14 @@ export default class SuccessfulClaim extends React.Component {
 
     // remove it from entires that are shown for each market
     firebase.database().ref(`markets/${marketName.split(",")[0]}/${marketId}`).remove();
+
+    // lGtcBwxX1XWtdioXbuEmQQUuTVn1 hard corded volunteer id 
+    let currUser = "lGtcBwxX1XWtdioXbuEmQQUuTVn1"; // should be firebase.auth().currentUser.uid;
+    let usersRef = firebase.database().ref('users/' + currUser + '/claimedRescues');
+    let newUserListing = {
+      listingId: listingId,
+    }
+    usersRef.push(newUserListing);
   }
 
   render() {
