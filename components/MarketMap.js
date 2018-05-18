@@ -102,6 +102,13 @@ export default class MarketMap extends React.Component {
             });
 
 
+            if ((i + 3) == marketKeys.length) {
+
+              countOfPickups += (marketKeys.length - 2);
+              this.setState({ countOfPickups: countOfPickups });
+            }
+
+
           })
         }
       })
