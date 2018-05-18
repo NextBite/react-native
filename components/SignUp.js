@@ -42,7 +42,7 @@ export default class SignUp extends Component {
         }
     }
 
-    signUp(email, password, firstName, lastName, mobile, personType, avatar) {
+    signUp(email, password, firstName, lastName, mobile, personType, avatar, vendorName) {
         let thisComponent = this;
         thisComponent.setState({spinnerDisplay: true}); //show loading spinner while user is being signed up
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -54,7 +54,8 @@ export default class SignUp extends Component {
                 lastName: lastName,
                 mobile: mobile,
                 personType: personType,
-                photoURL: avatar
+                photoURL: avatar,
+                vendorName: vendorName
             });
 
             //create new entry in the Cloud DB (for others to reference)
@@ -65,7 +66,8 @@ export default class SignUp extends Component {
                 lastName: lastName,
                 mobile: mobile,
                 personType: personType,
-                avatar: avatar
+                avatar: avatar,
+                vendorName: vendorName
             }
 
             userRef.set(userData); //update entry in JOITC, return promise for chaining

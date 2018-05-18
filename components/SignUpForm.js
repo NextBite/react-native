@@ -16,6 +16,7 @@ export default class SignUpFrom extends Component {
             passwordConfirm: undefined,
             mobile: undefined,
             personType: undefined,
+            vendorName: undefined,
             avatar: '', //optional            
         };
     }
@@ -100,7 +101,7 @@ export default class SignUpFrom extends Component {
 
     //handle signUp button
     signUp() {
-        this.props.signUpCallback(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.mobile, this.state.personType, this.state.avatar);
+        this.props.signUpCallback(this.state.email, this.state.password, this.state.firstName, this.state.lastName, this.state.mobile, this.state.personType, this.state.avatar, this.state.vendorName);
     }
 
     render() {
@@ -110,12 +111,13 @@ export default class SignUpFrom extends Component {
         let firstNameErrors = this.validate(this.state.firstName, { required: true, minLength: 1 });
         let lastNameErrors = this.validate(this.state.lastName, { required: true, minLength: 1 });
         let mobileErrors = this.validate(this.state.mobile, { required: true, phone: true });
-        let passwordConfirmErrors = this.validate(this.state.password, { required: true, match: true })
-        let typeErrors = this.validate(this.state.personType, { required: true })
+        let passwordConfirmErrors = this.validate(this.state.password, { required: true, match: true });
+        let typeErrors = this.validate(this.state.personType, { required: true });
+        let vendorNameErrors = this.validate(this.state.vendorName, {required: true, minLength: 1});
         //let avatar = <Avatar>{"N"}</Avatar> // default
 
         //button validation
-        let signUpEnabled = (emailErrors.isValid && passwordErrors.isValid && firstNameErrors.isValid && lastNameErrors.isValid && passwordConfirmErrors.isValid && mobileErrors.isValid && typeErrors.isValid);
+        let signUpEnabled = (emailErrors.isValid && passwordErrors.isValid && firstNameErrors.isValid && lastNameErrors.isValid && passwordConfirmErrors.isValid && mobileErrors.isValid && typeErrors.isValid && vendorNameErrors.isValid);
 
         //radio button label and value
         let radio_props = [
@@ -219,6 +221,7 @@ export default class SignUpFrom extends Component {
                             </RadioButton>
                         </RadioForm>
                         {this.renderErrorMsg(typeErrors)}
+                        {this.state.personType === 'vendor' ? <InputField label='Name of Business' keyboard='default' handleChange={(text) => this.setState({ vendorName: text })} secure={false}/> : null}
                     </Form>
                     <Button
                         style={[styles.signUpButton, signUpEnabled && styles.signUpButtonAlt]}
@@ -293,9 +296,9 @@ const styles = StyleSheet.create({
         marginLeft: "10%",
     },
     selectOneText: {
-        marginLeft: "10%",
+        marginLeft: "12%",
         fontSize: 16,
-        marginTop: '10%',
+        marginTop: '8%',
         marginBottom: '5%',
         color: 'white'
     },
