@@ -8,14 +8,6 @@ import MarketCards from './MarketCards';
 export default class MarketPickups extends React.Component {
   state = {};
 
-  /*static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-    
-    return {
-      title: params ? params.listingId : 'A Nested Details Screen',
-    }
-  };*/
-
   static navigationOptions = {
     title: 'Claim Pickup',
   };
@@ -41,7 +33,6 @@ export default class MarketPickups extends React.Component {
         this.setState({ vendorName: snapshot.child("vendorName").val() });
       });
     });
-
   }
 
   render() {
@@ -49,7 +40,7 @@ export default class MarketPickups extends React.Component {
       <View style={styles.container}>
         <Text>Are you sure you want to claim this pickup?</Text>
         <Text>Boxes: {this.state.boxes}</Text>
-        <Text>Expiration Date: {this.state.expirationDate}</Text>
+        <Text>Expiration Date: {String(new Date(this.state.expirationDate)).slice(0, -18)}</Text>
         <Text>Location: {this.state.location}</Text>
         <Text>Tags: {this.state.tags}</Text>
         <Text>Weight: {this.state.weight}</Text>

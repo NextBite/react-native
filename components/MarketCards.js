@@ -11,7 +11,7 @@ export default class MarketCards extends React.Component {
           <Left>
             <Body>
               <Text>{this.props.vendor}</Text>
-              <Text note style={styles.subText}>{this.props.expiration}</Text>
+              <Text note style={styles.subText}>{String(new Date(this.props.expiration)).slice(0, -18)}</Text>
               <Text style={styles.regText}>
                 This pickup has {this.props.boxes} boxes and weighs {this.props.weight}.
               </Text>
