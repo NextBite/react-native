@@ -5,7 +5,7 @@ import { Container, Header, Left, Body, Right, Button, Icon, Title, Text } from 
 export default class HeaderComponent extends Component {
   render() {
     return (
-        <Header>
+        <Header style={{backgroundColor: '#44beac'}} androidStatusBarColor='#35a08e'>
           <Left>
           <Button transparent>
               <Icon 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Button, StatusBar } from 'react-native';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
 
@@ -11,12 +11,26 @@ import HeaderComponent from './HeaderComponent';
 
 export default class MarketList extends React.Component {
   state = {
+    title: "Market List",
     userLocation: null,
     usersPlaces: [],
     markets: [],
     mapCards: [],
     marketDistance: [],
     countOfPickups: 0,
+  }
+
+  static navigationOptions = ({ navigation }) => {
+    let drawerLabel = 'Market List';
+    let drawerIcon = () => (
+      <Icon
+        name="menu"
+        style={{ marginLeft: 20, color: "#fff", backgroundColor: '#44beac' }}
+        size={28}
+      />
+    );
+    
+    return { drawerLabel, drawerIcon };
   }
 
   componentWillMount() {
@@ -168,16 +182,7 @@ export default class MarketList extends React.Component {
 
   } //end of component willmount
 
-
-
-
-
-
   render() {
-
-
-
-
     return (
       <View>
         <HeaderComponent {...this.props} title={this.state.title} />

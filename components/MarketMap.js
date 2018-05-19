@@ -20,7 +20,7 @@ export default class MarketMap extends React.Component {
     countOfPickups: 0,
   }
 
-  /*static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({ navigation }) => {
     let drawerLabel = 'Rescue Food';
     let drawerIcon = () => (
       <Icon 
@@ -32,7 +32,6 @@ export default class MarketMap extends React.Component {
     return { drawerLabel, drawerIcon};
   }
 
-  <HeaderComponent {...this.props} />*/
 
   componentWillMount() {
     let usersPosition = {};

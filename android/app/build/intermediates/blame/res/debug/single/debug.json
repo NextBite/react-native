@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_notification_media_action.xml.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/feafe421ffff4d685e5c37f83a53d1ae/res/layout/notification_media_action.xml"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_abc_btn_borderless_material.xml.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/feafe421ffff4d685e5c37f83a53d1ae/res/drawable/abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_notification_media_action.xml.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/feafe421ffff4d685e5c37f83a53d1ae/res/layout/notification_media_action.xml"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_node_modules_reactnavigation_src_views_assets_backicon.png.flat",

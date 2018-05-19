@@ -23,7 +23,7 @@ var config = {
 firebase.initializeApp(config);
 
 let routeConfigs = {
-    MarketMap: { 
+    Map: { 
         screen: MapNavigator,
     },
     Profile: {
@@ -32,15 +32,15 @@ let routeConfigs = {
 }
 
 let drawerNavigatorConfig = {    
-    initialRouteName: 'MarketMap',
+    initialRouteName: 'Map',
     drawerWidth: width / 2,
     drawerPosition: 'left',
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',  
-    drawerBackgroundColor: 'orange',
+    drawerBackgroundColor: 'white',
     contentOptions: {
-        activeTintColor: 'red',
+        activeTintColor: 'blue',
     }
 };
 
