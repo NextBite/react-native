@@ -50,7 +50,7 @@ export default class MarketPickups extends React.Component {
 
           pickupsObj["listingId"] = pickup["listingId"];
 
-          if (new Date(pickupsObj["expirationDate"]) > new Date() /*&& pickupsObj["claimed"] === "no"*/) {
+          //if (new Date(pickupsObj["expirationDate"]) < new Date() /*&& pickupsObj["claimed"] === "no"*/) {
             // retrieve vendor's name for the listing
             let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
             usersRef.on('value', (snapshot) => {
@@ -79,7 +79,7 @@ export default class MarketPickups extends React.Component {
 
               this.setState({ marketCards: currentMarketCards });
             });
-          }
+          //}
         });
       });
     });
