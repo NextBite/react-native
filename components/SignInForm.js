@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
   },
   inputField: {
     width: '80%',
+    marginRight: '2%',
     alignSelf: 'center',
     borderColor: '#247f6e'
   },
@@ -240,7 +241,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    marginLeft: '12%',
+    marginLeft: '11%',
     color: '#a32d21'
   }
 });
