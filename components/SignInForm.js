@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, KeyboardAvoidingView } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Icon, Header } from 'native-base';
-import SVGImage from 'react-native-svg-image';
 import Svg,{
   Circle,
   Ellipse,
