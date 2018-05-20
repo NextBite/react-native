@@ -4,7 +4,7 @@
             "outputFile": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/res/values-v23/values-v23.xml",
+                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/c169e57e9b9ada6c18d0c3658264d1a8/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "4,7,8,9,15,23",
                         "startColumns": "4,4,4,4,4,4",
