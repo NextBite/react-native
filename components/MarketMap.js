@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'native-base';
+import { Button, Header } from 'native-base';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
 
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import FetchLocation from './FetchLocation';
 import UsersMap from './UsersMap';
 import MapCards from './MapCards';
@@ -24,8 +24,8 @@ export default class MarketMap extends React.Component {
     let drawerLabel = 'Rescue Food';
     let drawerIcon = () => (
       <Icon 
-        name= "menu" 
-        style={{marginLeft: 20, color: "#fff", backgroundColor: '#44beac'}} 
+        name= "location-on" 
+        style={{color: "#44beac"}} 
         size={28} 
       />
     );
@@ -163,6 +163,7 @@ export default class MarketMap extends React.Component {
 
 
       <View style={styles.container} >
+      <Header style={{height: 0}} androidStatusBarColor='#35a08e'></Header>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
         <View style={styles.button}>
           <Button transparent

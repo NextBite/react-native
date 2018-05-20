@@ -16,8 +16,8 @@ export default class Profile extends Component {
     let drawerLabel = 'Profile';
     let drawerIcon = () => (
       <Icon 
-        name= "menu" 
-        style={{marginLeft: 20, color: "#fff", backgroundColor: '#44beac'}} 
+        name= "person" 
+        style={{color: "#44beac",}} 
         size={28} 
       />
     );

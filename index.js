@@ -33,14 +33,14 @@ let routeConfigs = {
 
 let drawerNavigatorConfig = {    
     initialRouteName: 'Map',
-    drawerWidth: width / 2,
+    drawerWidth: width * .60,
     drawerPosition: 'left',
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',  
     drawerBackgroundColor: 'white',
     contentOptions: {
-        activeTintColor: 'blue',
+        activeTintColor: '#f8b718',
     }
 };
 
