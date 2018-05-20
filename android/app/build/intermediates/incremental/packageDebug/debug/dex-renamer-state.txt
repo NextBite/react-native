@@ -1,4 +1,4 @@
-#Fri May 18 20:51:19 PDT 2018
-base.0=/Users/Lisa/Desktop/react-native/android/app/build/intermediates/transforms/dexMerger/debug/37
+#Sat May 19 19:53:58 PDT 2018
+base.0=/Users/Lisa/Desktop/react-native/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

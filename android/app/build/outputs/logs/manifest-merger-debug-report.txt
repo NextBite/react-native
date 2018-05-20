@@ -1,13 +1,33 @@
 -- Merging decision tree log ---
+permission#com.nextbite.permission.C2D_MESSAGE
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:15:5-17:47
+	android:protectionLevel
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:17:9-44
+	android:name
+		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:16:9-63
+uses-permission#com.nextbite.permission.C2D_MESSAGE
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:18:5-79
+	android:name
+		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:18:22-76
+category#com.nextbite
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:34:17-61
+	android:name
+		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:34:27-58
 manifest
-ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
-INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
-INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
-INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
+MERGED from [:react-native-push-notification] /Users/Lisa/Desktop/react-native/node_modules/react-native-push-notification/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/4b7435d5000ff35b5c1e254a23d8d61f/AndroidManifest.xml:2:1-15:12
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/0b44f8a4a15865902f33b3533a2d9c8d/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:16:1-24:12
 MERGED from [:react-native-maps] /Users/Lisa/Desktop/react-native/node_modules/react-native-maps/lib/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-12:12
 MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-maps-10.0.1.aar/1a34538bde176f663ba1ecf79edcaaf9/AndroidManifest.xml:16:1-25:12
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:16:1-24:12
 MERGED from [com.google.android.gms:play-services-base:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-base-10.0.1.aar/cf842e3141b09762c04443c5c9c50f96/AndroidManifest.xml:16:1-21:12
 MERGED from [com.google.android.gms:play-services-tasks:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-tasks-10.0.1.aar/a1d05a99d83c85e8a3c85d43bf0853eb/AndroidManifest.xml:2:1-5:12
 MERGED from [com.google.android.gms:play-services-basement:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-basement-10.0.1.aar/df96288a33cd02df78a32e96d6baf5f9/AndroidManifest.xml:16:1-23:12
@@ -17,34 +37,39 @@ MERGED from [com.facebook.fresco:fresco:1.3.0] /Users/Lisa/.gradle/caches/transf
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.3.0.aar/b007e162a7b5ead02a051f60793c0b5c/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/soloader-0.1.0.aar/d07d423bc3b831e3910cb9d4bf036d87/AndroidManifest.xml:1:1-4:12
 MERGED from [org.webkit:android-jsc:r174650] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/ad17c3ecc264a29f88604ad8b08260bc/AndroidManifest.xml:1:1-3:12
+MERGED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:2:1-41:12
 MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/cb93986ad011df4af036e6417d613461/AndroidManifest.xml:2:1-13:12
 MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/drawee-1.3.0.aar/3cf604b50f865fb094b69a7f1137dc14/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.3.0.aar/64e9fd5b18726641bd356aff0e41f407/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.3.0.aar/4fcba05b69bd6fdfeb437f7f0da4197a/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/fbcore-1.3.0.aar/6fb789d027c55352e244b475a1c3b2bc/AndroidManifest.xml:2:1-9:12
-INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
-INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
-INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
+INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
 	package
 		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:2:5-27
 		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
 		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12
 		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
 ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:4:5-67
+MERGED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:21:5-66
+MERGED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:21:5-66
 MERGED from [:react-native-maps] /Users/Lisa/Desktop/react-native/node_modules/react-native-maps/lib/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:9:5-67
 MERGED from [:react-native-maps] /Users/Lisa/Desktop/react-native/node_modules/react-native-maps/lib/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:9:5-67
 MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-maps-10.0.1.aar/1a34538bde176f663ba1ecf79edcaaf9/AndroidManifest.xml:20:5-66
 MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-maps-10.0.1.aar/1a34538bde176f663ba1ecf79edcaaf9/AndroidManifest.xml:20:5-66
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:21:5-66
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:21:5-66
 	android:name
 		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
@@ -85,14 +110,30 @@ uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:13:5-75
 	android:name
 		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:13:22-73
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:14:5-68
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:14:22-65
+uses-permission#android.permission.VIBRATE
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:19:5-66
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:19:22-63
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:20:5-80
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:20:22-78
 application
-ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:15:5-35:19
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:22:5-66:19
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/4b7435d5000ff35b5c1e254a23d8d61f/AndroidManifest.xml:13:5-20
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/4b7435d5000ff35b5c1e254a23d8d61f/AndroidManifest.xml:13:5-20
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/0b44f8a4a15865902f33b3533a2d9c8d/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/0b44f8a4a15865902f33b3533a2d9c8d/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:23:5-19
+MERGED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:23:5-19
 MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-maps-10.0.1.aar/1a34538bde176f663ba1ecf79edcaaf9/AndroidManifest.xml:24:5-19
 MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-maps-10.0.1.aar/1a34538bde176f663ba1ecf79edcaaf9/AndroidManifest.xml:24:5-19
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:23:5-19
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:23:5-19
 MERGED from [com.google.android.gms:play-services-base:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-base-10.0.1.aar/cf842e3141b09762c04443c5c9c50f96/AndroidManifest.xml:18:5-20:19
 MERGED from [com.google.android.gms:play-services-base:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-base-10.0.1.aar/cf842e3141b09762c04443c5c9c50f96/AndroidManifest.xml:18:5-20:19
 MERGED from [com.google.android.gms:play-services-tasks:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-tasks-10.0.1.aar/a1d05a99d83c85e8a3c85d43bf0853eb/AndroidManifest.xml:4:5-19
@@ -108,57 +149,103 @@ MERGED from [org.webkit:android-jsc:r174650] /Users/Lisa/.gradle/caches/transfor
 MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/cb93986ad011df4af036e6417d613461/AndroidManifest.xml:7:5-11:19
 MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/cb93986ad011df4af036e6417d613461/AndroidManifest.xml:7:5-11:19
 	android:label
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:17:7-39
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:24:7-39
 	android:icon
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:18:7-41
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:25:7-41
 	android:allowBackup
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:19:7-34
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:26:7-34
 	android:theme
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:20:7-38
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:27:7-38
 	android:name
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:16:7-38
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:23:7-38
+receiver#com.google.android.gms.gcm.GcmReceiver
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:28:7-36:20
+	android:exported
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:30:13-36
+	android:permission
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:31:13-73
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:29:13-66
+intent-filter#com.google.android.c2dm.intent.RECEIVE+com.nextbite
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:32:13-35:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:33:17-81
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:33:25-78
+receiver#com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:38:9-110
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:38:19-107
+receiver#com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:39:9-43:20
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:39:19-115
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:40:13-42:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:41:17-79
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:41:25-76
+service#com.dieam.reactnativepushnotification.modules.RNPushNotificationRegistrationService
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:44:9-118
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:44:18-116
+service#com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:45:9-51:19
+	android:exported
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:46:13-107
+intent-filter#com.google.android.c2dm.intent.RECEIVE
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:48:13-50:29
 meta-data#com.google.android.geo.API_KEY
-ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:21:7-23:64
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:52:7-54:64
 	android:value
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:23:7-62
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:54:7-62
 	android:name
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:22:7-52
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:53:7-52
 activity#com.nextbite.MainActivity
-ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:24:7-33:18
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:55:7-64:18
 	android:label
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:26:9-41
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:57:9-41
 	android:windowSoftInputMode
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:28:9-51
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:59:9-51
 	android:configChanges
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:27:9-79
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:58:9-79
 	android:name
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:25:9-37
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:56:9-37
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:29:9-32:25
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:60:9-63:25
 action#android.intent.action.MAIN
-ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:30:13-65
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:61:13-65
 	android:name
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:30:21-62
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:61:21-62
 category#android.intent.category.LAUNCHER
-ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:31:13-73
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:62:13-73
 	android:name
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:31:23-70
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:62:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:34:7-84
+ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:65:7-84
 	android:name
-		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:34:17-81
+		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:65:17-81
 uses-sdk
 INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-push-notification] /Users/Lisa/Desktop/react-native/node_modules/react-native-push-notification/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-push-notification] /Users/Lisa/Desktop/react-native/node_modules/react-native-push-notification/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/4b7435d5000ff35b5c1e254a23d8d61f/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/4b7435d5000ff35b5c1e254a23d8d61f/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/0b44f8a4a15865902f33b3533a2d9c8d/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/0b44f8a4a15865902f33b3533a2d9c8d/AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:17:5-42
 MERGED from [:react-native-maps] /Users/Lisa/Desktop/react-native/node_modules/react-native-maps/lib/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-maps] /Users/Lisa/Desktop/react-native/node_modules/react-native-maps/lib/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-maps-10.0.1.aar/1a34538bde176f663ba1ecf79edcaaf9/AndroidManifest.xml:23:5-42
 MERGED from [com.google.android.gms:play-services-maps:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-maps-10.0.1.aar/1a34538bde176f663ba1ecf79edcaaf9/AndroidManifest.xml:23:5-42
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:17:5-42
 MERGED from [com.google.android.gms:play-services-base:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-base-10.0.1.aar/cf842e3141b09762c04443c5c9c50f96/AndroidManifest.xml:17:5-42
 MERGED from [com.google.android.gms:play-services-base:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-base-10.0.1.aar/cf842e3141b09762c04443c5c9c50f96/AndroidManifest.xml:17:5-42
 MERGED from [com.google.android.gms:play-services-tasks:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-tasks-10.0.1.aar/a1d05a99d83c85e8a3c85d43bf0853eb/AndroidManifest.xml:3:5-42
@@ -175,6 +262,8 @@ MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] /Users/Lisa/.gradl
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.3.0.aar/b007e162a7b5ead02a051f60793c0b5c/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/soloader-0.1.0.aar/d07d423bc3b831e3910cb9d4bf036d87/AndroidManifest.xml:2:3-70
 MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/soloader-0.1.0.aar/d07d423bc3b831e3910cb9d4bf036d87/AndroidManifest.xml:2:3-70
+MERGED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:7:5-9:41
+MERGED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/cb93986ad011df4af036e6417d613461/AndroidManifest.xml:5:5-43
 MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/cb93986ad011df4af036e6417d613461/AndroidManifest.xml:5:5-43
 MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/drawee-1.3.0.aar/3cf604b50f865fb094b69a7f1137dc14/AndroidManifest.xml:5:5-7:41
@@ -197,6 +286,12 @@ INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManif
 		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 		ADDED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:20:5-81
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:20:5-81
+MERGED from [com.google.android.gms:play-services-iid:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-iid-10.0.1.aar/4ff2abb571a8be59ae8f8bf7be25aee3/AndroidManifest.xml:20:5-81
+	android:name
+		ADDED from [com.google.android.gms:play-services-gcm:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/e9489e595c44a1ebcda10821487a0bed/AndroidManifest.xml:20:22-79
 uses-feature#0x00020000
 ADDED from [com.google.android.gms:play-services-maps:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-maps-10.0.1.aar/1a34538bde176f663ba1ecf79edcaaf9/AndroidManifest.xml:21:5-77
 	android:glEsVersion
@@ -220,8 +315,52 @@ MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/Lisa/.gradle
 	android:name
 		ADDED from [com.google.android.gms:play-services-basement:10.0.1] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-basement-10.0.1.aar/df96288a33cd02df78a32e96d6baf5f9/AndroidManifest.xml:20:20-65
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+IMPLIED from /Users/Lisa/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-67:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+uses-permission#com.sec.android.provider.badge.permission.READ
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:19:5-86
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:19:22-83
+uses-permission#com.sec.android.provider.badge.permission.WRITE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:20:5-87
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:20:22-84
+uses-permission#com.htc.launcher.permission.READ_SETTINGS
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:23:5-81
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:23:22-78
+uses-permission#com.htc.launcher.permission.UPDATE_SHORTCUT
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:24:5-83
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:24:22-80
+uses-permission#com.sonyericsson.home.permission.BROADCAST_BADGE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:27:5-88
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:27:22-85
+uses-permission#com.sonymobile.home.permission.PROVIDER_INSERT_BADGE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:28:5-92
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:28:22-89
+uses-permission#com.anddoes.launcher.permission.UPDATE_COUNT
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:31:5-84
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:31:22-81
+uses-permission#com.majeur.launcher.permission.UPDATE_BADGE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:34:5-83
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:34:22-80
+uses-permission#com.huawei.android.launcher.permission.CHANGE_BADGE
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:37:5-91
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:37:22-88
+uses-permission#com.huawei.android.launcher.permission.READ_SETTINGS
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:38:5-92
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:38:22-89
+uses-permission#com.huawei.android.launcher.permission.WRITE_SETTINGS
+ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:39:5-93
+	android:name
+		ADDED from [me.leolin:ShortcutBadger:1.1.8] /Users/Lisa/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.8.aar/3405d51a76aaef8058a14ed0106b2caa/AndroidManifest.xml:39:22-90
