@@ -3,9 +3,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, KeyboardAvoidingView } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Icon, Header } from 'native-base';
-import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
-import icoMoonConfig from './config.json';
-const Icon2 = createIconSetFromIcoMoon(icoMoonConfig);
+
 
 export default class SignInForm extends Component {
   constructor(props) {
@@ -83,7 +81,7 @@ export default class SignInForm extends Component {
       <Header style={{ height: 0, }} androidStatusBarColor='#35a08e'></Header>
         <Content>
           <Image source={require('../resources/img/logo.png')} style={styles.logo} />
-          
+
           <Form>
             <InputField
               label='Email'
