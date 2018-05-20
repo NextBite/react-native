@@ -4,6 +4,7 @@ ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidMa
 INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
 INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
 INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-37:12
+MERGED from [:react-native-svg] /Users/alexiskoss/Desktop/react-native/node_modules/react-native-svg/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/9967b068b73d4538d02cb028413d4e7a/AndroidManifest.xml:2:1-15:12
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/feafe421ffff4d685e5c37f83a53d1ae/AndroidManifest.xml:17:1-24:12
 MERGED from [:react-native-maps] /Users/alexiskoss/Desktop/react-native/node_modules/react-native-maps/lib/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-12:12
@@ -151,6 +152,8 @@ uses-sdk
 INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-svg] /Users/alexiskoss/Desktop/react-native/node_modules/react-native-svg/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-svg] /Users/alexiskoss/Desktop/react-native/node_modules/react-native-svg/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/9967b068b73d4538d02cb028413d4e7a/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/9967b068b73d4538d02cb028413d4e7a/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/feafe421ffff4d685e5c37f83a53d1ae/AndroidManifest.xml:20:5-43
