@@ -23,13 +23,13 @@ export default class MarketMap extends React.Component {
   static navigationOptions = ({ navigation }) => {
     let drawerLabel = 'Rescue Food';
     let drawerIcon = () => (
-      <Icon 
-        name= "location-on" 
-        style={{color: "#44beac"}} 
-        size={28} 
+      <Icon
+        name="location-on"
+        style={{ color: "#44beac" }}
+        size={28}
       />
     );
-    return { drawerLabel, drawerIcon};
+    return { drawerLabel, drawerIcon };
   }
 
 
@@ -163,8 +163,21 @@ export default class MarketMap extends React.Component {
 
 
       <View style={styles.container} >
-      <Header style={{height: 0}} androidStatusBarColor='#35a08e'></Header>
+
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
+
+        <View style={styles.navigation}>
+          <Header style={{ height: 50, borderRadius: 50, width: 50, position: 'absolute', backgroundColor: '#f8b718',}} androidStatusBarColor='#35a08e'>
+            <Button transparent>
+              <Icon
+                name='menu'
+                onPress={() => this.props.navigation.navigate('DrawerOpen', {})}
+                style={{color: "#fff", display: 'flex', alignItems: 'center'}}
+                size={22} 
+              />
+            </Button>
+          </Header>
+        </View>
         <View style={styles.button}>
           <Button transparent
             style={styles.innerButton}
@@ -195,6 +208,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: '10%'
+  },
+  navigation: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
   },
   innerButton: {
     alignSelf: 'center',

@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import firebase from 'firebase';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import MarketCards from './MarketCards';
 import MarketTitleCard from './MarketTitleCard';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import HeaderComponent from './HeaderComponent';
 
 export default class MarketPickups extends React.Component {
-  state = {};
-
+  state = {
+    title: "Market Pickups",
+  }
 
   componentDidMount() {
     // basically this.props.{name}, but navigator requires this
@@ -74,6 +76,7 @@ export default class MarketPickups extends React.Component {
   render() {
     return (
       <View>
+        <HeaderComponent {...this.props} title={this.state.title} />
         <ScrollView style={styles.cards}>
         <MarketTitleCard
           marketName={this.state.marketName}
