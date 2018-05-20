@@ -4,6 +4,23 @@
             "outputFile": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rPT/values-pt-rPT.xml",
             "map": [
                 {
+                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/firebase-messaging-15.0.2.aar/fc8d7e1d74fbe8977811f9c30dc1a475/res/values-pt-rPT/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "209",
+                        "endColumns": "102",
+                        "endOffsets": "311"
+                    },
+                    "to": {
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "4757",
+                        "endColumns": "106",
+                        "endOffsets": "4859"
+                    }
+                },
+                {
                     "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/3b056ca15a93e785b187cb7d5aaef9c3/res/values-pt-rPT/values.xml",
                     "from": {
                         "startLines": "4",
@@ -30,11 +47,11 @@
                         "endOffsets": "399,507,630,736,843,932,1033,1157,1244,1351,1463,1565,1673,1780,1887,2009,2108,2209"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,37",
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,38",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,225,333,456,562,669,758,859,983,1070,1177,1289,1391,1499,1606,1713,1835,4757",
+                        "startOffsets": "105,225,333,456,562,669,758,859,983,1070,1177,1289,1391,1499,1606,1713,1835,4864",
                         "endColumns": "119,107,122,105,106,88,100,123,86,106,111,101,107,106,106,121,98,100",
-                        "endOffsets": "220,328,451,557,664,753,854,978,1065,1172,1284,1386,1494,1601,1708,1830,1929,4853"
+                        "endOffsets": "220,328,451,557,664,753,854,978,1065,1172,1284,1386,1494,1601,1708,1830,1929,4960"
                     }
                 },
                 {
