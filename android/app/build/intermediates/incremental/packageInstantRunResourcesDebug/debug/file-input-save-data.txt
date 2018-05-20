@@ -1,0 +1,15 @@
+#Internal package file, do not edit.
+#Wed May 09 20:14:28 PDT 2018
+1.base=/Users/Lisa/Desktop/react-native/android/app/build/intermediates/assets/debug
+2.path=ula.kml
+0.baseType=DIRECTORY
+2.base=/Users/Lisa/Desktop/react-native/android/app/build/intermediates/assets/debug
+2.set=ASSET
+1.baseType=DIRECTORY
+count=3
+1.set=ASSET
+0.path=index.android.bundle.meta
+0.set=ASSET
+0.base=/Users/Lisa/Desktop/react-native/android/app/build/intermediates/assets/debug
+2.baseType=DIRECTORY
+1.path=index.android.bundle

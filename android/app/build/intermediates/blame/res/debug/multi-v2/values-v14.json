@@ -4,14 +4,14 @@
             "outputFile": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v14/values-v14.xml",
             "map": [
                 {
-                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/0b44f8a4a15865902f33b3533a2d9c8d/res/values-v14/values-v14.xml",
+                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/res/values-v14/values-v14.xml",
                     "from": {
                         "startLines": "4,11,12,13,19,27,28,29,32,33",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "239,694,765,848,1258,1854,1974,2037,2191,2254",
+                        "startOffsets": "290,796,867,950,1360,2007,2127,2190,2344,2407",
                         "endLines": "8,11,12,18,24,27,28,31,32,33",
                         "endColumns": "12,70,82,12,12,119,62,12,62,131",
-                        "endOffsets": "510,760,843,1253,1675,1969,2032,2186,2249,2381"
+                        "endOffsets": "561,862,945,1355,1777,2122,2185,2339,2402,2534"
                     },
                     "to": {
                         "startLines": "2,7,8,9,15,21,22,23,26,27",

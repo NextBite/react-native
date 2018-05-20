@@ -4,14 +4,14 @@
             "outputFile": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/0b44f8a4a15865902f33b3533a2d9c8d/res/values-hdpi/values-hdpi.xml",
+                    "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/res/values-hdpi/values-hdpi.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "4",
-                        "startOffsets": "235",
+                        "startOffsets": "286",
                         "endLines": "8",
                         "endColumns": "13",
-                        "endOffsets": "507"
+                        "endOffsets": "558"
                     },
                     "to": {
                         "startLines": "2",
