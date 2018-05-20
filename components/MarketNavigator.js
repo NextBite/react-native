@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 
 import MarketMap from './MarketMap';
 import MarketList from './MarketList';
