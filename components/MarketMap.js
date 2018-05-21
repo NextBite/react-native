@@ -116,85 +116,6 @@ export default class MarketMap extends React.Component {
         }
       })
     });
-
-    RNfirebase.messaging().subscribeToTopic('newListing');
-
-    RNfirebase.messaging().getToken()
-      .then(fcmToken => {
-        if (fcmToken) {
-          // user has a device token
-          console.log("have", fcmToken);
-        } else {
-          // user doesn't have a device token yet
-          console.log("don't have", fcmToken);
-        }
-      });
-
-    this.onTokenRefreshListener = RNfirebase.messaging().onTokenRefresh(fcmToken => {
-      // Process your token as required
-      console.log("token listener", fcmToken)
-    });
-
-    RNfirebase.messaging().hasPermission()
-      .then(enabled => {
-        if (enabled) {
-          // user has permissions
-          console.log("enabled permission")
-        } else {
-          // user doesn't have permission
-          console.log("no permission");
-        }
-      });
-
-    this.messageListener = RNfirebase.messaging().onMessage((message) => {
-      // Process your message as required
-      console.log("remote msg", message);
-    });
-
-    // Build a channel
-    const channel = new RNfirebase.notifications.Android.Channel('test-channel', 'Test Channel', RNfirebase.notifications.Android.Importance.Max)
-      .setDescription('My apps test channel');
-
-    console.log("channel", channel);
-
-    this.setState({ channel: channel });
-
-    this.notificationListener = RNfirebase.notifications().onNotification((notification) => {
-      // Process your notification as required
-      console.log("recived a noti", notification);
-      notification.android.setChannelId('test-channel');
-      RNfirebase.notifications().displayNotification(notification)
-    });
-
-    this.notificationDisplayedListener = RNfirebase.notifications().onNotificationDisplayed((notification) => {
-      // Process your notification as required
-      // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
-      console.log("r?e", notification);
-    });
-
-    this.notificationOpenedListener = RNfirebase.notifications().onNotificationOpened((notificationOpen) => {
-      // Get the action triggered by the notification being opened
-      const action = notificationOpen.action;
-      // Get information about the notification that was opened
-      const notification = notificationOpen.notification;
-
-      console.log("opened", notification);
-      console.log("open act", action);
-    });
-
-    RNfirebase.notifications().getInitialNotification()
-      .then((notificationOpen) => {
-        if (notificationOpen) {
-          // App was opened by a notification
-          // Get the action triggered by the notification being opened
-          const action = notificationOpen.action;
-          // Get information about the notification that was opened
-          const notification = notificationOpen.notification;
-
-          console.log("closed", notification);
-          console.log("closed action", action);
-        }
-      });
   }
 
   // when get location button is pressed, new location is calculated
@@ -288,14 +209,6 @@ export default class MarketMap extends React.Component {
             onPress={() => this.props.navigation.navigate('MarketList', { marketCards: this.state.mapCards })}
           >
             <Text style={styles.buttonText}>{this.state.countOfPickups} Pickups Available</Text>
-          </Button>
-        </View>
-        <View style={styles.button}>
-          <Button transparent
-            style={styles.innerButton}
-            onPress={() => this.sendNotification()}
-          >
-            <Text style={styles.buttonText}>button</Text>
           </Button>
         </View>
       </View>
