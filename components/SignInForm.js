@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   },
   inputField: {
     width: '80%',
-    marginRight: '2%',
+    marginRight: '4%',
     alignSelf: 'center',
     borderColor: '#247f6e'
   },
