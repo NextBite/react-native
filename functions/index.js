@@ -7,14 +7,11 @@ admin.initializeApp(functions.config().firebase);
 
 // Listens for new messages added to messages/:pushId
 exports.pushNotification = functions.database.ref('/listings/{pushId}').onWrite( event => {
-
-    console.log('Push notification event triggered');
-
   // Create a notification
     const payload = {
         notification: {
-            title: "title",
-            body: "body",
+            title: "New Rescue Available",
+            body: `${event.after._data.location.split(",")[0]} has a pickup available. Expires at ${String(new Date(event.after._data.expirationDate)).split(" ")[4].slice(0, -3)}.`,
             sound: "default"
         },
     };
@@ -24,7 +21,6 @@ exports.pushNotification = functions.database.ref('/listings/{pushId}').onWrite(
         priority: "high",
         timeToLive: 60 * 60 * 24
     };
-
 
     return admin.messaging().sendToTopic("newListing", payload, options);
 });
