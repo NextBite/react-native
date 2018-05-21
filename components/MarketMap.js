@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
+import RNfirebase from 'react-native-firebase';
 
 import FetchLocation from './FetchLocation';
 import UsersMap from './UsersMap';
@@ -25,7 +26,7 @@ export default class MarketMap extends React.Component {
   componentDidMount() {
     let usersPosition = {};
     let countOfPickups = this.state.countOfPickups;
-    
+
     // get user's current location on load of map
     navigator.geolocation.getCurrentPosition(position => {
       usersPosition = position;
@@ -48,7 +49,7 @@ export default class MarketMap extends React.Component {
 
       snapshot.forEach(function (child) {
         let marketListing = {};
-        
+
         marketListing["contents"] = child.val();
         marketListing["key"] = child.key;
         marketsArray.push(marketListing);
@@ -68,53 +69,132 @@ export default class MarketMap extends React.Component {
 
           // not doing anything
           marketListingsRef.once('value')
-          .then(snapshot => {
-            // checks all posts to determine if expired
-            if(new Date(snapshot.child("expirationDate").val()) <  new Date()) {
-              marketListingsRef.remove();
-            }
+            .then(snapshot => {
+              // checks all posts to determine if expired
+              if (new Date(snapshot.child("expirationDate").val()) < new Date()) {
+                marketListingsRef.remove();
+              }
 
-            // last two entires are the coords and keys, so skip over those to check
-            // if ending has been reached yet
-            if ((i + 2) == marketKeys.length) {
-              let currentMapCards = this.state.mapCards;
-              this.setState({ currentMarket: market.key })
+              // last two entires are the coords and keys, so skip over those to check
+              // if ending has been reached yet
+              if ((i + 2) == marketKeys.length) {
+                let currentMapCards = this.state.mapCards;
+                this.setState({ currentMarket: market.key })
 
-              // calls the google api to calculate distance between user's location 
-              // and the geo markers (markets)
-              let responseDistance = "";
-              fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${usersPosition.coords.latitude},${usersPosition.coords.longitude}&destinations=${market.contents.coords.lat},${market.contents.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
-                .then(res => res.json())
-                .then(parsedRes => {
-                  responseDistance = parsedRes.rows[0].elements[0].distance.text;
-                })
-                .then(() => {
-                  currentMapCards.push(
-                    <MapCards
-                      title={market.key}
-                      count={marketKeys.length - 1}
-                      key={market.key}
-                      distance={responseDistance}
-                      navigation={this.props.navigation}
-                    />
-                  )
+                // calls the google api to calculate distance between user's location 
+                // and the geo markers (markets)
+                let responseDistance = "";
+                fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${usersPosition.coords.latitude},${usersPosition.coords.longitude}&destinations=${market.contents.coords.lat},${market.contents.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
+                  .then(res => res.json())
+                  .then(parsedRes => {
+                    responseDistance = parsedRes.rows[0].elements[0].distance.text;
+                  })
+                  .then(() => {
+                    currentMapCards.push(
+                      <MapCards
+                        title={market.key}
+                        count={marketKeys.length - 1}
+                        key={market.key}
+                        distance={responseDistance}
+                        navigation={this.props.navigation}
+                      />
+                    )
 
-                  countOfPickups += (marketKeys.length - 1);
-                  this.setState({countOfPickups: countOfPickups });
+                    countOfPickups += (marketKeys.length - 1);
+                    this.setState({ countOfPickups: countOfPickups });
 
-                  // sort the cards by smallest to largest according to distance away from user
-                  currentMapCards.sort(function (a, b) {
-                    return parseFloat(a.props.distance) - parseFloat(b.props.distance);
-                  });
+                    // sort the cards by smallest to largest according to distance away from user
+                    currentMapCards.sort(function (a, b) {
+                      return parseFloat(a.props.distance) - parseFloat(b.props.distance);
+                    });
 
-                  this.setState({ mapCards: currentMapCards })
-                })
-                .catch(err => console.log(err));
-            }
-          })
+                    this.setState({ mapCards: currentMapCards })
+                  })
+                  .catch(err => console.log(err));
+              }
+            })
         }
       })
     });
+
+    RNfirebase.messaging().subscribeToTopic('newListing');
+
+    RNfirebase.messaging().getToken()
+      .then(fcmToken => {
+        if (fcmToken) {
+          // user has a device token
+          console.log("have", fcmToken);
+        } else {
+          // user doesn't have a device token yet
+          console.log("don't have", fcmToken);
+        }
+      });
+
+    this.onTokenRefreshListener = RNfirebase.messaging().onTokenRefresh(fcmToken => {
+      // Process your token as required
+      console.log("token listener", fcmToken)
+    });
+
+    RNfirebase.messaging().hasPermission()
+      .then(enabled => {
+        if (enabled) {
+          // user has permissions
+          console.log("enabled permission")
+        } else {
+          // user doesn't have permission
+          console.log("no permission");
+        }
+      });
+
+    this.messageListener = RNfirebase.messaging().onMessage((message) => {
+      // Process your message as required
+      console.log("remote msg", message);
+    });
+
+    // Build a channel
+    const channel = new RNfirebase.notifications.Android.Channel('test-channel', 'Test Channel', RNfirebase.notifications.Android.Importance.Max)
+      .setDescription('My apps test channel');
+
+    console.log("channel", channel);
+
+    this.setState({ channel: channel });
+
+    this.notificationListener = RNfirebase.notifications().onNotification((notification) => {
+      // Process your notification as required
+      console.log("recived a noti", notification);
+      notification.android.setChannelId('test-channel');
+      RNfirebase.notifications().displayNotification(notification)
+    });
+
+    this.notificationDisplayedListener = RNfirebase.notifications().onNotificationDisplayed((notification) => {
+      // Process your notification as required
+      // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
+      console.log("r?e", notification);
+    });
+
+    this.notificationOpenedListener = RNfirebase.notifications().onNotificationOpened((notificationOpen) => {
+      // Get the action triggered by the notification being opened
+      const action = notificationOpen.action;
+      // Get information about the notification that was opened
+      const notification = notificationOpen.notification;
+
+      console.log("opened", notification);
+      console.log("open act", action);
+    });
+
+    RNfirebase.notifications().getInitialNotification()
+      .then((notificationOpen) => {
+        if (notificationOpen) {
+          // App was opened by a notification
+          // Get the action triggered by the notification being opened
+          const action = notificationOpen.action;
+          // Get information about the notification that was opened
+          const notification = notificationOpen.notification;
+
+          console.log("closed", notification);
+          console.log("closed action", action);
+        }
+      });
   }
 
   // when get location button is pressed, new location is calculated
@@ -163,6 +243,26 @@ export default class MarketMap extends React.Component {
       .catch(err => console.log(err));
   }
 
+  sendNotification() {
+    console.log("HI");
+    const notification = new RNfirebase.notifications.Notification()
+      .setNotificationId('notificationId')
+      .setTitle('My notification title')
+      .setBody('My notification body')
+      .setData({
+        key1: 'value1',
+        key2: 'value2',
+      });
+
+    notification
+      .android.setChannelId('test-channel')
+      .android.setSmallIcon('ic_launcher');
+
+    // Display the notification
+    RNfirebase.notifications().displayNotification(notification)
+
+  }
+
   render() {
     // generate markers for markets with current listings for the map
     // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
@@ -190,6 +290,14 @@ export default class MarketMap extends React.Component {
             <Text style={styles.buttonText}>{this.state.countOfPickups} Pickups Available</Text>
           </Button>
         </View>
+        <View style={styles.button}>
+          <Button transparent
+            style={styles.innerButton}
+            onPress={() => this.sendNotification()}
+          >
+            <Text style={styles.buttonText}>button</Text>
+          </Button>
+        </View>
       </View>
     );
   }
@@ -205,7 +313,7 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     height: '100%',
-  }, 
+  },
   button: {
     backgroundColor: '#44beac',
     position: 'absolute',
