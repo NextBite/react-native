@@ -54,7 +54,7 @@ export default class SuccessfulClaim extends React.Component {
           </Button>
           <Button transparent
             style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('VolunteerRescueHistory', {})}
+            onPress={() => this.props.navigation.navigate('VendorRescueHistory', {})}
           >
             <Text style={styles.buttonText}>Get Directions</Text>
           </Button>

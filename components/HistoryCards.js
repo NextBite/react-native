@@ -18,7 +18,7 @@ export default class HistoryCards extends React.Component {
               <Text style={styles.regText}>
                 Contains: {this.props.tags}
               </Text>
-              <Text stlye={styles.regText}>
+              <Text style={styles.regText}>
                 Delivered successfully to {this.props.dropoffLocation}.
               </Text>
             </Body>

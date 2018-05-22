@@ -18,6 +18,9 @@ export default class PendingCards extends React.Component {
               <Text style={styles.regText}>
                 Contains: {this.props.tags}
               </Text>
+              <Text style={styles.regText}>
+                This rescue is being delivered to {this.props.dropoffLocation}.
+              </Text>
             </Body>
           </Left>
         </CardItem>
