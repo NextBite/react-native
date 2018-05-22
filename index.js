@@ -25,61 +25,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-let routeConfigs = {
-  Map: {
-    screen: MapNavigator,
-  },
-  Profile: {
-    screen: ProfileNavigator,
-  },
-  SignOut: {
-    screen: SignOut,
-  }
-}
-
-let drawerNavigatorConfig = {
-  initialRouteName: 'Map',
-  drawerWidth: width * .60,
-  drawerPosition: 'left',
-  drawerOpenRoute: 'DrawerOpen',
-  drawerCloseRoute: 'DrawerClose',
-  drawerToggleRoute: 'DrawerToggle',
-  drawerBackgroundColor: 'white',
-  contentOptions: {
-    activeTintColor: '#f8b718',
-  }
-};
-
-
-// Layout when user is signed out
-const SignedOut = StackNavigator({
-  SignUp: {
-    screen: SignUp,
-  },
-  SignIn: {
-    screen: SignIn,
-  }
-},
-  {
-    initialRouteName: "SignIn"
-  }
-);
-
-// Switch between layouts depending on whether user is signed in or signed out
-const createRootNavigator = (signedIn = false) => {
-  return SwitchNavigator({
-    SignedIn: {
-      screen: DrawerNavigator(routeConfigs, drawerNavigatorConfig)
-    },
-    SignedOut: {
-      screen: SignedOut
-    }
-  },
-    {
-      initialRouteName: signedIn ? "SignedIn" : "SignedOut"
-    }
-  );
-};
 
 export default class App extends Component {
   constructor(props) {
@@ -94,12 +39,76 @@ export default class App extends Component {
       if (user) { 
         // user is signed in
         this.setState({ signedIn: true })
+        this.setState({ userId: user.uid })
+        var profileRef = firebase.database().ref('users/' + this.state.userId);
+        profileRef.once("value")
+          .then(snapshot => {
+            this.setState({personType: snapshot.child("personType").val()});
+            personType = this.state.personType;
+          });
       }
     });
   }
 
   render() {
     const { signedIn } = this.state;
+
+    let routeConfigs = {
+      Home: {
+        screen: this.state.personType === 'volunteer' ? MapNavigator : ProfileNavigator,
+      },
+      Profile: {
+        screen: ProfileNavigator,
+      },
+      SignOut: {
+        screen: SignOut,
+      }
+    }
+    
+    let drawerNavigatorConfig = {
+      initialRouteName: 'Home',
+      drawerWidth: width * .60,
+      drawerPosition: 'left',
+      drawerOpenRoute: 'DrawerOpen',
+      drawerCloseRoute: 'DrawerClose',
+      drawerToggleRoute: 'DrawerToggle',
+      drawerBackgroundColor: 'white',
+      contentOptions: {
+        activeTintColor: '#f8b718',
+      }
+    };
+    
+    
+    // Layout when user is signed out
+    const SignedOut = StackNavigator({
+      SignUp: {
+        screen: SignUp,
+      },
+      SignIn: {
+        screen: SignIn,
+      }
+    },
+      {
+        initialRouteName: "SignIn"
+      }
+    );
+    
+    // Switch between layouts depending on whether user is signed in or signed out
+    const createRootNavigator = (signedIn = false) => {
+      return SwitchNavigator({
+        SignedIn: {
+          screen: DrawerNavigator(routeConfigs, drawerNavigatorConfig)
+        },
+        SignedOut: {
+          screen: SignedOut
+        }
+      },
+        {
+          initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+        }
+      );
+    };
+
     const Layout = createRootNavigator(signedIn);
 
     return (
