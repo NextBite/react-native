@@ -10,6 +10,7 @@ import MapNavigator from './components/MapNavigator';
 
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import SignOut from './components/SignOut';
 
 var { height, width } = Dimensions.get('window');
 
@@ -30,6 +31,9 @@ let routeConfigs = {
   },
   Profile: {
     screen: ProfileNavigator,
+  },
+  SignOut: {
+    screen: SignOut,
   }
 }
 
