@@ -6,7 +6,7 @@ admin.initializeApp(functions.config().firebase);
 
 
 // Listens for new messages added to messages/:pushId
-exports.pushNotification = functions.database.ref('/listings/{pushId}').onWrite( event => {
+exports.pushNotification = functions.database.ref('/listings/{pushId}').onCreate( event => {
   // Create a notification
     const payload = {
         notification: {
