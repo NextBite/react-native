@@ -8,6 +8,7 @@ import MarketList from './components/MarketList';
 import DropOffLocation from './components/DropOffLocation';
 import SuccessfulClaim from './components/SuccessfulClaim';
 import VolunteerPendingRescues from './components/VolunteerPendingRescues';
+import VolunteerRescueHistory from './components/VolunteerRescueHistory';
 
 const App = StackNavigator({
   Home: { screen: MarketMap,
@@ -20,6 +21,7 @@ const App = StackNavigator({
   DropOffLocation: { screen: DropOffLocation },
   SuccessfulClaim: { screen: SuccessfulClaim },
   VolunteerPendingRescues: { screen: VolunteerPendingRescues },
+  VolunteerRescueHistory: { screen: VolunteerRescueHistory },
 },
   {
     initialRouteName: 'Home',

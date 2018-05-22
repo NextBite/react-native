@@ -23,7 +23,7 @@ export default class SuccessfulClaim extends React.Component {
     // update the listing entry to reflect that it's been 
     // claimed by a volunteer
     firebase.database().ref().child(`listings/${listingId}`)
-        .update({ claimed: "yes", dropoffLocation: coords });
+        .update({ claimed: "yes", dropoffLocation: nonprofit });
 
     // remove it from entires that are shown for each market
     firebase.database().ref(`markets/${marketName.split(",")[0]}/${marketId}`).remove();
@@ -54,7 +54,7 @@ export default class SuccessfulClaim extends React.Component {
           </Button>
           <Button transparent
             style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('VolunteerPendingRescues')}
+            onPress={() => this.props.navigation.navigate('VolunteerRescueHistory', {})}
           >
             <Text style={styles.buttonText}>Get Directions</Text>
           </Button>
