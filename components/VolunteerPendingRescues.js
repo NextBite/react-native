@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, Text } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
 
-import PendingCards from './PendingCards';
+import VolunteerPendingCards from './VolunteerPendingCards';
 
 export default class VolunteerPendingRescues extends React.Component {
   state = {};
@@ -49,7 +49,7 @@ export default class VolunteerPendingRescues extends React.Component {
               }
             });
 
-            pendingCards.push(<PendingCards
+            pendingCards.push(<VolunteerPendingCards
               boxes={pickupsObj.boxes}
               vendor={vendor}
               expiration={pickupsObj.expirationDate}

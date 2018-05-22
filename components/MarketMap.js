@@ -190,6 +190,14 @@ export default class MarketMap extends React.Component {
             <Text style={styles.buttonText}>{this.state.countOfPickups} Pickups Available</Text>
           </Button>
         </View>
+        <View style={styles.button}>
+          <Button transparent
+            style={styles.innerButton}
+            onPress={() => this.props.navigation.navigate('VendorPendingRescues', { })}
+          >
+            <Text style={styles.buttonText}>Vendor's Pending Rescues</Text>
+          </Button>
+        </View>
       </View>
     );
   }

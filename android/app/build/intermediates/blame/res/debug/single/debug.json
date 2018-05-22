@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_abc_activity_chooser_view.xml.flat",
-        "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/res/layout/abc_activity_chooser_view.xml"
-    },
-    {
         "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-mdpi_abc_switch_track_mtrl_alpha.9.png.flat",
         "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/res/drawable-mdpi/abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_abc_activity_chooser_view.xml.flat",
+        "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/58cc6163aa5fd363af7591ca7220baf1/res/layout/abc_activity_chooser_view.xml"
     },
     {
         "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-v21_abc_btn_colored_material.xml.flat",

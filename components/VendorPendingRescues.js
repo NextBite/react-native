@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, Text } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
 
-import PendingCards from './PendingCards';
+import VendorPendingCards from './VendorPendingCards';
 
 export default class VendorPendingRescues extends React.Component {
   state = {};
@@ -40,33 +40,34 @@ export default class VendorPendingRescues extends React.Component {
 
           pickupsObj["listingId"] = rescue;
 
-          let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
-          usersRef.on('value', (snapshot) => {
-            let vendor = "";
-            snapshot.forEach(function (child) {
-              if (child.key == "vendorName") {
-                vendor = child.val();
-              }
+          let vendorRef = firebase.database().ref(`users/${pickupsObj.userId}`);
+          vendorRef.once('value', (snapshot) => {
+            let vendor = snapshot.child("vendorName").val();
+
+            let volunteerRef = firebase.database().ref(`users/${pickupsObj.claimedBy}`);
+            volunteerRef.once('value', (snapshot) => {
+              let volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
+
+              pendingCards.push(<VendorPendingCards
+                boxes={pickupsObj.boxes}
+                vendor={vendor}
+                expiration={pickupsObj.expirationDate}
+                weight={pickupsObj.weight}
+                tags={pickupsObj.tags}
+                market={pickupsObj.location}
+                listingId={rescue}
+                dropoffLocation={pickupsObj.dropoffLocation}
+                volunteer={volunteerName}
+                key={rescue}
+                navigation={this.props.navigation}
+              />);
+
+              pendingCards.sort(function (a, b) {
+                return new Date(a.props.expiration) - new Date(b.props.expiration);
+              });
+
+              this.setState({ pendingCards: pendingCards });
             });
-
-            pendingCards.push(<PendingCards
-              boxes={pickupsObj.boxes}
-              vendor={vendor}
-              expiration={pickupsObj.expirationDate}
-              weight={pickupsObj.weight}
-              tags={pickupsObj.tags}
-              market={pickupsObj.location}
-              listingId={rescue}
-              dropoffLocation={pickupsObj.dropoffLocation}
-              key={rescue}
-              navigation={this.props.navigation}
-            />);
-
-            pendingCards.sort(function (a, b) {
-              return new Date(a.props.expiration) - new Date(b.props.expiration);
-            });
-
-            this.setState({ pendingCards: pendingCards });
           });
         });
       });
