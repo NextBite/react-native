@@ -32,7 +32,7 @@ export default class Listing extends Component {
         }
     }
 
-    submit(location, boxes, expirationDate, weight, tags, claimed) {
+    submit(location, boxes, expirationDate, weight, tags, claimed, claimedBy, delivered, dropoffLocation) {
         console.log(claimed)
         console.log(location)
         let thisComponent = this;
@@ -47,7 +47,10 @@ export default class Listing extends Component {
             tags: tags,
             time: firebase.database.ServerValue.TIMESTAMP,
             userId: firebase.auth().currentUser.uid,
-            claimed: claimed
+            claimed: claimed,
+            claimedBy: claimedBy,
+            delivered: delivered,
+            dropoffLocation: dropoffLocation
         }
 
         let listing = listingsRef.push(newListing); // upload msg to database

@@ -17,7 +17,10 @@ export default class ListingsForm extends Component {
             weight: undefined,
             tags: undefined,
             isTimePickerVisible: false,
-            claimed: "no"
+            claimed: "no",
+            claimedBy: "",
+            delivered: "no",
+            dropoffLocation: ""
         }
     };
 
@@ -79,7 +82,7 @@ export default class ListingsForm extends Component {
 
     //handle submit button
     submit() {
-        this.props.submitCallback(this.state.location, this.state.boxes, this.state.expirationDate, this.state.weight, this.state.tags, this.state.claimed);
+        this.props.submitCallback(this.state.location, this.state.boxes, this.state.expirationDate, this.state.weight, this.state.tags, this.state.claimed, this.state.claimedBy, this.state.delivered, this.state.dropoffLocation);
         this.props.navigation.navigate('CurrentDonations');
     }
 
