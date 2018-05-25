@@ -12,7 +12,6 @@ export default class CurrentDonations extends Component {
         this.state = {
             donationCards: []
         };
-        this.readableTime = this.readableTime.bind(this);
     }
 
     static navigationOptions = {
@@ -50,12 +49,12 @@ export default class CurrentDonations extends Component {
                             usersRef.once('value', (snapshot) => {
                                 volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
                                 currentDonationCards.push(<ListingItem
-                                    timestamp={this.readableTime(new Date(listingDetailObj.time))}
-                                    location={listingDetailObj.location.split(",")[0]}
+                                    timestamp={new Date(listingDetailObj.time)}
+                                    location={listingDetailObj.location}
                                     boxes={listingDetailObj.boxes}
                                     weight={listingDetailObj.weight}
                                     tag={listingDetailObj.tags}
-                                    expiration={this.readableTime(listingDetailObj.expirationDate)}
+                                    expiration={listingDetailObj.expirationDate}
                                     claimed={listingDetailObj.claimed}
                                     volunteer={volunteerName}
                                     delivered={listingDetailObj.delivered}
@@ -81,21 +80,6 @@ export default class CurrentDonations extends Component {
         if (this.unregister) {
             this.unregister();
         }
-    }
-
-    readableTime(time) {
-        let dt = time.toString().slice(0, -18).split(" ");
-        let hour = dt[4].split(":")[0];
-        if (parseInt(hour) > 0 && parseInt(hour) < 12) {
-            dt[4] = dt[4] + " AM";
-        } else if (parseInt(hour) > 12) {
-            dt[4] = (parseInt(hour) - 12).toString() + ":" + dt[4].split(":")[1] + " PM";
-        } else if (parseInt(hour) === 12) {
-            dt[4] = dt[4] + " PM";
-        } else if (parseInt(hour) === 0) {
-            dt[4] = "12:" + dt[4].split(":")[1] + " AM";
-        }
-        return dt[0] + " " + dt[1] + " " + dt[2] + " " + dt[3] + ", " + dt[4];
     }
 
     render() {

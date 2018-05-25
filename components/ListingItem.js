@@ -128,6 +128,21 @@ export default class ListingItem extends Component {
         userListingRef.remove();
     }
 
+    readableTime(time) {
+        let dt = time.toString().slice(0, -18).split(" ");
+        let hour = dt[4].split(":")[0];
+        if (parseInt(hour) > 0 && parseInt(hour) < 12) {
+            dt[4] = dt[4] + " AM";
+        } else if (parseInt(hour) > 12) {
+            dt[4] = (parseInt(hour) - 12).toString() + ":" + dt[4].split(":")[1] + " PM";
+        } else if (parseInt(hour) === 12) {
+            dt[4] = dt[4] + " PM";
+        } else if (parseInt(hour) === 0) {
+            dt[4] = "12:" + dt[4].split(":")[1] + " AM";
+        }
+        return dt[0] + " " + dt[1] + " " + dt[2] + " " + dt[3] + ", " + dt[4];
+    }
+
     render() {
         let timestamp = (
             <View style={styles.cardView}>
@@ -135,7 +150,7 @@ export default class ListingItem extends Component {
                     <Text style={styles.leftText}>Created at</Text>
                 </Left>
                 <Right style={styles.right}>
-                    <Text style={styles.rightText}>{this.props.timestamp}</Text>
+                    <Text style={styles.rightText}>{this.readableTime(this.props.timestamp)}</Text>
                 </Right>
             </View>
         )
@@ -146,7 +161,7 @@ export default class ListingItem extends Component {
                     <Text style={styles.leftText}>Pickup Location</Text>
                 </Left>
                 <Right style={styles.right}>
-                    <Text style={styles.rightText}>{this.props.location}</Text>
+                    <Text style={styles.rightText}>{this.props.location.split(",")[0]}</Text>
                 </Right>
             </View>
         )
@@ -190,7 +205,7 @@ export default class ListingItem extends Component {
                     <Text style={styles.leftText}>Latest Pickup Time</Text>
                 </Left>
                 <Right style={styles.right}>
-                    <Text style={styles.rightText}>{this.props.expiration}</Text>
+                    <Text style={styles.rightText}>{this.readableTime(this.props.expiration)}</Text>
                 </Right>
             </View>
         )
