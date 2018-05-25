@@ -25,7 +25,7 @@ export default class MarketMap extends React.Component {
 
   componentDidMount() {
     let usersPosition = {};
-    let countOfPickups = this.state.countOfPickups;
+    let countOfPickups = 0;
 
     // get user's current location on load of map
     navigator.geolocation.getCurrentPosition(position => {
@@ -45,7 +45,6 @@ export default class MarketMap extends React.Component {
     let marketsArray = [];
     let marketsRef = firebase.database().ref('markets');
     marketsRef.on('value', (snapshot) => {
-
 
       snapshot.forEach(function (child) {
         let marketListing = {};
@@ -100,7 +99,7 @@ export default class MarketMap extends React.Component {
                       />
                     )
 
-                    countOfPickups += (marketKeys.length - 1);
+                    countOfPickups = (marketKeys.length - 1);
                     this.setState({ countOfPickups: countOfPickups });
 
                     // sort the cards by smallest to largest according to distance away from user

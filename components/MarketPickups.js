@@ -18,13 +18,17 @@ export default class MarketPickups extends React.Component {
     const marketName = params ? params.marketName : null;
     const marketKey = params ? params.marketKey : null;
     this.setState({ marketName: marketName });
+    let currentMarketCards = [];
+    console.log("beginngin of did mount", currentMarketCards);
 
     // query the pickup listings within a particular market
     let marketRef = firebase.database().ref(`markets/${marketName}`);
     marketRef.on('value', (snapshot) => {
+      currentMarketCards = []
+      console.log("BEGINNING OF MARKET REF", currentMarketCards)
+
       let marketPickups = [];
       let marketIds = [];
-      let currentMarketCards = [];
       let pickupObj = "";
       snapshot.forEach(function (child) {
         pickupObj = child.val();
@@ -41,7 +45,9 @@ export default class MarketPickups extends React.Component {
 
       // query for all pickup listing details
       let pickups = marketIds.map((pickup) => {
+        console.log("BEGINNING OF listingREF", currentMarketCards)
         let listingsRef = firebase.database().ref(`listings/${pickup["listingId"]}`);
+        console.log("pickup listing id ref", pickup["listingId"])
         listingsRef.on('value', (snapshot) => {
           let pickupsObj = {};
           snapshot.forEach(function (child) {
@@ -51,41 +57,51 @@ export default class MarketPickups extends React.Component {
           pickupsObj["listingId"] = pickup["listingId"];
 
           //if (new Date(pickupsObj["expirationDate"]) < new Date() /*&& pickupsObj["claimed"] === "no"*/) {
-            // retrieve vendor's name for the listing
-            let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
-            usersRef.on('value', (snapshot) => {
-              let vendor = "";
-              snapshot.forEach(function (child) {
-                if (child.key == "vendorName") {
-                  vendor = child.val();
-                }
-              });
+          // retrieve vendor's name for the listing
+          let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
+          console.log("users pickup id", pickupsObj.userId)
+          console.log("BEGINNING OF USERS REF", currentMarketCards)
 
-              currentMarketCards.push(<MarketCards
-                boxes={pickupsObj.boxes}
-                vendor={vendor}
-                expiration={pickupsObj.expirationDate}
-                weight={pickupsObj.weight}
-                tags={pickupsObj.tags}
-                marketId={pickup["dbKey"]}
-                listingId={pickup["listingId"]}
-                key={pickup["listingId"]}
-                navigation={this.props.navigation}
-              />);
-
-              currentMarketCards.sort(function (a, b) {
-                return new Date(a.props.expiration) - new Date(b.props.expiration);
-              });
-
-              this.setState({ marketCards: currentMarketCards });
+          usersRef.on('value', (snapshot) => {
+            let vendor = "";
+            snapshot.forEach(function (child) {
+              if (child.key == "vendorName") {
+                vendor = child.val();
+              }
             });
+            console.log("before the push", currentMarketCards);
+
+            currentMarketCards.push(<MarketCards
+              boxes={pickupsObj.boxes}
+              vendor={vendor}
+              expiration={pickupsObj.expirationDate}
+              weight={pickupsObj.weight}
+              tags={pickupsObj.tags}
+              marketId={pickup["dbKey"]}
+              listingId={pickup["listingId"]}
+              key={pickup["listingId"]}
+              navigation={this.props.navigation}
+            />);
+
+            currentMarketCards.sort(function (a, b) {
+              return new Date(a.props.expiration) - new Date(b.props.expiration);
+            });
+
+            console.log("firebase market cards", currentMarketCards);
+
+            this.setState({ marketCards: currentMarketCards });
+          });
           //}
         });
       });
     });
+
+    console.log("current market cards", currentMarketCards)
+    //this.setState({ marketCards: currentMarketCards })
   }
 
   render() {
+    console.log("market cards state", this.state.marketCards);
     return (
       <View>
         <ScrollView style={styles.cards}>
