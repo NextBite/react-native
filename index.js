@@ -7,6 +7,7 @@ import { Root } from 'native-base';
 
 import ProfileNavigator from './components/ProfileNavigator';
 import MapNavigator from './components/MapNavigator';
+import Listing from './components/Listing';
 import PendingDonationsNavigator from './components/PendingDonationsNavigator';
 
 import Home from './components/Home';
@@ -57,13 +58,13 @@ export default class App extends Component {
 
     let routeConfigs = {
       Home: {
-        screen: this.state.personType === 'volunteer' ? MapNavigator : ProfileNavigator,
-      },
-      Profile: {
-        screen: ProfileNavigator,
+        screen: this.state.personType === 'volunteer' ? MapNavigator : Listing,
       },
       PendingDonations: {
         screen: PendingDonationsNavigator,
+      },
+      Profile: {
+        screen: ProfileNavigator,
       },
       SignOut: {
         screen: SignOut,

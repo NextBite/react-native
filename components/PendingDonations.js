@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import firebase from 'firebase';
@@ -38,10 +36,10 @@ export default class PendingDonations extends Component {
   static navigationOptions = ({ navigation }) => {
     let drawerLabel = 'Pending Donations';
     let drawerIcon = () => (
-      <Svg height="28" width="28">
-        <Polygon fill="#44BEAC" points="16.3,0 16.3,4.7 14,3.5 11.7,4.7 11.7,0 7.6,0 7.6,12.8 20.4,12.8 20.4,0 " />
-        <Polygon fill="#44BEAC" points="8.8,15.2 8.8,19.8 6.4,18.7 4.1,19.8 4.1,15.2 0,15.2 0,28 12.8,28 12.8,15.2 " />
-        <Polygon fill="#44BEAC" points="23.9,15.2 23.9,19.8 21.6,18.7 19.2,19.8 19.2,15.2 15.2,15.2 15.2,28 28,28 28,15.2 " />
+      <Svg height="24" width="24">
+        <Polygon fill="#44BEAC" points="14,0 14,4 12,3 10,4 10,0 6.5,0 6.5,11 17.5,11 17.5,0 " />
+        <Polygon fill="#44BEAC" points="7.5,13 7.5,17 5.5,16 3.5,17 3.5,13 0,13 0,24 11,24 11,13 " />
+        <Polygon fill="#44BEAC" points="20.5,13 20.5,17 18.5,16 16.5,17 16.5,13 13,13 13,24 24,24 24,13 " />
       </Svg>
     );
     return { drawerLabel, drawerIcon };
@@ -50,53 +48,45 @@ export default class PendingDonations extends Component {
   componentDidMount() {
     let userListings = [];
     let currentDonationCards = [];
+    let volunteerName = ""
 
     this.unregister = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("user uid", user.uid)
         // query for vendor's listingIds
         let listingRef = firebase.database().ref(`users/${user.uid}/pendingRescues`);
         listingRef.on('value', (snapshot) => {
           snapshot.forEach(function (child) {
-            console.log("child", child.val())
             let listingObj = child.val();
             userListings.push(listingObj.listingId)
           });
-          //this.setState({ userListingsId: userListings })
-          console.log("user listings", userListings)
 
           //query for details of each listing
           let listings = userListings.map((listingId) => {
-            console.log("listingId", listingId)
-            let volunteerName = ""
             let listingDetailRef = firebase.database().ref(`listings/${listingId}`);
             listingDetailRef.on('value', (snapshot) => {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
                 listingDetailObj[child.key] = child.val()
-                console.log("listing id child", child.val())
-                console.log("child key", child.key)
+
               });
 
               listingDetailObj["listingId"] = listingId;
-              console.log("claimed by", listingDetailObj.claimedBy)
               // retrieve volunteer's name for the listing
               let usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
               usersRef.once('value', (snapshot) => {
                 volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
-                console.log("ahahah", volunteerName)
-
                 currentDonationCards.push(<ListingItem
-                  timestamp={this.readableTime(new Date(listingDetailObj.time))}
-                  location={listingDetailObj.location.split(",")[0]}
+                  timestamp={new Date(listingDetailObj.time)}
+                  location={listingDetailObj.location}
                   boxes={listingDetailObj.boxes}
                   weight={listingDetailObj.weight}
                   tag={listingDetailObj.tags}
-                  expiration={this.readableTime(listingDetailObj.expirationDate)}
+                  expiration={listingDetailObj.expirationDate}
                   claimed={listingDetailObj.claimed}
                   volunteer={volunteerName}
                   delivered={listingDetailObj.delivered}
                   dropoff={listingDetailObj.dropoffLocation}
+                  listingID={listingDetailObj.listingId}
                 />);
 
                 currentDonationCards.sort(function (a, b) {

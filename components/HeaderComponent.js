@@ -7,18 +7,19 @@ export default class HeaderComponent extends Component {
     return (
         <Header style={{backgroundColor: '#44beac'}} androidStatusBarColor='#35a08e'>
           <Left>
-          <Button transparent>
+          <Button transparent style={{width: 50,}}>
               <Icon 
                 name='menu'
                 onPress={() => {
                     const { navigate } = this.props.navigation;
                     navigate('DrawerOpen');
                 }}
+                style={{ fontSize: 30, }}
                 />
             </Button>
           </Left>
           <Body>
-            <Title style={{ marginLeft: -40 }}>{this.props.title}</Title>
+            <Title style={{ marginLeft: -40, fontWeight: 'bold', fontSize: 18 }}>{this.props.title}</Title>
           </Body>
         </Header>
     );
