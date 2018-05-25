@@ -58,7 +58,7 @@ export default class VendorPendingRescues extends React.Component {
                 listingId={rescue}
                 dropoffLocation={pickupsObj.dropoffLocation}
                 volunteer={volunteerName}
-                key={rescue}
+                key={rescue} 
                 navigation={this.props.navigation}
               />);
 

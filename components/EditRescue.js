@@ -1,7 +1,5 @@
-'use strict';
-
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, TimePickerAndroid, TimePickerAndroidOpenOptions } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TimePickerAndroid, TimePickerAndroidOpenOptions, Picker } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Left, Right } from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -15,11 +13,22 @@ export default class ListingsForm extends Component {
       boxes: undefined,
       expirationDate: undefined,
       weight: undefined,
-      tags: undefined,
+      tags: 'tags',
       isTimePickerVisible: false,
       claimed: "no"
     }
-  };
+  }
+
+  componentWillMount() {
+    const { params } = this.props.navigation.state;
+    const market = params ? params.market : null;
+    const boxes = params ? params.boxes : null;
+    const weight =  params ? params.weight : null;
+    const tags = params ?  params.tags : null;
+    const expiration = params ? params.expiration : null;
+
+    console.log("market props", market);
+  }
 
 
   /**
@@ -185,43 +194,43 @@ export default class ListingsForm extends Component {
     let numBox = [
       {
         label: '1',
-        value: 1
+        value: '1'
       },
       {
         label: '2',
-        value: 2
+        value: '2'
       },
       {
         label: '3',
-        value: 3
+        value: '3'
       },
       {
         label: '4',
-        value: 4
+        value: '4'
       },
       {
         label: '5',
-        value: 5
+        value: '5'
       },
       {
         label: '6',
-        value: 6
+        value: '6'
       },
       {
         label: '7',
-        value: 7
+        value: '7'
       },
       {
         label: '8',
-        value: 8
+        value: '8'
       },
       {
         label: '9',
-        value: 9
+        value: '9'
       },
       {
         label: '10',
-        value: 10
+        value: '10'
       }
     ]
 
@@ -245,6 +254,7 @@ export default class ListingsForm extends Component {
     return (
       <Container>
         <Content>
+          
           <View style={styles.view}>
             <Left style={styles.left}>
               <Icon name="map-marker" style={styles.icon} />
@@ -252,12 +262,10 @@ export default class ListingsForm extends Component {
             <Right style={styles.right} >
               <RNPickerSelect
                 placeholder={{
-                  label: 'Your current location',
-                  value: null,
-                }}
+                  }}
                 items={markets}
                 onValueChange={(value) => this.setState({ location: value })}
-                value={this.state.location}
+                value='University District Farmers Market, 47.6656392, -122.3152575'
                 style={{ ...pickerSelectStyles }}
               />
             </Right>
@@ -269,16 +277,15 @@ export default class ListingsForm extends Component {
             <Right style={styles.right} >
               <RNPickerSelect
                 placeholder={{
-                  label: 'Number of boxes',
-                  value: null
-                }}
+                 }}
                 items={numBox}
                 onValueChange={(value) => this.setState({ boxes: value })}
-                value={this.state.boxes}
+                value='3'
                 style={{ ...pickerSelectStyles }}
               />
             </Right>
           </View>
+
           <View style={styles.view}>
             <Left style={styles.left}>
               <Icon name="balance-scale" style={styles.iconscale} />

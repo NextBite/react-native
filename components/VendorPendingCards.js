@@ -13,7 +13,7 @@ export default class VendorPendingCards extends React.Component {
       displayedButton = (
         <Button transparent
           style={styles.innerButton}
-          onPress={() => this.props.navigation.navigate('EditRescue', {})}
+          onPress={() => this.props.navigation.navigate('EditRescue', {market: this.props.market, boxes: this.props.boxes, weight: this.props.weight, tags: this.props.tags, expiration: this.props.expiration})}
         >
           <Text style={styles.buttonText}>Edit</Text>
         </Button>
