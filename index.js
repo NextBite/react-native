@@ -1,6 +1,7 @@
 import { AppRegistry } from 'react-native';
 import App from './App';
 import firebase from 'firebase';
+import bgMessaging from './components/bgMessaging'; 
 
 // Initialize Firebase
 var config = {
@@ -14,3 +15,4 @@ var config = {
 firebase.initializeApp(config);
 
 AppRegistry.registerComponent('NextBite', () => App);
+AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => bgMessaging);

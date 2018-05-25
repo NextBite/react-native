@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "956642372530",
+    "firebase_url": "https://nextbite-f8314.firebaseio.com",
+    "project_id": "nextbite-f8314",
+    "storage_bucket": "nextbite-f8314.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956642372530:android:cbb6b5f4b068601b",
+        "android_client_info": {
+          "package_name": "com.nextbite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956642372530-tvf9gk74kpemv24iuhjup086qe9ddg0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwKg9pcMunXGyhP8A5r-JJTX76f7nkwIs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

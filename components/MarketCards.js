@@ -11,12 +11,12 @@ export default class MarketCards extends React.Component {
           <Left>
             <Body>
               <Text>{this.props.vendor}</Text>
-              <Text note style={styles.subText}>{this.props.expiration}</Text>
+              <Text note style={styles.subText}>{String(new Date(this.props.expiration)).slice(0, -18)}</Text>
               <Text style={styles.regText}>
                 This pickup has {this.props.boxes} boxes and weighs {this.props.weight}.
               </Text>
               <Text style={styles.regText}>
-                Tags: {this.props.tags}
+                Contains: {this.props.tags}
               </Text>
             </Body>
           </Left>
@@ -24,9 +24,10 @@ export default class MarketCards extends React.Component {
         <CardItem>
           <Left>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('ClaimListing', { listingId: this.props.listingId })}
+              style={styles.innerButton}
+              onPress={() => this.props.navigation.navigate('ClaimListing', { listingId: this.props.listingId, marketId: this.props.marketId })}
             >
-              <Text>Claim Pickup</Text>
+              <Text style={styles.buttonText}>Claim Pickup</Text>
             </Button>
           </Left>
         </CardItem>
@@ -45,5 +46,16 @@ const styles = StyleSheet.create({
   },
   regText: {
     fontSize: 14,
-  }
+  },
+  innerButton: {
+    backgroundColor: '#44beac',
+    alignSelf: 'center',
+    alignItems: 'center',
+    paddingRight: 0,
+    marginLeft: 8
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 14,
+  },
 });
