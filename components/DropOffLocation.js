@@ -33,18 +33,18 @@ export default class DropOffLocation extends React.Component {
           fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${marketLat},${marketLong}&destinations=${parseFloat(parsedRes[key].latitude)},${parseFloat(parsedRes[key].longitude)}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
             .then(res => res.json())
             .then(parsedDistance => {
-                currentFoodBankCards.push(
-                  <FoodBankCards
-                    title={parsedRes[key].name}
-                    distance={parseFloat(parsedDistance.rows[0].elements[0].distance.text)}
-                    coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
-                    listingId={listingId}
-                    marketId={marketId}
-                    marketName={location}
-                    key={parsedRes[key].name}
-                    navigation={this.props.navigation}
-                  />
-                );
+              currentFoodBankCards.push(
+                <FoodBankCards
+                  title={parsedRes[key].name}
+                  distance={parseFloat(parsedDistance.rows[0].elements[0].distance.text)}
+                  coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
+                  listingId={listingId}
+                  marketId={marketId}
+                  marketName={location}
+                  key={parsedRes[key].name}
+                  navigation={this.props.navigation}
+                />
+              );
 
 
               if (key + 1 == Object.keys(parsedRes).length) {
@@ -65,7 +65,7 @@ export default class DropOffLocation extends React.Component {
               }
             })
             .catch(err => console.log(err));
-        } 
+        }
       })
   }
 
