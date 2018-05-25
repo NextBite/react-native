@@ -91,7 +91,7 @@ export default class EditRescueForm extends Component {
   submit() {
     console.log("props lsiting", this.state.listingId)
     this.props.submitCallback(this.state.location, this.state.boxes, this.state.expirationDate, this.state.weight, this.state.tags, this.state.claimed, this.state.listingId);
-    this.props.navigation.navigate('CurrentDonations');
+    this.props.navigation.navigate('VendorPendingRescues', {});
   }
 
   render() {
