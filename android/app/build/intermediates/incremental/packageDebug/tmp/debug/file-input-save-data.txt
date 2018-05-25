@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu May 24 23:42:21 PDT 2018
+#Fri May 25 11:17:18 PDT 2018
 17.baseType=DIRECTORY
 4.path=lib/x86/libglog_init.so
 25.base=/Users/Lisa/Desktop/react-native/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
