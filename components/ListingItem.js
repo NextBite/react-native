@@ -3,12 +3,15 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Button, Left, Right } from 'native-base';
+import firebase from 'firebase';
 
 export default class ListingItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
+    
+        this.deleteListing = this.deleteListing.bind(this)
     }
 
     checkStatus() {
@@ -52,7 +55,7 @@ export default class ListingItem extends Component {
             }
         }
     }
-    
+
     dropoffLocationStatus() {
         if (this.props.claimed === 'no') {
             return null
@@ -70,6 +73,60 @@ export default class ListingItem extends Component {
         }
     }
 
+    buttonOptions() {
+        if (this.props.claimed === 'no') {
+            return (
+                <View style={styles.cardView}>
+                    <Left style={styles.leftButton}>
+                        <Button transparent>
+                            <Text style={styles.buttonText}>EDIT</Text>
+                        </Button>
+                    </Left>
+                    <Right style={styles.rightButton}>
+                        <Button transparent
+                            onPress={() => this.deleteListing()}
+                        >
+                            <Text style={styles.buttonText}>DELETE</Text>
+                        </Button>
+                    </Right>
+                </View>
+            );
+        } else if (this.props.claimed === 'yes') {
+            let volunteer = this.props.volunteer.toUpperCase()
+            return (
+                <View style={styles.cardViewAlt}>
+                    <Button transparent style={{alignSelf: 'center'}}>
+                            <Text style={styles.buttonText}>CONTACT {volunteer}</Text>
+                    </Button>
+                </View>
+            );
+        }
+    }
+
+    deleteListing() {
+        let listingId = this.props.listingID
+
+        // remove from listings
+        let listingRef = firebase.database().ref(`listings/${listingId}`);
+        listingRef.remove();
+
+        //remove from vendor's pending rescues
+        let idArray = [];
+        let user = firebase.auth().currentUser;
+        let pendingRescueRef = firebase.database().ref(`users/${user.uid}/pendingRescues`);
+        pendingRescueRef.on('value', (snapshot) => {
+            snapshot.forEach(function (child) {
+                if (child.val().listingId === listingId) {
+                    let newRef = firebase.database().ref(`users/${user.uid}/pendingRescues/${child.key}`)
+                    newRef.remove();
+                }
+            });
+        });
+
+        //remove from user's listing field
+        let userListingRef = firebase.database().ref(`users/${user.uid}/listings/${listingId}`);
+        userListingRef.remove();
+    }
 
     render() {
         let timestamp = (
@@ -149,21 +206,6 @@ export default class ListingItem extends Component {
             </View>
         )
 
-        let buttons = (
-            <View style={styles.cardView}>
-                <Left style={styles.leftButton}>
-                    <Button transparent>
-                        <Text>Edit</Text>
-                    </Button>
-                </Left>
-                <Right style={styles.rightButton}>
-                    <Button transparent>
-                        <Text>Delete</Text>
-                    </Button>
-                </Right>
-            </View>
-        )
-
         return (
             <Card style={styles.card}>
                 <CardItem>
@@ -180,20 +222,7 @@ export default class ListingItem extends Component {
                     </Body>
                 </CardItem>
                 <CardItem footer bordered style={styles.footer}>
-                    <View style={styles.cardView}>
-                        <Left style={styles.leftButton}>
-                            <Button transparent
-                            >
-                                <Text style={styles.buttonText}>EDIT</Text>
-                            </Button>
-                        </Left>
-                        <Right style={styles.rightButton}>
-                            <Button transparent
-                            >
-                                <Text style={styles.buttonText}>DELETE</Text>
-                            </Button>
-                        </Right>
-                    </View>
+                    {this.buttonOptions()}
                 </CardItem>
             </Card>
         );
@@ -204,6 +233,9 @@ const styles = StyleSheet.create({
     cardView: {
         flex: 1,
         flexDirection: 'row'
+    },
+    cardViewAlt: {
+        flex: 1,
     },
     left: {
         flex: 4,
@@ -223,7 +255,7 @@ const styles = StyleSheet.create({
     rightText: {
         marginLeft: 10,
         fontSize: 15,
-        marginBottom: 10,
+        marginBottom: 10
     },
     leftButton: {
         flex: 1,
@@ -238,8 +270,9 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
+        fontWeight: 'bold'
     },
     footer: {
-        backgroundColor: '#f6f6f6'
+        backgroundColor: '#d3d3d3'
     }
 });
