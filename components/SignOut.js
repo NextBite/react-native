@@ -9,7 +9,7 @@ import SignIn from './SignIn';
 export default class SignOut extends React.Component {
   constructor(props){
 		super(props);
-		this.state = {};
+    this.state = {};
   }
   
   static navigationOptions = ({ navigation }) => {
@@ -48,12 +48,6 @@ export default class SignOut extends React.Component {
     }
   }
   
-  //A callback function for logging out the current user
-  signOut(){
-    // Sign out the user
-    firebase.auth().signOut();
-  }
-
   render() {
     return (
       <View>

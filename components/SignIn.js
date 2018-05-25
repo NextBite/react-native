@@ -4,21 +4,28 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { Container, Content, Spinner, Toast } from 'native-base';
 import firebase from 'firebase';
+import TimerMixin from 'react-timer-mixin';
+
 import SignInForm from './SignInForm';
 
 export default class SignIn extends Component {
   static navigationOptions = {
-    header: null
+    header: null,
   }
+
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       spinnerDisplay: false,
       showToast: false,
+      timerMsg: "You have been successfully signed out.",
+      signedOut: false,
     };
 
     this.signIn = this.signIn.bind(this);
+    this.timer = this.timer.bind(this);
+
   }
 
   //Lifecycle callback executed when the component appears on the screen.
@@ -38,7 +45,14 @@ export default class SignIn extends Component {
     if (this.unregister) { //if have a function to unregister with
       this.unregister(); //call that function!
     }
-    this.setState({ spinnerDisplay: false });
+    this.setState({ spinnerDisplay: false });;
+    clearTimeout(this.timer);
+  }
+
+  timer() {
+    setTimeout(() => {
+      this.setState({ timerMsg: null })
+    }, 3000)
   }
 
   //A callback function for logging in existing users
@@ -56,7 +70,6 @@ export default class SignIn extends Component {
   }
 
   getSignedOut() {
-
     if (this.props.navigation.state.params) {
       signedOut = this.props.navigation.state.params.signedOut;
     }
@@ -87,15 +100,22 @@ export default class SignIn extends Component {
       signedOut = this.props.navigation.state.params.signedOut;
     }
 
-    if (signedOut === true) {
-      signOutMsg = (
-        <View style={styles.messageView}>
+
+    if (this.state.timerMsg != null && signedOut) {
+      signOutMsg = (<View style={styles.messageView}>
         <Text style={styles.messageText}>
-          You have been successfully signed out.
+          {this.state.timerMsg}
         </Text>
-        </View>
-      )
+      </View>)
+    } else {
+      signOutMsg = <View style={{ display: 'none' }}>
+        <Text style={{ display: 'none' }}>
+          {this.state.timerMsg}
+        </Text>
+      </View>;
     }
+
+    this.timer();
 
     this.state.showToast = false;
     this.state.spinnerDisplay = false;

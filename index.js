@@ -8,6 +8,7 @@ import { Root } from 'native-base';
 import ProfileNavigator from './components/ProfileNavigator';
 import MapNavigator from './components/MapNavigator';
 
+import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignOut from './components/SignOut';
