@@ -47,7 +47,7 @@ export default class SignOut extends React.Component {
       this.unregister(); //call that function!
     }
   }
-  
+
   render() {
     return (
       <View>
