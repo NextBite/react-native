@@ -242,6 +242,7 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 16,
     marginLeft: '11%',
-    color: '#a32d21'
+    color: '#96372d',
+    fontWeight: 'bold',
   }
 });

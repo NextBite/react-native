@@ -341,7 +341,8 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 16,
     marginLeft: '11%',
-    color: '#a32d21'
+    color: '#96372d',
+    fontWeight: 'bold',
   },
   signIn: {
     alignSelf: 'center',
@@ -380,5 +381,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Light',
     fontSize: 38,
     color: '#fff',
-  }
+  },
 });

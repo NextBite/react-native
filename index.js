@@ -7,6 +7,7 @@ import { Root } from 'native-base';
 
 import ProfileNavigator from './components/ProfileNavigator';
 import MapNavigator from './components/MapNavigator';
+import PendingDonationsNavigator from './components/PendingDonationsNavigator';
 
 import Home from './components/Home';
 import SignIn from './components/SignIn';
@@ -61,6 +62,9 @@ export default class App extends Component {
       Profile: {
         screen: ProfileNavigator,
       },
+      PendingDonations: {
+        screen: PendingDonationsNavigator,
+      },
       SignOut: {
         screen: SignOut,
       }
@@ -74,8 +78,10 @@ export default class App extends Component {
       drawerCloseRoute: 'DrawerClose',
       drawerToggleRoute: 'DrawerToggle',
       drawerBackgroundColor: 'white',
+      drawerColor: '#44beac',
       contentOptions: {
         activeTintColor: '#f8b718',
+        inactiveTintColor: '#474748',
       }
     };
     
