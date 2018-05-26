@@ -244,7 +244,10 @@ export default class ListingsForm extends Component {
     return (
       <Container style={{alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6'}}>
         <Content>
-        <Text style={{ alignSelf: 'center', fontSize: 16, marginTop: 20 }}>What would you like to donate today?</Text>
+        <View style={styles.messageView}>
+          <Text style={styles.messageText}>What would you like to donate today?</Text>
+        </View>
+        <View style={{width: '96%', alignSelf: 'center', marginTop: 10,}}>
           <View style={styles.view}>
             <Left style={styles.left}>
               <Icon name="map-marker" style={styles.icon} />
@@ -334,6 +337,7 @@ export default class ListingsForm extends Component {
             mode='time'
             style={{ marginBottom: 0 }}
           />
+          </View>
           <Button
             style={[styles.submitBtn, submitEnabled && styles.submitBtnAlt]}
             onPress={() => this.submit()}
@@ -357,7 +361,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     alignItems: 'center',
-    width: '92%'
+    alignSelf: 'flex-start',
+    width: '100%',
   },
   icon: {
     fontSize: 36,
@@ -371,14 +376,15 @@ const styles = StyleSheet.create({
     paddingLeft: '10%',
   },
   timepickerbtn: {
-    width: '88%',
-    marginRight: '10%',
+    width: '91%',
+    marginRight: '8%',
     borderBottomWidth: 0.5,
     borderColor: '#333333',
     alignSelf: 'flex-end'
   },
   timepickertxt: {
-    width: '90%',
+    width: '88%',
+    paddingLeft: 5, 
     fontSize: 16,
     color: '#C7C6CC'
   },
@@ -388,7 +394,7 @@ const styles = StyleSheet.create({
     color: '#333333'
   },
   timepickericon: {
-    marginRight: 30,
+    marginRight: '15%',
     fontSize: 16
   },
   submitBtn: {
@@ -400,9 +406,11 @@ const styles = StyleSheet.create({
     elevation: 0,
     backgroundColor: 'rgba(204,204,204,0.8)',
     marginBottom: 20,
+    marginTop: 10
   },
   submitBtnAlt: { // when button is enabled
-    backgroundColor: '#44beac'
+    backgroundColor: '#44beac',
+    marginTop: 10
   },
   buttonText: {
     fontSize: 20,
@@ -417,6 +425,24 @@ const styles = StyleSheet.create({
   },
   right: {
     flex: 3,
+  },
+  messageView: {
+    alignSelf: 'center',
+    width: '100%',
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  messageText: {
+    alignSelf: 'center',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#ffffff',
+    backgroundColor: '#f8b718',
+    width: '100%',
+    padding: 20,
+    borderRadius: 10,
+    fontSize: 16
   }
 });
 
@@ -425,7 +451,7 @@ const pickerSelectStyles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   viewContainer: {
-    width: '100%',
+    width: '92%',
     alignSelf: 'flex-start',
     borderColor: '#247f6e',
     marginRight: '10%',

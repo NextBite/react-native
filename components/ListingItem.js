@@ -153,7 +153,7 @@ export default class ListingItem extends Component {
           <Text style={styles.rightText}>{this.readableTime(this.props.timestamp)}</Text>
         </Right>
       </View>
-    )
+    );
 
     let location = (
       <View style={styles.cardView}>
@@ -164,7 +164,7 @@ export default class ListingItem extends Component {
           <Text style={styles.rightText}>{this.props.location.split(",")[0]}</Text>
         </Right>
       </View>
-    )
+    );
 
     let boxes = (
       <View style={styles.cardView}>
@@ -175,7 +175,7 @@ export default class ListingItem extends Component {
           <Text style={styles.rightText}>{this.props.boxes}</Text>
         </Right>
       </View>
-    )
+    );
 
     let weight = (
       <View style={styles.cardView}>
@@ -186,7 +186,7 @@ export default class ListingItem extends Component {
           <Text style={styles.rightText}>{this.props.weight}</Text>
         </Right>
       </View>
-    )
+    );
 
     let tags = (
       <View style={styles.cardView}>
@@ -197,18 +197,18 @@ export default class ListingItem extends Component {
           <Text style={styles.rightText}>{this.props.tag}</Text>
         </Right>
       </View>
-    )
+    );
 
     let expiration = (
       <View style={styles.cardView}>
         <Left style={styles.left}>
-          <Text style={styles.leftText}>Latest Pickup Time</Text>
+          <Text style={styles.leftText}>Expiration Time</Text>
         </Left>
         <Right style={styles.right}>
           <Text style={styles.rightText}>{this.readableTime(this.props.expiration)}</Text>
         </Right>
       </View>
-    )
+    );
 
     let status = (
       <View style={styles.cardView}>
@@ -219,7 +219,7 @@ export default class ListingItem extends Component {
           {this.checkStatus()}
         </Right>
       </View>
-    )
+    );
 
     return (
       <Card style={styles.card}>
@@ -285,9 +285,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#247f6e'
   },
   footer: {
-    backgroundColor: '#d3d3d3'
+    backgroundColor: '#c1e0da'
   }
 });

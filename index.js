@@ -9,13 +9,14 @@ import { Root } from 'native-base';
 
 import ProfileNavigator from './components/ProfileNavigator';
 import MapNavigator from './components/MapNavigator';
-import Listing from './components/Listing';
+import ListingNavigator from './components/ListingNavigator';
 
 import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignOut from './components/SignOut';
 import VolunteerPendingRescues from './components/VolunteerPendingRescues';
+import PendingDonations from './components/PendingDonations';
 
 var { height, width } = Dimensions.get('window');
 
@@ -60,10 +61,10 @@ export default class App extends Component {
 
     let routeConfigs = {
       Home: {
-        screen: this.state.personType === 'volunteer' ? MapNavigator : Listing,
+        screen: this.state.personType === 'volunteer' ? MapNavigator : ListingNavigator,
       },
-      VolunteerPendingRescues: {
-        screen: VolunteerPendingRescues,
+      Pending: {
+        screen: this.state.personType === 'volunteer' ? VolunteerPendingRescues : PendingDonations,
       },
       Profile: {
         screen: ProfileNavigator,

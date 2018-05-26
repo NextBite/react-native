@@ -138,8 +138,7 @@ export default class SignInForm extends Component {
             disabled={!signInEnabled}
           >
             <Text style={[styles.buttonText, signInEnabled && styles.signInButtonAltText]}>
-              SIGN IN
-                        </Text>
+              SIGN IN</Text>
           </Button >
           <View style={styles.noAccountBlock}>
             <Text style={styles.noAccount} >

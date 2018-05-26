@@ -5,7 +5,7 @@ import firebase from 'firebase';
 import { Icon } from 'native-base';
 
 import HeaderComponent from './HeaderComponent';
-import PendingCards from './PendingCards';
+import VolunteerPendingCards from './VolunteerPendingCards';
 
 export default class VolunteerPendingRescues extends React.Component {
   state = {title:"Pending Rescues"};
@@ -13,11 +13,11 @@ export default class VolunteerPendingRescues extends React.Component {
   static navigationOptions = ({ navigation }) => {
     let drawerLabel = 'Pending Rescues';
     let drawerIcon = () => (
-      <Icon
-        name="person"
-        style={{ color: "#44beac", }}
-        size={28}
-      />
+      <Svg height="24" width="24">
+        <Polygon fill="#44BEAC" points="14,0 14,4 12,3 10,4 10,0 6.5,0 6.5,11 17.5,11 17.5,0 " />
+        <Polygon fill="#44BEAC" points="7.5,13 7.5,17 5.5,16 3.5,17 3.5,13 0,13 0,24 11,24 11,13 " />
+        <Polygon fill="#44BEAC" points="20.5,13 20.5,17 18.5,16 16.5,17 16.5,13 13,13 13,24 24,24 24,13 " />
+      </Svg>
     );
     return { drawerLabel, drawerIcon };
   }
@@ -59,7 +59,7 @@ export default class VolunteerPendingRescues extends React.Component {
               }
             });
 
-            pendingCards.push(<PendingCards
+            pendingCards.push(<VolunteerPendingCards
               boxes={pickupsObj.boxes}
               vendor={vendor}
               expiration={pickupsObj.expirationDate}

@@ -113,7 +113,8 @@ export default class Listing extends Component {
   render() {
     let spinner = null;
     if (this.state.spinnerDisplay) {
-      spinner = (<Spinner />)
+      spinner = (<View style={{ backgroundColor: 'rgba(0,0,0,0.9)', height: 80, }}><Spinner color="#44beac" />
+      </View>)
     }
 
     return (

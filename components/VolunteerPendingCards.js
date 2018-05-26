@@ -3,7 +3,7 @@ import { StyleSheet, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 
-export default class PendingCards extends React.Component {
+export default class VolunteerPendingCards extends React.Component {
   render() {
     return (
       <Card style={styles.card}>
