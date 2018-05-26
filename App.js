@@ -10,7 +10,7 @@ import DropOffLocation from './components/DropOffLocation';
 import SuccessfulClaim from './components/SuccessfulClaim';
 import VolunteerPendingRescues from './components/VolunteerPendingRescues';
 
-const App = StackNavigator({
+/*const App = StackNavigator({
   Home: {
     screen: MarketMap,
     navigationOptions: {
@@ -27,7 +27,7 @@ const App = StackNavigator({
   {
     initialRouteName: 'Home',
     /* The header config from HomeScreen is now here */
-    navigationOptions: {
+    /*navigationOptions: {
       headerStyle: {
         backgroundColor: '#44beac',
       },
@@ -37,7 +37,7 @@ const App = StackNavigator({
       },
     },
   }
-);
+);*/
 
 // Build a channel
 const channel = new RNfirebase.notifications.Android.Channel('new-listing-channel', 'New Listing Channel', RNfirebase.notifications.Android.Importance.Max)

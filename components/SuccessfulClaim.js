@@ -2,13 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
+import HeaderComponent from './HeaderComponent';
 
 export default class SuccessfulClaim extends React.Component {
-  state = {};
-
-  static navigationOptions = {
-    title: 'Successful Claim',
-  };
+  state = {title:"Successful Claim"};
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
@@ -40,6 +37,7 @@ export default class SuccessfulClaim extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+      <HeaderComponent {...this.props} title={this.state.title} />
         <Image
           style={{ width: '100%', height: '50%' }}
           source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.state.coords.lat},${this.state.coords.long}&zoom=16&size=400x400&scale=2&maptype=roadmap&markers=color:red|label:|${this.state.coords.lat},${this.state.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE` }}

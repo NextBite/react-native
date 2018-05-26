@@ -2,15 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import firebase from 'firebase';
 
+import HeaderComponent from './HeaderComponent';
 import MarketCards from './MarketCards';
 import MarketTitleCard from './MarketTitleCard'
 
 export default class MarketPickups extends React.Component {
-  state = {};
-
-  static navigationOptions = {
-    title: 'Market Details',
-  };
+  state = { title: "Market Details"};
 
   componentDidMount() {
     // basically this.props.{name}, but navigator requires this
@@ -104,6 +101,7 @@ export default class MarketPickups extends React.Component {
     console.log("market cards state", this.state.marketCards);
     return (
       <View>
+        <HeaderComponent {...this.props} title={this.state.title} />
         <ScrollView style={styles.cards}>
           <MarketTitleCard
             marketName={this.state.marketName}

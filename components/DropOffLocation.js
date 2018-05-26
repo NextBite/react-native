@@ -3,14 +3,13 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
 
+import HeaderComponent from './HeaderComponent';
+
 import FoodBankCards from './FoodBankCards';
 
 export default class DropOffLocation extends React.Component {
-  state = {};
+  state = {title: "Choose Dropoff Location"};
 
-  static navigationOptions = {
-    title: 'Claim Pickup',
-  };
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
@@ -72,6 +71,7 @@ export default class DropOffLocation extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+       <HeaderComponent {...this.props} title={this.state.title} />
         <ScrollView style={styles.cards}>
           {this.state.foodBankCards}
         </ScrollView>

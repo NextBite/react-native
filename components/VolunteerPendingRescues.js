@@ -1,16 +1,26 @@
 import React from 'react';
-import { StyleSheet, ScrollView, Text } from 'react-native';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
+import { Icon } from 'native-base';
 
+import HeaderComponent from './HeaderComponent';
 import PendingCards from './PendingCards';
 
 export default class VolunteerPendingRescues extends React.Component {
-  state = {};
+  state = {title:"Pending Rescues"};
 
-  static navigationOptions = {
-    title: 'Pending Rescues',
-  };
+  static navigationOptions = ({ navigation }) => {
+    let drawerLabel = 'Pending Rescues';
+    let drawerIcon = () => (
+      <Icon
+        name="person"
+        style={{ color: "#44beac", }}
+        size={28}
+      />
+    );
+    return { drawerLabel, drawerIcon };
+  }
 
   componentDidMount() {
     // query the pickup listings within a particular market
@@ -74,9 +84,12 @@ export default class VolunteerPendingRescues extends React.Component {
 
   render() {
     return (
+      <View>
+        <HeaderComponent {...this.props} title={this.state.title} />
       <ScrollView style={styles.cards}>
         {this.state.pendingCards}
       </ScrollView>
+      </View>
     );
   }
 }

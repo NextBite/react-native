@@ -3,14 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
 
+import HeaderComponent from './HeaderComponent';
+
 import MarketCards from './MarketCards';
 
 export default class MarketPickups extends React.Component {
-  state = {};
+  state = {title:"Confirm Pickup Claim"};
 
-  static navigationOptions = {
-    title: 'Claim Pickup',
-  };
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
@@ -38,6 +37,7 @@ export default class MarketPickups extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+       <HeaderComponent {...this.props} title={this.state.title} />
         <Text>Are you sure you want to claim this pickup?</Text>
         <Text>Boxes: {this.state.boxes}</Text>
         <Text>Expiration Date: {String(new Date(this.state.expirationDate)).slice(0, -18)}</Text>

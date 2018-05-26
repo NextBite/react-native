@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'native-base';
+import { Button, Header } from 'native-base';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
 import RNfirebase from 'react-native-firebase';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import FetchLocation from './FetchLocation';
 import UsersMap from './UsersMap';
 import MapCards from './MapCards';
+import HeaderComponent from './HeaderComponent';
 
 export default class MarketMap extends React.Component {
   state = {
@@ -19,10 +21,17 @@ export default class MarketMap extends React.Component {
     countOfPickups: 0,
   }
 
-  static navigationOptions = {
-    title: 'Rescue Food',
-  };
-
+  static navigationOptions = ({ navigation }) => {
+    let drawerLabel = 'Rescue Food';
+    let drawerIcon = () => (
+      <Icon
+        name="location-on"
+        style={{ color: "#44beac" }}
+        size={28}
+      />
+    );
+    return { drawerLabel, drawerIcon };
+  }
   componentDidMount() {
     let usersPosition = {};
     let countOfPickups = 0;
@@ -202,6 +211,20 @@ export default class MarketMap extends React.Component {
     return (
       <View style={styles.container}>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
+        
+        <View style={styles.navigation}>
+          <Header style={{ height: 50, borderRadius: 50, width: 50, position: 'absolute', backgroundColor: '#f8b718',}} androidStatusBarColor='#35a08e'>
+            <Button transparent>
+              <Icon
+                name='menu'
+                onPress={() => this.props.navigation.navigate('DrawerOpen', {})}
+                style={{color: "#fff", display: 'flex', alignItems: 'center'}}
+                size={22} 
+              />
+            </Button>
+          </Header>
+        </View>
+        
         <View style={styles.button}>
           <Button transparent
             style={styles.innerButton}
@@ -241,5 +264,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#ffffff',
     fontSize: 18,
-  }
+  },
+  navigation: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+  },
 });
