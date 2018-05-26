@@ -46,9 +46,8 @@ export default class PendingDonations extends Component {
   }
 
   componentDidMount() {
-    let userListings = [];
     let currentDonationCards = [];
-    let volunteerName = ""
+    let userListings = [];
 
     this.unregister = firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -63,7 +62,7 @@ export default class PendingDonations extends Component {
           //query for details of each listing
           let listings = userListings.map((listingId) => {
             let listingDetailRef = firebase.database().ref(`listings/${listingId}`);
-            listingDetailRef.on('value', (snapshot) => {
+            listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
                 listingDetailObj[child.key] = child.val()
@@ -72,28 +71,38 @@ export default class PendingDonations extends Component {
 
               listingDetailObj["listingId"] = listingId;
               // retrieve volunteer's name for the listing
-              let usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
-              usersRef.once('value', (snapshot) => {
-                volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
-                currentDonationCards.push(<ListingItem
-                  timestamp={new Date(listingDetailObj.time)}
-                  location={listingDetailObj.location}
-                  boxes={listingDetailObj.boxes}
-                  weight={listingDetailObj.weight}
-                  tag={listingDetailObj.tags}
-                  expiration={listingDetailObj.expirationDate}
-                  claimed={listingDetailObj.claimed}
-                  volunteer={volunteerName}
-                  delivered={listingDetailObj.delivered}
-                  dropoff={listingDetailObj.dropoffLocation}
-                  listingID={listingDetailObj.listingId}
-                />);
-
-                currentDonationCards.sort(function (a, b) {
-                  return new Date(a.props.expiration) - new Date(b.props.expiration);
+              let usersRef;
+              let volunteerName = "";
+              if (listingDetailObj.claimed === 'yes') {
+                usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
+                userRef.once('value', (snapshot) => {
+                  volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
                 });
-                this.setState({ donationCards: currentDonationCards })
+              }
+              // create one donation card
+              let oneCard = (<ListingItem
+                timestamp={new Date(listingDetailObj.time)}
+                location={listingDetailObj.location}
+                boxes={listingDetailObj.boxes}
+                weight={listingDetailObj.weight}
+                tag={listingDetailObj.tags}
+                expiration={listingDetailObj.expirationDate}
+                claimed={listingDetailObj.claimed}
+                volunteer={volunteerName}
+                delivered={listingDetailObj.delivered}
+                dropoff={listingDetailObj.dropoffLocation}
+                listingID={listingDetailObj.listingId}
+              />);
+
+              // add donation card to array
+              currentDonationCards.push(oneCard)
+
+              currentDonationCards.sort(function (a, b) {
+                return new Date(a.props.expiration) - new Date(b.props.expiration);
               });
+
+              this.setState({ donationCards: currentDonationCards })
+
             });
           });
         });
@@ -102,27 +111,10 @@ export default class PendingDonations extends Component {
       }
     });
   }
-
   componentWillUnmount() {
     if (this.unregister) {
       this.unregister();
     }
-  }
-
-  readableTime(time) {
-    let dt = time.toString().slice(0, -18).split(" ");
-    console.debug(dt);
-    let hour = dt[4].split(":")[0];
-    if (parseInt(hour) > 0 && parseInt(hour) < 12) {
-      dt[4] = dt[4] + " AM";
-    } else if (parseInt(hour) > 12) {
-      dt[4] = (parseInt(hour) - 12).toString() + ":" + dt[4].split(":")[1] + " PM";
-    } else if (parseInt(hour) === 12) {
-      dt[4] = dt[4] + " PM";
-    } else if (parseInt(hour) === 0) {
-      dt[4] = "12:" + dt[4].split(":")[1] + " AM";
-    }
-    return dt[0] + " " + dt[1] + " " + dt[2] + " " + dt[3] + ", " + dt[4];
   }
 
   render() {
