@@ -3,7 +3,7 @@ import { StyleSheet, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 
-export default class VolunteerPendingCards extends React.Component {
+export default class HistoryCards extends React.Component {
   render() {
     return (
       <Card style={styles.card}>
@@ -19,19 +19,9 @@ export default class VolunteerPendingCards extends React.Component {
                 Contains: {this.props.tags}
               </Text>
               <Text style={styles.regText}>
-                This rescue is being delivered to {this.props.dropoffLocation}.
+                Delivered successfully to {this.props.dropoffLocation}.
               </Text>
             </Body>
-          </Left>
-        </CardItem>
-        <CardItem>
-          <Left>
-            <Button transparent
-              style={styles.innerButton}
-              onPress={() => this.props.navigation.navigate('', {})}
-            >
-              <Text style={styles.buttonText}>Contact Vendor</Text>
-            </Button>
           </Left>
         </CardItem>
       </Card>

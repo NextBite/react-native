@@ -12,11 +12,14 @@ import MapNavigator from './components/MapNavigator';
 import ListingNavigator from './components/ListingNavigator';
 
 import Home from './components/Home';
+import Profile from './components/Profile';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignOut from './components/SignOut';
 import VolunteerPendingRescues from './components/VolunteerPendingRescues';
 import PendingDonations from './components/PendingDonations';
+import VolunteerRescueHistory from './components/VolunteerRescueHistory';
+import VendorRescueHistory from './components/VendorRescueHistory';
 
 var { height, width } = Dimensions.get('window');
 
@@ -61,10 +64,13 @@ export default class App extends Component {
 
     let routeConfigs = {
       Home: {
-        screen: this.state.personType === 'volunteer' ? MapNavigator : ListingNavigator,
+        screen: this.state.personType === undefined ? Profile : (this.state.personType === 'volunteer' ? MapNavigator : ListingNavigator),
       },
       Pending: {
         screen: this.state.personType === 'volunteer' ? VolunteerPendingRescues : PendingDonations,
+      },
+      History: {
+        screen: this.state.personType === 'volunteer' ? VolunteerRescueHistory : VendorRescueHistory
       },
       Profile: {
         screen: ProfileNavigator,

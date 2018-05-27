@@ -2,37 +2,22 @@ import React from 'react';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
-import Svg, {
-  Circle,
-  Ellipse,
-  G,
-  LinearGradient,
-  RadialGradient,
-  Line,
-  Path,
-  Polygon,
-  Polyline,
-  Rect,
-  Symbol,
-  Use,
-  Defs,
-  Stop
-} from 'react-native-svg';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import HeaderComponent from './HeaderComponent';
-import VolunteerPendingCards from './VolunteerPendingCards';
+import HistoryCards from './HistoryCards';
 
-export default class VolunteerPendingRescues extends React.Component {
-  state = {title:"Pending Rescues"};
+export default class VolunteerRescueHistory extends React.Component {
+  state = { title: 'Rescue History' };
 
   static navigationOptions = ({ navigation }) => {
-    let drawerLabel = 'Pending Rescues';
+    let drawerLabel = 'Rescue History';
     let drawerIcon = () => (
-      <Svg height="24" width="24">
-        <Polygon fill="#44BEAC" points="14,0 14,4 12,3 10,4 10,0 6.5,0 6.5,11 17.5,11 17.5,0 " />
-        <Polygon fill="#44BEAC" points="7.5,13 7.5,17 5.5,16 3.5,17 3.5,13 0,13 0,24 11,24 11,13 " />
-        <Polygon fill="#44BEAC" points="20.5,13 20.5,17 18.5,16 16.5,17 16.5,13 13,13 13,24 24,24 24,13 " />
-      </Svg>
+      <Icon
+        name="history"
+        style={{ color: "#44beac", marginLeft: -3 }}
+        size={28}
+      />
     );
     return { drawerLabel, drawerIcon };
   }
@@ -40,22 +25,22 @@ export default class VolunteerPendingRescues extends React.Component {
   componentDidMount() {
     // query the pickup listings within a particular market
     let currUser = "lGtcBwxX1XWtdioXbuEmQQUuTVn1"; // CHANGE LATER TO NON-HARD CODE
-    let rescuesRef = firebase.database().ref(`users/${currUser}/claimedRescues`);
+    let rescuesRef = firebase.database().ref(`users/${currUser}/deliveredRescues`);
 
-    let pendingCards = [];
-    let claimedRescues = [];
+    let historyCards = [];
+    let deliveredRescues = [];
     rescuesRef.on('value', (snapshot) => {
       snapshot.forEach(function (child) {
-        console.log("PENDING RESCUES CHILD", child.val().listingId);
-        claimedRescues.push(child.val().listingId);
+        console.log("DELIVERED RESCUES CHILD", child.val().listingId);
+        deliveredRescues.push(child.val().listingId);
       });
 
-      console.log("claimed rescues array", claimedRescues);
+      console.log("delivered rescues array", deliveredRescues);
 
-      this.setState({ claimedRescues: claimedRescues });
+      this.setState({ deliveredRescues: deliveredRescues });
 
       // query for all pickup listing details
-      let rescues = claimedRescues.map((rescue) => {
+      let rescues = deliveredRescues.map((rescue) => {
         let listingsRef = firebase.database().ref(`listings/${rescue}`);
         listingsRef.on('value', (snapshot) => {
           let pickupsObj = {};
@@ -74,7 +59,7 @@ export default class VolunteerPendingRescues extends React.Component {
               }
             });
 
-            pendingCards.push(<VolunteerPendingCards
+            historyCards.push(<HistoryCards
               boxes={pickupsObj.boxes}
               vendor={vendor}
               expiration={pickupsObj.expirationDate}
@@ -82,15 +67,16 @@ export default class VolunteerPendingRescues extends React.Component {
               tags={pickupsObj.tags}
               market={pickupsObj.location}
               listingId={rescue}
+              dropoffLocation={pickupsObj.dropoffLocation}
               key={rescue}
               navigation={this.props.navigation}
             />);
 
-            pendingCards.sort(function (a, b) {
+            historyCards.sort(function (a, b) {
               return new Date(a.props.expiration) - new Date(b.props.expiration);
             });
 
-            this.setState({ pendingCards: pendingCards });
+            this.setState({ historyCards: historyCards });
           });
         });
       });
@@ -100,10 +86,10 @@ export default class VolunteerPendingRescues extends React.Component {
   render() {
     return (
       <View>
-      <HeaderComponent {...this.props} title={this.state.title} />
-      <ScrollView style={styles.cards}>
-        {this.state.pendingCards}
-      </ScrollView>
+        <HeaderComponent {...this.props} title={this.state.title} />
+        <ScrollView style={styles.cards}>
+          {this.state.historyCards}
+        </ScrollView>
       </View>
     );
   }

@@ -32,15 +32,38 @@ export default class ListingsForm extends Component {
   validate(value, validations) {
     let errors = { isValid: true };
 
-    if (value === undefined) { //check validations
+    if (value === null) { //check validations
       //display name required
       if (validations.required) {
         errors.required = true;
         errors.isValid = false;
       }
+    } else if (value !== null) {
+      if (validations.time) {
+        if (value < Date.now()) {
+          errors.time = true;
+          errors.isValid = false;
+        }
+      }
+    }
+
+    if (!errors.isValid) { //if found errors
+    } else if (value !== undefined) { //valid and has input
+    } else { //valid and no input
+      errors.isValid = false; //make false anyway
     }
 
     return errors; //return data object
+  }
+
+  /* A helper function that renders the appropriate error message */
+  renderErrorMsg(error) {
+    if (error.time) {
+      return <Text style={styles.errorText}>The expiration time must be after {this.readableTime(Date.now())}.</Text>
+    } else if (error.required) {
+      return <Text style={styles.errorText}>This field is required.</Text>
+    }
+    return null
   }
 
   showTimePicker = () => this.setState({ isTimePickerVisible: true });
@@ -58,24 +81,28 @@ export default class ListingsForm extends Component {
         <Text style={styles.timepickertxt}>Latest pickup time today</Text>
       );
     } else {
-      // render a more readable time
-      let datetime = this.state.expirationDate.toString().slice(0, -18).split(" ");
-      let hour = datetime[4].split(":")[0];
-      if (parseInt(hour) > 0 && parseInt(hour) < 12) {
-        datetime[4] = datetime[4] + " AM";
-      } else if (parseInt(hour) > 12) {
-        datetime[4] = (parseInt(hour) - 12).toString() + ":" + datetime[4].split(":")[1] + " PM";
-      } else if (parseInt(hour) === 12) {
-        datetime[4] = datetime[4] + " PM";
-      } else if (parseInt(hour) === 0) {
-        datetime[4] = "12:" + datetime[4].split(":")[1] + " AM";
-      }
-      let displayedTime = datetime[0] + " " + datetime[1] + " " + datetime[2] + ", " + datetime[4];
+      
 
       return (
-        <Text style={styles.timepickertxtAlt}>{displayedTime}</Text>
+        <Text style={styles.timepickertxtAlt}>{this.readableTime()}</Text>
       );
     }
+  }
+
+  readableTime() {
+    // render a more readable time
+    let datetime = this.state.expirationDate.toString().slice(0, -18).split(" ");
+    let hour = datetime[4].split(":")[0];
+    if (parseInt(hour) > 0 && parseInt(hour) < 12) {
+      datetime[4] = datetime[4] + " AM";
+    } else if (parseInt(hour) > 12) {
+      datetime[4] = (parseInt(hour) - 12).toString() + ":" + datetime[4].split(":")[1] + " PM";
+    } else if (parseInt(hour) === 12) {
+      datetime[4] = datetime[4] + " PM";
+    } else if (parseInt(hour) === 0) {
+      datetime[4] = "12:" + datetime[4].split(":")[1] + " AM";
+    }
+    return displayedTime = datetime[0] + " " + datetime[1] + " " + datetime[2] + ", " + datetime[4];
   }
 
   //handle submit button
@@ -90,7 +117,7 @@ export default class ListingsForm extends Component {
     let boxesErrors = this.validate(this.state.boxes, { required: true });
     let weightErrors = this.validate(this.state.weight, { required: true });
     let tagErrors = this.validate(this.state.tags, { required: true });
-    let expirationErrors = this.validate(this.state.expirationDate, { required: true });
+    let expirationErrors = this.validate(this.state.expirationDate, { required: true, time: true });
     let submitEnabled = (locationErrors.isValid && boxesErrors.isValid && weightErrors.isValid && tagErrors.isValid && expirationErrors.isValid)
 
     let markets = [
@@ -242,101 +269,106 @@ export default class ListingsForm extends Component {
     ]
 
     return (
-      <Container style={{alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6'}}>
+      <Container style={{ alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6' }}>
         <Content>
-        <View style={styles.messageView}>
-          <Text style={styles.messageText}>What would you like to donate today?</Text>
-        </View>
-        <View style={{width: '96%', alignSelf: 'center', marginTop: 10,}}>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="map-marker" style={styles.icon} />
-            </Left>
-            <Right style={styles.right} >
-              <RNPickerSelect
-                placeholder={{
-                  label: 'Your Market Location',
-                  value: null,
-                }}
-                items={markets}
-                onValueChange={(value) => this.setState({ location: value })}
-                value={this.state.location}
-                style={{ ...pickerSelectStyles }}
-              />
-            </Right>
+          <View style={styles.messageView}>
+            <Text style={styles.messageText}>What would you like to donate today?</Text>
           </View>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="cube" style={styles.icon} />
-            </Left>
-            <Right style={styles.right} >
-              <RNPickerSelect
-                placeholder={{
-                  label: 'Number of Boxes',
-                  value: null
-                }}
-                items={numBox}
-                onValueChange={(value) => this.setState({ boxes: value })}
-                value={this.state.boxes}
-                style={{ ...pickerSelectStyles }}
-              />
-            </Right>
-          </View>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="balance-scale" style={styles.iconscale} />
-            </Left>
-            <Right style={styles.right}>
-              <RNPickerSelect
-                placeholder={{
-                  label: 'Weight of Boxes',
-                  value: null,
-                }}
-                items={boxWeight}
-                onValueChange={(value) => this.setState({ weight: value })}
-                value={this.state.weight}
-                style={{ ...pickerSelectStyles }}
-              />
-            </Right>
-          </View>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="tags" style={styles.icon} />
-            </Left>
-            <Right style={styles.right} >
-              <RNPickerSelect
-                placeholder={{
-                  label: 'Types of Food',
-                  value: null
-                }}
-                items={tags}
-                onValueChange={(value) => this.setState({ tags: value })}
-                value={this.state.tags}
-                style={{ ...pickerSelectStyles }}
-              />
-            </Right>
-          </View>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="hourglass-start" style={styles.icon} />
-            </Left>
-            <Right style={styles.right}>
-              <Button transparent
-                style={styles.timepickerbtn}
-                onPress={this.showTimePicker}
-              >
-                {this.showTimePicked()}
-                <Icon name='caret-down' style={styles.timepickericon} />
-              </Button>
-            </Right>
-          </View>
-          <DateTimePicker
-            isVisible={this.state.isTimePickerVisible}
-            onConfirm={this.handleTimePicked}
-            onCancel={this.hideTimePicker}
-            mode='time'
-            style={{ marginBottom: 0 }}
-          />
+          <View style={{ width: '96%', alignSelf: 'center', marginTop: 10, }}>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="map-marker" style={styles.icon} />
+              </Left>
+              <Right style={styles.right} >
+                <RNPickerSelect
+                  placeholder={{
+                    label: 'Your Market Location',
+                    value: null,
+                  }}
+                  items={markets}
+                  onValueChange={(value) => this.setState({ location: value })}
+                  value={this.state.location}
+                  style={{ ...pickerSelectStyles }}
+                />
+                {this.renderErrorMsg(locationErrors)}
+              </Right>
+            </View>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="cube" style={styles.icon} />
+              </Left>
+              <Right style={styles.right} >
+                <RNPickerSelect
+                  placeholder={{
+                    label: 'Number of Boxes',
+                    value: null
+                  }}
+                  items={numBox}
+                  onValueChange={(value) => this.setState({ boxes: value })}
+                  value={this.state.boxes}
+                  style={{ ...pickerSelectStyles }}
+                />
+                {this.renderErrorMsg(boxesErrors)}
+              </Right>
+            </View>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="balance-scale" style={styles.iconscale} />
+              </Left>
+              <Right style={styles.right}>
+                <RNPickerSelect
+                  placeholder={{
+                    label: 'Weight of Boxes',
+                    value: null,
+                  }}
+                  items={boxWeight}
+                  onValueChange={(value) => this.setState({ weight: value })}
+                  value={this.state.weight}
+                  style={{ ...pickerSelectStyles }}
+                />
+                {this.renderErrorMsg(weightErrors)}
+              </Right>
+            </View>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="tags" style={styles.icon} />
+              </Left>
+              <Right style={styles.right} >
+                <RNPickerSelect
+                  placeholder={{
+                    label: 'Types of Food',
+                    value: null
+                  }}
+                  items={tags}
+                  onValueChange={(value) => this.setState({ tags: value })}
+                  value={this.state.tags}
+                  style={{ ...pickerSelectStyles }}
+                />
+                {this.renderErrorMsg(tagErrors)}
+              </Right>
+            </View>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="hourglass-start" style={styles.icon} />
+              </Left>
+              <Right style={styles.right}>
+                <Button transparent
+                  style={styles.timepickerbtn}
+                  onPress={this.showTimePicker}
+                >
+                  {this.showTimePicked()}
+                  <Icon name='caret-down' style={styles.timepickericon} />
+                </Button>
+                {this.renderErrorMsg(expirationErrors)}
+              </Right>
+            </View>
+            <DateTimePicker
+              isVisible={this.state.isTimePickerVisible}
+              onConfirm={this.handleTimePicked}
+              onCancel={this.hideTimePicker}
+              mode='time'
+              style={{ marginBottom: 0 }}
+            />
           </View>
           <Button
             style={[styles.submitBtn, submitEnabled && styles.submitBtnAlt]}
@@ -384,7 +416,7 @@ const styles = StyleSheet.create({
   },
   timepickertxt: {
     width: '88%',
-    paddingLeft: 5, 
+    paddingLeft: 5,
     fontSize: 16,
     color: '#C7C6CC'
   },
@@ -443,7 +475,16 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     fontSize: 16
-  }
+  },
+  errorText: {
+    fontSize: 16,
+    marginLeft: 0,
+    color: '#96372d',
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    marginLeft: '2%',
+    marginRight: '10%'
+  },
 });
 
 const pickerSelectStyles = StyleSheet.create({

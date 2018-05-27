@@ -78,7 +78,8 @@ export default class ListingItem extends Component {
       return (
         <View style={styles.cardView}>
           <Left style={styles.leftButton}>
-            <Button transparent>
+            <Button transparent
+              onPress={() => this.props.navigation.navigate('EditRescue', {market: this.props.market, boxes: this.props.boxes, weight: this.props.weight, tags: this.props.tags, expiration: this.props.expiration, listingId: this.props.listingId})}>
               <Text style={styles.buttonText}>EDIT</Text>
             </Button>
           </Left>
