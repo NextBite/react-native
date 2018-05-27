@@ -1,9 +1,133 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, TimePickerAndroid, TimePickerAndroidOpenOptions } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TimePickerAndroid, TimePickerAndroidOpenOptions, TouchableOpacity, } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Left, Right } from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from "react-native-vector-icons/FontAwesome";
+import Autocomplete from 'react-native-autocomplete-input';
+
+class AutoComplete extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      markets: [],
+      query: ''
+    };
+  }
+
+  componentDidMount() {
+    let marketList = [
+      {
+        label: 'Ballard Farmers Market',
+        value: 'Ballard Farmers Market, 47.6450099, -122.3486234'
+      },
+      {
+        label: 'Capitol Hill Farmers Market',
+        value: 'Capitol Hill Farmers Market, 47.6163942, -122.3231928'
+      },
+      {
+        label: 'City Hall Farmers Market',
+        value: 'City Hall Farmers Market, 47.6097185, -122.3597025'
+      },
+      {
+        label: 'Columbia City Farmers Market',
+        value: 'Columbia City Farmers Market, 47.5663073, -122.3465634'
+      },
+      {
+        label: 'Denny Regrade Farmers Market',
+        value: 'Denny Regrade Farmers Market, 47.6097158, -122.3597025'
+      },
+      {
+        label: 'Fremont Farmers Market',
+        value: 'Fremont Farmers Market, 47.6463977, -122.3474217,13'
+      },
+      {
+        label: 'Lake City Farmers Market',
+        value: 'Lake City Farmers Market, 47.71992, -122.3003247'
+      },
+      {
+        label: 'Madrona Farmers Market',
+        value: 'Madrona Farmers Market, 47.612343, -122.2977045'
+      },
+      {
+        label: 'Magnolia Farmers Market',
+        value: 'Magnolia Farmers Market, 47.646629, -122.363557'
+      },
+      {
+        label: 'Phinney Farmers Market',
+        value: 'Phinney Farmers Market, 47.67763, -122.3562657'
+      },
+      {
+        label: 'Pike Place Market',
+        value: 'Pike Place Market, 47.6097199, -122.3465703'
+      },
+      {
+        label: 'Queen Anne Farmers Market',
+        value: 'Queen Anne Farmers Market, 47.637149, -122.3592802'
+      },
+      {
+        label: 'Rainier Farmers Market',
+        value: 'Rainier Farmers Market, 47.5663073,-122.3465634'
+      },
+      {
+        label: 'South Lake Union Farmers Market',
+        value: 'South Lake Union Farmers Market, 47.6040411, -122.3366638'
+      },
+      {
+        label: 'University District Farmers Market',
+        value: 'University District Farmers Market, 47.6656392, -122.3152575'
+      },
+      {
+        label: 'Wallingford Farmers Market',
+        value: 'Wallingford Farmers Market, 47.6623941, -122.3407796'
+      },
+      {
+        label: 'West Seattle Farmers Market',
+        value: 'West Seattle Farmers Market, 47.5612161, -122.3887488'
+      }
+    ]
+
+    this.setState({markets: marketList})
+  }
+
+  findMarket(query) {
+    if (query === '') {
+      return [];
+    }
+
+    const regex = new RegExp(`${query.trim()}`, 'i');
+    return this.state.markets.filter(market => market.label.search(regex) >= 0);
+  }
+
+  render() {
+    const { query } = this.state;
+    const markets = this.findMarket(query);
+    const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
+
+    return (
+      <View style={{zIndex:1}}>
+      <View style={styles.containerAuto}>
+        <Autocomplete
+          autoCapitalize="none"
+          autoCorrect={false}
+          data={markets.length === 1 && comp(query, markets[0].label) ? [] : markets}
+          defaultValue={query}
+          onChangeText={text => this.setState({ query: text })}
+          placeholder="Enter Market Location"
+          renderItem={({ label }) => (
+            <TouchableOpacity onPress={() => this.setState({ query: label })}>
+              <Text style={styles.itemText}>
+                {label}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+      </View>
+    );
+  }
+}
+
 
 export default class ListingsForm extends Component {
   constructor(props) {
@@ -119,6 +243,7 @@ export default class ListingsForm extends Component {
     let tagErrors = this.validate(this.state.tags, { required: true });
     let expirationErrors = this.validate(this.state.expirationDate, { required: true, time: true });
     let submitEnabled = (locationErrors.isValid && boxesErrors.isValid && weightErrors.isValid && tagErrors.isValid && expirationErrors.isValid)
+
 
     let markets = [
       {
@@ -271,6 +396,7 @@ export default class ListingsForm extends Component {
     return (
       <Container style={{ alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6' }}>
         <Content>
+        <AutoComplete/>
           <View style={styles.messageView}>
             <Text style={styles.messageText}>What would you like to donate today?</Text>
           </View>
@@ -506,6 +632,51 @@ const styles = StyleSheet.create({
     marginLeft: '2%',
     color: '#c3c3c8',
   },
+
+
+
+  containerAuto: {
+    backgroundColor: '#F5FCFF',
+    flex: 1,
+    paddingTop: 25
+  },
+  autocompleteContainer: {
+    flex: 1,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 1
+  },
+  itemText: {
+    fontSize: 15,
+    margin: 2
+  },
+  descriptionContainer: {
+    // `backgroundColor` needs to be set otherwise the
+    // autocomplete input will disappear on text input.
+    backgroundColor: '#F5FCFF',
+    marginTop: 25
+  },
+  infoText: {
+    textAlign: 'center'
+  },
+  titleText: {
+    fontSize: 18,
+    fontWeight: '500',
+    marginBottom: 10,
+    marginTop: 10,
+    textAlign: 'center'
+  },
+  directorText: {
+    color: 'grey',
+    fontSize: 12,
+    marginBottom: 10,
+    textAlign: 'center'
+  },
+  openingText: {
+    textAlign: 'center'
+}
 });
 
 const pickerSelectStyles = StyleSheet.create({
