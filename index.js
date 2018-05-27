@@ -12,6 +12,7 @@ import MapNavigator from './components/MapNavigator';
 import ListingNavigator from './components/ListingNavigator';
 
 import Home from './components/Home';
+import Profile from './components/Profile';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignOut from './components/SignOut';
@@ -61,7 +62,7 @@ export default class App extends Component {
 
     let routeConfigs = {
       Home: {
-        screen: this.state.personType === 'volunteer' ? MapNavigator : ListingNavigator,
+        screen: this.state.personType === undefined ? Profile : (this.state.personType === 'volunteer' ? MapNavigator : ListingNavigator),
       },
       Pending: {
         screen: this.state.personType === 'volunteer' ? VolunteerPendingRescues : PendingDonations,
