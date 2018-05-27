@@ -108,7 +108,7 @@ export default class MarketMap extends React.Component {
                       />
                     )
 
-                    countOfPickups = (marketKeys.length - 1);
+                    countOfPickups += (marketKeys.length - 1);
                     this.setState({ countOfPickups: countOfPickups });
 
                     // sort the cards by smallest to largest according to distance away from user

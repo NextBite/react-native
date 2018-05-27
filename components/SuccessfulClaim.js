@@ -1,11 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Platform, Linking } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
 import HeaderComponent from './HeaderComponent';
 
 export default class SuccessfulClaim extends React.Component {
-  state = {title:"Successful Claim"};
+  constructor(props) {
+    super(props);
+    state = { title: "Successful Claim" };
+
+    this.openMaps = this.openMaps.bind(this);
+  }
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
@@ -15,12 +20,12 @@ export default class SuccessfulClaim extends React.Component {
     const marketId = params ? params.marketId : null;
     const marketName = params ? params.marketName : null;
 
-    this.setState({nonprofit: nonprofit, coords: coords, listingId: listingId});
+    this.setState({ nonprofit: nonprofit, coords: coords, listingId: listingId });
 
     // update the listing entry to reflect that it's been 
     // claimed by a volunteer
     firebase.database().ref().child(`listings/${listingId}`)
-        .update({ claimed: "yes", dropoffLocation: coords });
+      .update({ claimed: "yes", dropoffLocation: coords });
 
     // remove it from entires that are shown for each market
     firebase.database().ref(`markets/${marketName.split(",")[0]}/${marketId}`).remove();
@@ -34,28 +39,36 @@ export default class SuccessfulClaim extends React.Component {
     usersRef.push(newUserListing);
   }
 
+  openMaps() {
+    const scheme = Platform.OS === 'ios' ? 'maps:0,0?q=' : 'geo:0,0?q=:';
+    const latLng = `${this.state.coords.lat},${this.state.coords.long}`;
+    const label = `${this.state.nonprofit}`;
+    const url = Platform.OS === 'ios' ? `${scheme}${label}@${latLng}` : `${scheme}${latLng}(${label})`;
+
+    Linking.openURL(url);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-      <HeaderComponent {...this.props} title={this.state.title} />
+        <HeaderComponent {...this.props} title={this.state.title} />
         <Image
           style={{ width: '100%', height: '50%' }}
           source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.state.coords.lat},${this.state.coords.long}&zoom=16&size=400x400&scale=2&maptype=roadmap&markers=color:red|label:|${this.state.coords.lat},${this.state.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE` }}
         />
         <Text style={styles.message}>You're delivering this donation to {this.state.nonprofit}!</Text>
-
-          <Button transparent
-            style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('VolunteerPendingRescues', {})}
-          >
-            <Text style={styles.buttonText}>Pending Rescues</Text>
-          </Button>
-          <Button transparent
-            style={styles.innerButton}
-            onPress={() => this.props.navigation.navigate('VolunteerPendingRescues')}
-          >
-            <Text style={styles.buttonText}>Get Directions</Text>
-          </Button>
+        <Button transparent
+          style={styles.innerButton}
+          onPress={() => this.props.navigation.navigate('VolunteerPendingRescues', {})}
+        >
+          <Text style={styles.buttonText}>Pending Rescues</Text>
+        </Button>
+        <Button transparent
+          style={styles.innerButton}
+          onPress={() => this.openMaps()}
+        >
+          <Text style={styles.buttonText}>Get Directions</Text>
+        </Button>
       </View>
     );
   }
