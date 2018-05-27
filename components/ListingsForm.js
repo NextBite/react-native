@@ -32,12 +32,25 @@ export default class ListingsForm extends Component {
   validate(value, validations) {
     let errors = { isValid: true };
 
-    if (value === undefined) { //check validations
+    if (value === null) { //check validations
       //display name required
       if (validations.required) {
         errors.required = true;
         errors.isValid = false;
       }
+    } else if (value !== null) {
+      if (validations.time) {
+        if (value < Date.now()) {
+          errors.time = true;
+          errors.isValid = false;
+        }
+      }
+    }
+
+    if (!errors.isValid) { //if found errors
+    } else if (value !== undefined) { //valid and has input
+    } else { //valid and no input
+      errors.isValid = false; //make false anyway
     }
 
     return errors; //return data object
@@ -90,7 +103,7 @@ export default class ListingsForm extends Component {
     let boxesErrors = this.validate(this.state.boxes, { required: true });
     let weightErrors = this.validate(this.state.weight, { required: true });
     let tagErrors = this.validate(this.state.tags, { required: true });
-    let expirationErrors = this.validate(this.state.expirationDate, { required: true });
+    let expirationErrors = this.validate(this.state.expirationDate, { required: true, time: true });
     let submitEnabled = (locationErrors.isValid && boxesErrors.isValid && weightErrors.isValid && tagErrors.isValid && expirationErrors.isValid)
 
     let markets = [
@@ -242,101 +255,101 @@ export default class ListingsForm extends Component {
     ]
 
     return (
-      <Container style={{alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6'}}>
+      <Container style={{ alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6' }}>
         <Content>
-        <View style={styles.messageView}>
-          <Text style={styles.messageText}>What would you like to donate today?</Text>
-        </View>
-        <View style={{width: '96%', alignSelf: 'center', marginTop: 10,}}>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="map-marker" style={styles.icon} />
-            </Left>
-            <Right style={styles.right} >
-              <RNPickerSelect
-                placeholder={{
-                  label: 'Your Market Location',
-                  value: null,
-                }}
-                items={markets}
-                onValueChange={(value) => this.setState({ location: value })}
-                value={this.state.location}
-                style={{ ...pickerSelectStyles }}
-              />
-            </Right>
+          <View style={styles.messageView}>
+            <Text style={styles.messageText}>What would you like to donate today?</Text>
           </View>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="cube" style={styles.icon} />
-            </Left>
-            <Right style={styles.right} >
-              <RNPickerSelect
-                placeholder={{
-                  label: 'Number of Boxes',
-                  value: null
-                }}
-                items={numBox}
-                onValueChange={(value) => this.setState({ boxes: value })}
-                value={this.state.boxes}
-                style={{ ...pickerSelectStyles }}
-              />
-            </Right>
-          </View>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="balance-scale" style={styles.iconscale} />
-            </Left>
-            <Right style={styles.right}>
-              <RNPickerSelect
-                placeholder={{
-                  label: 'Weight of Boxes',
-                  value: null,
-                }}
-                items={boxWeight}
-                onValueChange={(value) => this.setState({ weight: value })}
-                value={this.state.weight}
-                style={{ ...pickerSelectStyles }}
-              />
-            </Right>
-          </View>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="tags" style={styles.icon} />
-            </Left>
-            <Right style={styles.right} >
-              <RNPickerSelect
-                placeholder={{
-                  label: 'Types of Food',
-                  value: null
-                }}
-                items={tags}
-                onValueChange={(value) => this.setState({ tags: value })}
-                value={this.state.tags}
-                style={{ ...pickerSelectStyles }}
-              />
-            </Right>
-          </View>
-          <View style={styles.view}>
-            <Left style={styles.left}>
-              <Icon name="hourglass-start" style={styles.icon} />
-            </Left>
-            <Right style={styles.right}>
-              <Button transparent
-                style={styles.timepickerbtn}
-                onPress={this.showTimePicker}
-              >
-                {this.showTimePicked()}
-                <Icon name='caret-down' style={styles.timepickericon} />
-              </Button>
-            </Right>
-          </View>
-          <DateTimePicker
-            isVisible={this.state.isTimePickerVisible}
-            onConfirm={this.handleTimePicked}
-            onCancel={this.hideTimePicker}
-            mode='time'
-            style={{ marginBottom: 0 }}
-          />
+          <View style={{ width: '96%', alignSelf: 'center', marginTop: 10, }}>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="map-marker" style={styles.icon} />
+              </Left>
+              <Right style={styles.right} >
+                <RNPickerSelect
+                  placeholder={{
+                    label: 'Your Market Location',
+                    value: null,
+                  }}
+                  items={markets}
+                  onValueChange={(value) => this.setState({ location: value })}
+                  value={this.state.location}
+                  style={{ ...pickerSelectStyles }}
+                />
+              </Right>
+            </View>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="cube" style={styles.icon} />
+              </Left>
+              <Right style={styles.right} >
+                <RNPickerSelect
+                  placeholder={{
+                    label: 'Number of Boxes',
+                    value: null
+                  }}
+                  items={numBox}
+                  onValueChange={(value) => this.setState({ boxes: value })}
+                  value={this.state.boxes}
+                  style={{ ...pickerSelectStyles }}
+                />
+              </Right>
+            </View>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="balance-scale" style={styles.iconscale} />
+              </Left>
+              <Right style={styles.right}>
+                <RNPickerSelect
+                  placeholder={{
+                    label: 'Weight of Boxes',
+                    value: null,
+                  }}
+                  items={boxWeight}
+                  onValueChange={(value) => this.setState({ weight: value })}
+                  value={this.state.weight}
+                  style={{ ...pickerSelectStyles }}
+                />
+              </Right>
+            </View>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="tags" style={styles.icon} />
+              </Left>
+              <Right style={styles.right} >
+                <RNPickerSelect
+                  placeholder={{
+                    label: 'Types of Food',
+                    value: null
+                  }}
+                  items={tags}
+                  onValueChange={(value) => this.setState({ tags: value })}
+                  value={this.state.tags}
+                  style={{ ...pickerSelectStyles }}
+                />
+              </Right>
+            </View>
+            <View style={styles.view}>
+              <Left style={styles.left}>
+                <Icon name="hourglass-start" style={styles.icon} />
+              </Left>
+              <Right style={styles.right}>
+                <Button transparent
+                  style={styles.timepickerbtn}
+                  onPress={this.showTimePicker}
+                >
+                  {this.showTimePicked()}
+                  <Icon name='caret-down' style={styles.timepickericon} />
+                </Button>
+              </Right>
+            </View>
+            <DateTimePicker
+              isVisible={this.state.isTimePickerVisible}
+              onConfirm={this.handleTimePicked}
+              onCancel={this.hideTimePicker}
+              mode='time'
+              style={{ marginBottom: 0 }}
+            />
           </View>
           <Button
             style={[styles.submitBtn, submitEnabled && styles.submitBtnAlt]}
@@ -384,7 +397,7 @@ const styles = StyleSheet.create({
   },
   timepickertxt: {
     width: '88%',
-    paddingLeft: 5, 
+    paddingLeft: 5,
     fontSize: 16,
     color: '#C7C6CC'
   },
