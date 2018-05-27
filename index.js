@@ -1,8 +1,9 @@
 
 import { AppRegistry, Dimensions } from 'react-native';
 import firebase from 'firebase';
+import RNfirebase from 'react-native-firebase';
 import React, { Component } from 'react';
-import bgMessaging from './components/bgMessaging'; 
+import bgMessaging from './components/bgMessaging';
 
 import { DrawerNavigator, SwitchNavigator, StackNavigator } from 'react-navigation';
 import { Root } from 'native-base';
@@ -45,18 +46,138 @@ export default class App extends Component {
 
   componentDidMount() {
     this.unregister = firebase.auth().onAuthStateChanged(user => {
-      if (user) { 
+      if (user) {
         // user is signed in
         this.setState({ signedIn: true })
         this.setState({ userId: user.uid })
         var profileRef = firebase.database().ref('users/' + this.state.userId);
         profileRef.once("value")
           .then(snapshot => {
-            this.setState({personType: snapshot.child("personType").val()});
+            this.setState({ personType: snapshot.child("personType").val() });
             personType = this.state.personType;
+          });
+
+        this.onTokenRefreshListener = RNfirebase.messaging().onTokenRefresh(fcmToken => {
+          // Process your token as required
+          firebase.database().ref(`users/${this.state.userId}`)
+          .update({ fcmToken: fcmToken });
+        });
+
+        RNfirebase.messaging().getToken()
+          .then(fcmToken => {
+            console.log("token", fcmToken);
+            console.log("user", this.state.userId);
+            if (fcmToken) {
+              // user has a device token
+              firebase.database().ref(`users/${this.state.userId}`)
+              .update({ fcmToken: fcmToken });
+            } else {
+              // user doesn't have a device token yet
+              firebase.database().ref(`users/${this.state.userId}`)
+              .update({ fcmToken: 'no' });
+            }
+          });
+
+        // Build a channel
+        const channel = new RNfirebase.notifications.Android.Channel('new-listing-channel', 'New Listing Channel', RNfirebase.notifications.Android.Importance.Max)
+          .setDescription('NextBite\'s New Listing Channel');
+
+        if (this.state.personType === 'volunteer') {
+          // every volunteer is part of the new listing topic; this means
+          // everyone gets a new notification when a listing is posted
+          RNfirebase.messaging().subscribeToTopic('newListing');
+        }
+
+        RNfirebase.messaging().hasPermission()
+          .then(enabled => {
+            if (enabled) {
+              // user has permissions
+              console.log("enabled permission");
+
+              // for displaying notifications made inside the app manually
+              // make a func to create the notification and assign it to the channel
+              this.notificationDisplayedListener = RNfirebase.notifications().onNotificationDisplayed((notification) => {
+                // Process your notification as required
+                // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
+                console.log("in app made notification", notification);
+              });
+
+              // msg sent via firebase cloud function (subscription to newListing topic)
+              // foreground?? and background
+              this.notificationOpenedListener = RNfirebase.notifications().onNotificationOpened((notificationOpen) => {
+                // Get the action triggered by the notification being opened
+                const action = notificationOpen.action;
+                // Get information about the notification that was opened
+                const notification = notificationOpen.notification;
+                notification.android.setChannelId('new-listing-channel');
+                console.log("cloud func fore/bg");
+              });
+
+              // msg sent via firebase cloud function (subscription to newListing topic)
+              // closed or msg sent from firebase console
+              RNfirebase.notifications().getInitialNotification()
+                .then((notificationOpen) => {
+                  if (notificationOpen) {
+                    // App was opened by a notification
+                    // Get the action triggered by the notification being opened
+                    const action = notificationOpen.action;
+                    // Get information about the notification that was opened
+                    const notification = notificationOpen.notification;
+                    notification.android.setChannelId('new-listing-channel');
+                    console.log("closed");
+                  }
+                });
+            } else {
+              // user doesn't have permission
+              console.log("no permission");
+              RNfirebase.messaging().requestPermission()
+                .then(() => {
+                  // User has authorised  
+                  // for displaying notifications made inside the app manually
+                  // make a func to create the notification and assign it to the channel
+                  this.notificationDisplayedListener = RNfirebase.notifications().onNotificationDisplayed((notification) => {
+                    // Process your notification as required
+                    // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
+                    console.log("in app made notification", notification);
+                  });
+
+                  // msg sent via firebase cloud function (subscription to newListing topic)
+                  // foreground?? and background
+                  this.notificationOpenedListener = RNfirebase.notifications().onNotificationOpened((notificationOpen) => {
+                    // Get the action triggered by the notification being opened
+                    const action = notificationOpen.action;
+                    // Get information about the notification that was opened
+                    const notification = notificationOpen.notification;
+                    notification.android.setChannelId('new-listing-channel');
+                    console.log("cloud func fore/bg");
+                  });
+
+                  // msg sent via firebase cloud function (subscription to newListing topic)
+                  // closed or msg sent from firebase console
+                  RNfirebase.notifications().getInitialNotification()
+                    .then((notificationOpen) => {
+                      if (notificationOpen) {
+                        // App was opened by a notification
+                        // Get the action triggered by the notification being opened
+                        const action = notificationOpen.action;
+                        // Get information about the notification that was opened
+                        const notification = notificationOpen.notification;
+                        notification.android.setChannelId('new-listing-channel');
+                        console.log("closed");
+                      }
+                    });
+                })
+                .catch(error => {
+                  // User has rejected permissions  
+                });
+            }
           });
       }
     });
+  }
+
+  componentWillUnmount() {
+    this.onTokenRefreshListener();
   }
 
   render() {
@@ -79,7 +200,7 @@ export default class App extends Component {
         screen: SignOut,
       }
     }
-    
+
     let drawerNavigatorConfig = {
       initialRouteName: 'Home',
       drawerWidth: width * .60,
@@ -94,8 +215,8 @@ export default class App extends Component {
         inactiveTintColor: '#474748',
       }
     };
-    
-    
+
+
     // Layout when user is signed out
     const SignedOut = StackNavigator({
       SignUp: {
@@ -109,7 +230,7 @@ export default class App extends Component {
         initialRouteName: "SignIn"
       }
     );
-    
+
     // Switch between layouts depending on whether user is signed in or signed out
     const createRootNavigator = (signedIn = false) => {
       return SwitchNavigator({
