@@ -2,7 +2,22 @@ import React from 'react';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
-import { Icon } from 'native-base';
+import Svg, {
+  Circle,
+  Ellipse,
+  G,
+  LinearGradient,
+  RadialGradient,
+  Line,
+  Path,
+  Polygon,
+  Polyline,
+  Rect,
+  Symbol,
+  Use,
+  Defs,
+  Stop
+} from 'react-native-svg';
 
 import HeaderComponent from './HeaderComponent';
 import VolunteerPendingCards from './VolunteerPendingCards';

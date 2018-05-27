@@ -218,8 +218,8 @@ export default class MarketMap extends React.Component {
               <Icon
                 name='menu'
                 onPress={() => this.props.navigation.navigate('DrawerOpen', {})}
-                style={{color: "#fff", display: 'flex', alignItems: 'center'}}
-                size={22} 
+                style={{color: "#fff", display: 'flex', alignItems: 'center', marginLeft: -2}}
+                size={26} 
               />
             </Button>
           </Header>

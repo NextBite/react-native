@@ -14,7 +14,7 @@ export default class HeaderComponent extends Component {
                     const { navigate } = this.props.navigation;
                     navigate('DrawerOpen');
                 }}
-                style={{ fontSize: 30, }}
+                style={{ fontSize: 26, }}
                 />
             </Button>
           </Left>
