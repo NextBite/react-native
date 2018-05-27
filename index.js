@@ -18,6 +18,8 @@ import SignUp from './components/SignUp';
 import SignOut from './components/SignOut';
 import VolunteerPendingRescues from './components/VolunteerPendingRescues';
 import PendingDonations from './components/PendingDonations';
+import VolunteerRescueHistory from './components/VolunteerRescueHistory';
+import VendorRescueHistory from './components/VendorRescueHistory';
 
 var { height, width } = Dimensions.get('window');
 
@@ -66,6 +68,9 @@ export default class App extends Component {
       },
       Pending: {
         screen: this.state.personType === 'volunteer' ? VolunteerPendingRescues : PendingDonations,
+      },
+      History: {
+        screen: this.state.personType === 'volunteer' ? VolunteerRescueHistory : VendorRescueHistory
       },
       Profile: {
         screen: ProfileNavigator,
