@@ -56,6 +56,16 @@ export default class ListingsForm extends Component {
     return errors; //return data object
   }
 
+  /* A helper function that renders the appropriate error message */
+  renderErrorMsg(error) {
+    if (error.time) {
+      return <Text style={styles.errorText}>The expiration time must be after {this.readableTime(Date.now())}.</Text>
+    } else if (error.required) {
+      return <Text style={styles.errorText}>This field is required.</Text>
+    }
+    return null
+  }
+
   showTimePicker = () => this.setState({ isTimePickerVisible: true });
 
   hideTimePicker = () => this.setState({ isTimePickerVisible: false });
@@ -71,24 +81,28 @@ export default class ListingsForm extends Component {
         <Text style={styles.timepickertxt}>Latest pickup time today</Text>
       );
     } else {
-      // render a more readable time
-      let datetime = this.state.expirationDate.toString().slice(0, -18).split(" ");
-      let hour = datetime[4].split(":")[0];
-      if (parseInt(hour) > 0 && parseInt(hour) < 12) {
-        datetime[4] = datetime[4] + " AM";
-      } else if (parseInt(hour) > 12) {
-        datetime[4] = (parseInt(hour) - 12).toString() + ":" + datetime[4].split(":")[1] + " PM";
-      } else if (parseInt(hour) === 12) {
-        datetime[4] = datetime[4] + " PM";
-      } else if (parseInt(hour) === 0) {
-        datetime[4] = "12:" + datetime[4].split(":")[1] + " AM";
-      }
-      let displayedTime = datetime[0] + " " + datetime[1] + " " + datetime[2] + ", " + datetime[4];
+      
 
       return (
-        <Text style={styles.timepickertxtAlt}>{displayedTime}</Text>
+        <Text style={styles.timepickertxtAlt}>{this.readableTime()}</Text>
       );
     }
+  }
+
+  readableTime() {
+    // render a more readable time
+    let datetime = this.state.expirationDate.toString().slice(0, -18).split(" ");
+    let hour = datetime[4].split(":")[0];
+    if (parseInt(hour) > 0 && parseInt(hour) < 12) {
+      datetime[4] = datetime[4] + " AM";
+    } else if (parseInt(hour) > 12) {
+      datetime[4] = (parseInt(hour) - 12).toString() + ":" + datetime[4].split(":")[1] + " PM";
+    } else if (parseInt(hour) === 12) {
+      datetime[4] = datetime[4] + " PM";
+    } else if (parseInt(hour) === 0) {
+      datetime[4] = "12:" + datetime[4].split(":")[1] + " AM";
+    }
+    return displayedTime = datetime[0] + " " + datetime[1] + " " + datetime[2] + ", " + datetime[4];
   }
 
   //handle submit button
@@ -276,6 +290,7 @@ export default class ListingsForm extends Component {
                   value={this.state.location}
                   style={{ ...pickerSelectStyles }}
                 />
+                {this.renderErrorMsg(locationErrors)}
               </Right>
             </View>
             <View style={styles.view}>
@@ -293,6 +308,7 @@ export default class ListingsForm extends Component {
                   value={this.state.boxes}
                   style={{ ...pickerSelectStyles }}
                 />
+                {this.renderErrorMsg(boxesErrors)}
               </Right>
             </View>
             <View style={styles.view}>
@@ -310,6 +326,7 @@ export default class ListingsForm extends Component {
                   value={this.state.weight}
                   style={{ ...pickerSelectStyles }}
                 />
+                {this.renderErrorMsg(weightErrors)}
               </Right>
             </View>
             <View style={styles.view}>
@@ -327,6 +344,7 @@ export default class ListingsForm extends Component {
                   value={this.state.tags}
                   style={{ ...pickerSelectStyles }}
                 />
+                {this.renderErrorMsg(tagErrors)}
               </Right>
             </View>
             <View style={styles.view}>
@@ -341,6 +359,7 @@ export default class ListingsForm extends Component {
                   {this.showTimePicked()}
                   <Icon name='caret-down' style={styles.timepickericon} />
                 </Button>
+                {this.renderErrorMsg(expirationErrors)}
               </Right>
             </View>
             <DateTimePicker
@@ -456,7 +475,16 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     fontSize: 16
-  }
+  },
+  errorText: {
+    fontSize: 16,
+    marginLeft: 0,
+    color: '#96372d',
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    marginLeft: '2%',
+    marginRight: '10%'
+  },
 });
 
 const pickerSelectStyles = StyleSheet.create({
