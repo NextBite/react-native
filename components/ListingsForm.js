@@ -81,7 +81,7 @@ export default class ListingsForm extends Component {
         <Text style={styles.timepickertxt}>Latest pickup time today</Text>
       );
     } else {
-      
+
 
       return (
         <Text style={styles.timepickertxtAlt}>{this.readableTime()}</Text>
@@ -298,15 +298,11 @@ export default class ListingsForm extends Component {
                 <Icon name="cube" style={styles.icon} />
               </Left>
               <Right style={styles.right} >
-                <RNPickerSelect
-                  placeholder={{
-                    label: 'Number of Boxes',
-                    value: null
-                  }}
-                  items={numBox}
-                  onValueChange={(value) => this.setState({ boxes: value })}
-                  value={this.state.boxes}
-                  style={{ ...pickerSelectStyles }}
+                <InputField
+                  label='Number of Boxes'
+                  keyboard='numeric'
+                  handleChange={(text) => this.setState({ boxes: text })}
+                  secure={false}
                 />
                 {this.renderErrorMsg(boxesErrors)}
               </Right>
@@ -382,6 +378,18 @@ export default class ListingsForm extends Component {
     );
   }
 }
+
+const InputField = props => (
+  <Item floatingLabel style={styles.inputField} >
+    <Label style={styles.inputLabel}>{props.label}</Label>
+    <Input
+      keyboardType={props.keyboard}
+      onChangeText={props.handleChange}
+      secureTextEntry={props.secure}
+      style={styles.input}
+    />
+  </Item>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -485,6 +493,19 @@ const styles = StyleSheet.create({
     marginLeft: '2%',
     marginRight: '10%'
   },
+  inputField: {
+    width: '90%',
+    alignSelf: 'flex-start',
+    borderColor: '#247f6e'
+  },
+  input: {
+    color: 'black'
+  },
+  inputLabel: {
+    fontSize: 16,
+    marginLeft: '2%',
+    color: '#c3c3c8',
+  },
 });
 
 const pickerSelectStyles = StyleSheet.create({
@@ -494,12 +515,11 @@ const pickerSelectStyles = StyleSheet.create({
   viewContainer: {
     width: '92%',
     alignSelf: 'flex-start',
-    borderColor: '#247f6e',
     marginRight: '10%',
   },
   underline: {
-    borderColor: '#247f6e',
+    borderTopColor: '#247f6e',
     opacity: 1,
-    borderTopWidth: 0.5
+    borderTopWidth: .5
   },
 });
