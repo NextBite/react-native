@@ -30,7 +30,6 @@ export default class PendingDonations extends Component {
 
       title: "Pending Donations"
     };
-    this.readableTime = this.readableTime.bind(this)
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -51,9 +50,6 @@ export default class PendingDonations extends Component {
       if (user) {
         let currentDonationCards = [];
         let userListings = [];
-        console.log("1 curr donations state beginning of didmount", this.state.donationCards)
-        console.log('1 curr donation beginning of didmount', currentDonationCards);
-        console.log('1 curr user listings beginning didmount', userListings)
 
         // query for vendor's listingIds
         let pendingRescueRef = firebase.database().ref(`users/${user.uid}/pendingRescues`);
@@ -61,27 +57,18 @@ export default class PendingDonations extends Component {
         pendingRescueRef.on('value', (snapshot) => {
           currentDonationCards = [];
           userListings = [];
-          console.log("2 userlistings state before push", this.state.userListings)
 
           snapshot.forEach(function (child) {
             let pendingRescueObj = {}
             pendingRescueObj['randomKey'] = child.key;
             pendingRescueObj['listingId'] = child.val().listingId;
-            //pendingRescueKey.push(child.key)
-            //userListings.push(child.val().listingId)
             userListings.push(pendingRescueObj);
-            console.log("2 userlistings object after push", userListings)
 
           });
-          //thisComponent.setState({ userListings: userListings })
-          console.log("2 userlistings state after push", this.state.userListings)
-          console.log("2 curr donations after pendingrescueref", this.state.donationCards)
 
 
           //query for details of each listing
           let listings = userListings.map((obj) => {
-            //console.log("3 obj listingid", obj.listingId)
-            console.log('3 curr donations after userlistingsref', this.state.donationCards)
             let listingDetailRef = firebase.database().ref(`listings/${obj.listingId}`);
             listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
@@ -101,7 +88,6 @@ export default class PendingDonations extends Component {
                   volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
                 });
               }
-              console.log('4 making card', listingDetailObj['listingId'])
               // create one donation card
               let oneCard = (<ListingItem
                 timestamp={new Date(listingDetailObj.time)}
@@ -126,7 +112,6 @@ export default class PendingDonations extends Component {
               });
 
               this.setState({ donationCards: currentDonationCards })
-              console.log("5 after pushing card", this.state.donationCards)
             });
           });
         });
@@ -140,22 +125,6 @@ export default class PendingDonations extends Component {
     if (this.unregister) {
       this.unregister();
     }
-  }
-
-  readableTime(time) {
-    let dt = time.toString().slice(0, -18).split(" ");
-    console.debug(dt);
-    let hour = dt[4].split(":")[0];
-    if (parseInt(hour) > 0 && parseInt(hour) < 12) {
-      dt[4] = dt[4] + " AM";
-    } else if (parseInt(hour) > 12) {
-      dt[4] = (parseInt(hour) - 12).toString() + ":" + dt[4].split(":")[1] + " PM";
-    } else if (parseInt(hour) === 12) {
-      dt[4] = dt[4] + " PM";
-    } else if (parseInt(hour) === 0) {
-      dt[4] = "12:" + dt[4].split(":")[1] + " AM";
-    }
-    return dt[0] + " " + dt[1] + " " + dt[2] + " " + dt[3] + ", " + dt[4];
   }
 
   render() {
