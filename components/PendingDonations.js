@@ -27,7 +27,7 @@ export default class PendingDonations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      donationCards: [],
+
       title: "Pending Donations"
     };
     this.readableTime = this.readableTime.bind(this)
@@ -46,54 +46,87 @@ export default class PendingDonations extends Component {
   }
 
   componentDidMount() {
-    let userListings = [];
-    let currentDonationCards = [];
-    let volunteerName = ""
 
     this.unregister = firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        let currentDonationCards = [];
+        let userListings = [];
+        console.log("1 curr donations state beginning of didmount", this.state.donationCards)
+        console.log('1 curr donation beginning of didmount', currentDonationCards);
+        console.log('1 curr user listings beginning didmount', userListings)
+
         // query for vendor's listingIds
-        let listingRef = firebase.database().ref(`users/${user.uid}/pendingRescues`);
-        listingRef.on('value', (snapshot) => {
+        let pendingRescueRef = firebase.database().ref(`users/${user.uid}/pendingRescues`);
+
+        pendingRescueRef.on('value', (snapshot) => {
+          currentDonationCards = [];
+          userListings = [];
+          console.log("2 userlistings state before push", this.state.userListings)
+
           snapshot.forEach(function (child) {
-            let listingObj = child.val();
-            userListings.push(listingObj.listingId)
+            let pendingRescueObj = {}
+            pendingRescueObj['randomKey'] = child.key;
+            pendingRescueObj['listingId'] = child.val().listingId;
+            //pendingRescueKey.push(child.key)
+            //userListings.push(child.val().listingId)
+            userListings.push(pendingRescueObj);
+            console.log("2 userlistings object after push", userListings)
+
           });
+          //thisComponent.setState({ userListings: userListings })
+          console.log("2 userlistings state after push", this.state.userListings)
+          console.log("2 curr donations after pendingrescueref", this.state.donationCards)
+
 
           //query for details of each listing
-          let listings = userListings.map((listingId) => {
-            let listingDetailRef = firebase.database().ref(`listings/${listingId}`);
-            listingDetailRef.on('value', (snapshot) => {
+          let listings = userListings.map((obj) => {
+            //console.log("3 obj listingid", obj.listingId)
+            console.log('3 curr donations after userlistingsref', this.state.donationCards)
+            let listingDetailRef = firebase.database().ref(`listings/${obj.listingId}`);
+            listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
                 listingDetailObj[child.key] = child.val()
 
               });
 
-              listingDetailObj["listingId"] = listingId;
-              // retrieve volunteer's name for the listing
-              let usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
-              usersRef.once('value', (snapshot) => {
-                volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
-                currentDonationCards.push(<ListingItem
-                  timestamp={new Date(listingDetailObj.time)}
-                  location={listingDetailObj.location}
-                  boxes={listingDetailObj.boxes}
-                  weight={listingDetailObj.weight}
-                  tag={listingDetailObj.tags}
-                  expiration={listingDetailObj.expirationDate}
-                  claimed={listingDetailObj.claimed}
-                  volunteer={volunteerName}
-                  delivered={listingDetailObj.delivered}
-                  dropoff={listingDetailObj.dropoffLocation}
-                  listingID={listingDetailObj.listingId}
-                />);
+              listingDetailObj["listingId"] = obj.listingId;
 
-                currentDonationCards.sort(function (a, b) {
-                  return new Date(a.props.expiration) - new Date(b.props.expiration);
+              // retrieve volunteer's name for the listing
+              let usersRef;
+              let volunteerName = "";
+              if (listingDetailObj.claimed === 'yes') {
+                usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
+                usersRef.once('value', (snapshot) => {
+                  volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
                 });
-                this.setState({ donationCards: currentDonationCards })
+              }
+              console.log('4 making card', listingDetailObj['listingId'])
+              // create one donation card
+              let oneCard = (<ListingItem
+                timestamp={new Date(listingDetailObj.time)}
+                location={listingDetailObj.location}
+                boxes={listingDetailObj.boxes}
+                weight={listingDetailObj.weight}
+                tag={listingDetailObj.tags}
+                expiration={listingDetailObj.expirationDate}
+                claimed={listingDetailObj.claimed}
+                volunteer={volunteerName}
+                delivered={listingDetailObj.delivered}
+                dropoff={listingDetailObj.dropoffLocation}
+                listingID={listingDetailObj.listingId}
+                pendingRescueKey={obj.randomKey}
+              />);
+
+              // add donation card to array
+              currentDonationCards.push(oneCard)
+
+              currentDonationCards.sort(function (a, b) {
+                return new Date(a.props.expiration) - new Date(b.props.expiration);
               });
+
+              this.setState({ donationCards: currentDonationCards })
+              console.log("5 after pushing card", this.state.donationCards)
             });
           });
         });
