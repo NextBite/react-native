@@ -6,14 +6,25 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from "react-native-vector-icons/FontAwesome";
 import Autocomplete from 'react-native-autocomplete-input';
 
-class AutoComplete extends Component {
+
+export default class ListingsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      location: undefined,
+      boxes: undefined,
+      expirationDate: undefined,
+      weight: undefined,
+      tags: undefined,
+      isTimePickerVisible: false,
+      claimed: "no",
+      claimedBy: "",
+      delivered: "no",
+      dropoffLocation: "",
       markets: [],
-      query: ''
-    };
-  }
+      query: '',
+    }
+  };
 
   componentDidMount() {
     let marketList = [
@@ -87,64 +98,8 @@ class AutoComplete extends Component {
       }
     ]
 
-    this.setState({markets: marketList})
+    this.setState({ markets: marketList })
   }
-
-  findMarket(query) {
-    if (query === '') {
-      return [];
-    }
-
-    const regex = new RegExp(`${query.trim()}`, 'i');
-    return this.state.markets.filter(market => market.label.search(regex) >= 0);
-  }
-
-  render() {
-    const { query } = this.state;
-    const markets = this.findMarket(query);
-    const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
-
-    return (
-      <View style={{zIndex:1}}>
-      <View style={styles.containerAuto}>
-        <Autocomplete
-          autoCapitalize="none"
-          autoCorrect={false}
-          data={markets.length === 1 && comp(query, markets[0].label) ? [] : markets}
-          defaultValue={query}
-          onChangeText={text => this.setState({ query: text })}
-          placeholder="Enter Market Location"
-          renderItem={({ label }) => (
-            <TouchableOpacity onPress={() => this.setState({ query: label })}>
-              <Text style={styles.itemText}>
-                {label}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-      </View>
-    );
-  }
-}
-
-
-export default class ListingsForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: undefined,
-      boxes: undefined,
-      expirationDate: undefined,
-      weight: undefined,
-      tags: undefined,
-      isTimePickerVisible: false,
-      claimed: "no",
-      claimedBy: "",
-      delivered: "no",
-      dropoffLocation: ""
-    }
-  };
 
 
   /**
@@ -235,6 +190,14 @@ export default class ListingsForm extends Component {
     this.props.navigation.navigate('PendingDonations');
   }
 
+  findMarket(query) {
+    if (query === '') {
+      return [];
+    }
+    const regex = new RegExp(`${query.trim()}`, 'i');
+    return this.state.markets.filter(market => market.label.search(regex) >= 0);
+  }
+
   render() {
     //field validation
     let locationErrors = this.validate(this.state.location, { required: true });
@@ -244,77 +207,9 @@ export default class ListingsForm extends Component {
     let expirationErrors = this.validate(this.state.expirationDate, { required: true, time: true });
     let submitEnabled = (locationErrors.isValid && boxesErrors.isValid && weightErrors.isValid && tagErrors.isValid && expirationErrors.isValid)
 
-
-    let markets = [
-      {
-        label: 'Ballard Farmers Market',
-        value: 'Ballard Farmers Market, 47.6450099, -122.3486234'
-      },
-      {
-        label: 'Capitol Hill Farmers Market',
-        value: 'Capitol Hill Farmers Market, 47.6163942, -122.3231928'
-      },
-      {
-        label: 'City Hall Farmers Market',
-        value: 'City Hall Farmers Market, 47.6097185, -122.3597025'
-      },
-      {
-        label: 'Columbia City Farmers Market',
-        value: 'Columbia City Farmers Market, 47.5663073, -122.3465634'
-      },
-      {
-        label: 'Denny Regrade Farmers Market',
-        value: 'Denny Regrade Farmers Market, 47.6097158, -122.3597025'
-      },
-      {
-        label: 'Fremont Farmers Market',
-        value: 'Fremont Farmers Market, 47.6463977, -122.3474217,13'
-      },
-      {
-        label: 'Lake City Farmers Market',
-        value: 'Lake City Farmers Market, 47.71992, -122.3003247'
-      },
-      {
-        label: 'Madrona Farmers Market',
-        value: 'Madrona Farmers Market, 47.612343, -122.2977045'
-      },
-      {
-        label: 'Magnolia Farmers Market',
-        value: 'Magnolia Farmers Market, 47.646629, -122.363557'
-      },
-      {
-        label: 'Phinney Farmers Market',
-        value: 'Phinney Farmers Market, 47.67763, -122.3562657'
-      },
-      {
-        label: 'Pike Place Market',
-        value: 'Pike Place Market, 47.6097199, -122.3465703'
-      },
-      {
-        label: 'Queen Anne Farmers Market',
-        value: 'Queen Anne Farmers Market, 47.637149, -122.3592802'
-      },
-      {
-        label: 'Rainier Farmers Market',
-        value: 'Rainier Farmers Market, 47.5663073,-122.3465634'
-      },
-      {
-        label: 'South Lake Union Farmers Market',
-        value: 'South Lake Union Farmers Market, 47.6040411, -122.3366638'
-      },
-      {
-        label: 'University District Farmers Market',
-        value: 'University District Farmers Market, 47.6656392, -122.3152575'
-      },
-      {
-        label: 'Wallingford Farmers Market',
-        value: 'Wallingford Farmers Market, 47.6623941, -122.3407796'
-      },
-      {
-        label: 'West Seattle Farmers Market',
-        value: 'West Seattle Farmers Market, 47.5612161, -122.3887488'
-      }
-    ]
+    const { query } = this.state;
+    const markets = this.findMarket(query);
+    const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
     let boxWeight = [
       {
@@ -393,10 +288,11 @@ export default class ListingsForm extends Component {
       }
     ]
 
+    console.log("LOCATION", this.state.location);
+
     return (
       <Container style={{ alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6' }}>
         <Content>
-        <AutoComplete/>
           <View style={styles.messageView}>
             <Text style={styles.messageText}>What would you like to donate today?</Text>
           </View>
@@ -405,17 +301,34 @@ export default class ListingsForm extends Component {
               <Left style={styles.left}>
                 <Icon name="map-marker" style={styles.icon} />
               </Left>
-              <Right style={styles.right} >
-                <RNPickerSelect
-                  placeholder={{
-                    label: 'Your Market Location',
-                    value: null,
-                  }}
-                  items={markets}
-                  onValueChange={(value) => this.setState({ location: value })}
-                  value={this.state.location}
-                  style={{ ...pickerSelectStyles }}
-                />
+              <Right style={{flex: 3, paddingLeft: '9%', borderWidth: 0, }} >
+
+                <View style={{ zIndex: 1, width: '100%', marginRight: '10%', marginBottom: 0  }}>
+                  <View style={styles.containerAuto}>
+                  <Label style={styles.inputLabelMarket}>Enter Market Location</Label>
+                    <Autocomplete
+                    floatingLabel style={styles.inputField}
+                      style={{ backgroundColor: '#f6f6f6', color: '#000000', fontSize: 16, borderColor: '#ffffff' }}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      data={markets.length === 1 && comp(query, markets[0].label) ? [] : markets}
+                      defaultValue={query}
+                      onChangeText={text => this.setState({ query: text })}
+                      inputContainerStyle = {{ borderWidth: 0, }}
+                      containerStyle= {{ margin: 0, borderWidth: 0, }}
+                      listStyle= {{ borderWidth: 0 }}
+                      placeholder="ex: Ballard Farmers Market"
+                      renderItem={({ label }) => (
+                        <TouchableOpacity onPress={() => this.setState({ query: label })}>
+                          <Text style={styles.itemText}>
+                            {label}
+                          </Text>
+                        </TouchableOpacity>
+                      )}
+                    />
+                  </View>
+                </View>
+
                 {this.renderErrorMsg(locationErrors)}
               </Right>
             </View>
@@ -489,7 +402,7 @@ export default class ListingsForm extends Component {
               onConfirm={this.handleTimePicked}
               onCancel={this.hideTimePicker}
               mode='time'
-              style={{ marginBottom: 0 }}
+              style={{ marginBottom: 0, }}
             />
           </View>
           <Button
@@ -544,15 +457,15 @@ const styles = StyleSheet.create({
   timepickerbtn: {
     width: '91%',
     marginRight: '8%',
-    borderBottomWidth: 0.5,
-    borderColor: '#333333',
+    borderBottomWidth: 0.7,
+    borderColor: '#247f6e',
     alignSelf: 'flex-end'
   },
   timepickertxt: {
     width: '88%',
     paddingLeft: 5,
     fontSize: 16,
-    color: '#C7C6CC'
+    color: '#C7C6CC',
   },
   timepickertxtAlt: { // when time is picked
     width: '90%',
@@ -622,12 +535,19 @@ const styles = StyleSheet.create({
   inputField: {
     width: '90%',
     alignSelf: 'flex-start',
-    borderColor: '#247f6e'
+    borderColor: '#247f6e',
+    marginTop: -10,
   },
   input: {
-    color: 'black'
+    color: 'black',
   },
   inputLabel: {
+    fontSize: 16,
+    marginLeft: '2%',
+    color: '#c3c3c8',
+    marginTop: -13,
+  },
+  inputLabelMarket: {
     fontSize: 16,
     marginLeft: '2%',
     color: '#c3c3c8',
@@ -636,9 +556,10 @@ const styles = StyleSheet.create({
 
 
   containerAuto: {
-    backgroundColor: '#F5FCFF',
     flex: 1,
-    paddingTop: 25
+    paddingBottom: 0,
+    marginBottom: 0 ,
+    borderWidth: 0,
   },
   autocompleteContainer: {
     flex: 1,
@@ -646,37 +567,24 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 0,
-    zIndex: 1
+    zIndex: 1,
+    paddingBottom: 0,
+    borderWidth: 0,
   },
   itemText: {
-    fontSize: 15,
-    margin: 2
+    fontSize: 16,
+    margin: 2,
+    borderWidth: 0,
   },
   descriptionContainer: {
     // `backgroundColor` needs to be set otherwise the
     // autocomplete input will disappear on text input.
-    backgroundColor: '#F5FCFF',
-    marginTop: 25
+    width: '100%', 
+    marginTop: 25,
+    fontSize: 16,
+    borderWidth: 0,
+
   },
-  infoText: {
-    textAlign: 'center'
-  },
-  titleText: {
-    fontSize: 18,
-    fontWeight: '500',
-    marginBottom: 10,
-    marginTop: 10,
-    textAlign: 'center'
-  },
-  directorText: {
-    color: 'grey',
-    fontSize: 12,
-    marginBottom: 10,
-    textAlign: 'center'
-  },
-  openingText: {
-    textAlign: 'center'
-}
 });
 
 const pickerSelectStyles = StyleSheet.create({
