@@ -66,7 +66,7 @@ export default class ListingItem extends Component {
             <Text style={styles.leftText}>Dropoff Location</Text>
           </Left>
           <Right style={styles.right}>
-            <Text style={styles.rightText}>{this.props.dropoff}</Text>
+            <Text style={styles.rightText}>{this.props.dropoff.name}</Text>
           </Right>
         </View>
       );
