@@ -22,16 +22,18 @@ export default class SuccessfulClaim extends React.Component {
 
     this.setState({ nonprofit: nonprofit, coords: coords, listingId: listingId });
 
+    let currUser = firebase.auth().currentUser.uid;
+
     // update the listing entry to reflect that it's been 
     // claimed by a volunteer
     firebase.database().ref().child(`listings/${listingId}`)
-      .update({ claimed: "yes", dropoffLocation: coords });
+        .update({ claimed: "yes", dropoffLocation: { lat: coords.lat, long: coords.long, name: nonprofit }, claimedBy: currUser });
 
     // remove it from entires that are shown for each market
     firebase.database().ref(`markets/${marketName.split(",")[0]}/${marketId}`).remove();
 
     // lGtcBwxX1XWtdioXbuEmQQUuTVn1 hard corded volunteer id 
-    let currUser = "lGtcBwxX1XWtdioXbuEmQQUuTVn1"; // should be firebase.auth().currentUser.uid;
+    //let currUser = "lGtcBwxX1XWtdioXbuEmQQUuTVn1"; // should be firebase.auth().currentUser.uid;
     let usersRef = firebase.database().ref('users/' + currUser + '/claimedRescues');
     let newUserListing = {
       listingId: listingId,

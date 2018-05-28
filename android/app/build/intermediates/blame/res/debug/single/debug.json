@@ -380,6 +380,10 @@
         "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/17d418f7f81a8f94e29232be2da91857/res/drawable/common_google_signin_btn_text_dark.xml"
     },
     {
+        "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_stat_notify.png.flat",
+        "source": "/Users/Lisa/Desktop/react-native/android/app/src/main/res/drawable-xhdpi/ic_stat_notify.png"
+    },
+    {
         "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark.xml.flat",
         "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/17d418f7f81a8f94e29232be2da91857/res/drawable/common_google_signin_btn_icon_dark.xml"
     },
@@ -1276,8 +1280,16 @@
         "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/8e386bc771358d66ea7b7b21419c93af/res/layout/redbox_item_title.xml"
     },
     {
+        "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/Lisa/Desktop/react-native/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
         "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi_abc_list_longpressed_holo.9.png.flat",
         "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/c169e57e9b9ada6c18d0c3658264d1a8/res/drawable-hdpi/abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_stat_notify.png.flat",
+        "source": "/Users/Lisa/Desktop/react-native/android/app/src/main/res/drawable-hdpi/ic_stat_notify.png"
     },
     {
         "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_amu_bubble_mask.9.png.flat",
@@ -1286,6 +1298,10 @@
     {
         "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/raw_amu_multiple_placemarks.kml.flat",
         "source": "/Users/Lisa/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/f1b832c11d390166041b20fa4449cfa3/res/raw/amu_multiple_placemarks.kml"
+    },
+    {
+        "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_stat_notify.png.flat",
+        "source": "/Users/Lisa/Desktop/react-native/android/app/src/main/res/drawable-mdpi/ic_stat_notify.png"
     },
     {
         "merged": "/Users/Lisa/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_notification_action_tombstone.xml.flat",
