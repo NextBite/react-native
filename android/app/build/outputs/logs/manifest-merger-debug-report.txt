@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
-INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
-INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
-INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
+INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
+INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
+INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
 MERGED from [:react-native-vector-icons] /Users/alexiskoss/Desktop/react-native/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-svg] /Users/alexiskoss/Desktop/react-native/node_modules/react-native-svg/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/602c28d3812aed803608f1bf3a232b84/AndroidManifest.xml:2:1-15:12
@@ -44,20 +44,20 @@ MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/alexiskoss/.gr
 MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/fbcore-1.3.0.aar/f13199094d4ed994bc0175a136667d99/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-measurement-base:15.0.2] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-15.0.2.aar/ab7a4ea20301bc28375cc7b9496bc102/AndroidManifest.xml:17:1-24:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/d4f6884c783ceb79652b5f27cfa9ce68/AndroidManifest.xml:17:1-30:12
-INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
-INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
-INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
+INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
+INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
 	package
 		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:2:5-27
 		INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
 		INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12
 		INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:11-69
@@ -134,7 +134,7 @@ ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidMa
 	android:name
 		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:14:22-63
 application
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:16:5-48:19
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:16:5-54:19
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/602c28d3812aed803608f1bf3a232b84/AndroidManifest.xml:13:5-20
 MERGED from [com.facebook.react:react-native:0.54.4] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/602c28d3812aed803608f1bf3a232b84/AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/AndroidManifest.xml:22:5-20
@@ -201,62 +201,68 @@ MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/alexiskoss/.gradle/cac
 		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:21:7-38
 	android:name
 		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:17:7-38
+meta-data#com.google.firebase.messaging.default_notification_icon
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:23:8-26:5
+	android:resource
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:25:5-48
+	android:name
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:24:5-75
 meta-data#com.google.android.geo.API_KEY
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:22:7-24:64
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:28:7-30:64
 	android:value
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:24:7-62
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:30:7-62
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:23:7-52
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:29:7-52
 activity#com.nextbite.MainActivity
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:25:7-35:18
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:31:7-41:18
 	android:label
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:27:9-41
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:33:9-41
 	android:launchMode
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:30:9-39
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:36:9-39
 	android:windowSoftInputMode
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:29:9-51
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:35:9-51
 	android:configChanges
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:28:9-79
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:34:9-79
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:26:9-37
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:32:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:31:9-34:25
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:37:9-40:25
 action#android.intent.action.MAIN
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:32:13-65
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:38:13-65
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:32:21-62
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:38:21-62
 category#android.intent.category.LAUNCHER
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:33:13-73
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:39:13-73
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:33:23-70
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:39:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:36:7-84
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:42:7-84
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:36:17-81
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:42:17-81
 service#io.invertase.firebase.messaging.RNFirebaseMessagingService
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:37:7-41:17
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:43:7-47:17
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:37:16-89
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:43:16-89
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:38:9-40:25
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:44:9-46:25
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:39:11-72
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:45:11-72
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:39:19-69
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:45:19-69
 service#io.invertase.firebase.messaging.RNFirebaseInstanceIdService
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:42:7-46:17
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:48:7-52:17
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:42:16-90
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:48:16-90
 intent-filter#action:name:com.google.firebase.INSTANCE_ID_EVENT
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:43:9-45:25
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:49:9-51:25
 action#com.google.firebase.INSTANCE_ID_EVENT
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:44:11-73
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:50:11-73
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:44:19-71
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:50:19-71
 service#io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService
-ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:47:7-102
+ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:53:7-102
 	android:name
-		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:47:16-99
+		ADDED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:53:16-99
 uses-sdk
 INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml
@@ -604,11 +610,11 @@ MERGED from [com.android.support:support-compat:26.1.0] /Users/alexiskoss/.gradl
 	android:name
 		ADDED from [com.android.support:support-v4:26.1.0] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/14a1d40aa41f4d21ec22ef4dde4562a3/AndroidManifest.xml:27:13-51
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-50:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+IMPLIED from /Users/alexiskoss/Desktop/react-native/android/app/src/main/AndroidManifest.xml:1:1-56:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
 meta-data#android.arch.lifecycle.VERSION
 ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/d4f6884c783ceb79652b5f27cfa9ce68/AndroidManifest.xml:25:9-27:47
 	android:value

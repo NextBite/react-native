@@ -12,7 +12,6 @@ import ProfileNavigator from './components/ProfileNavigator';
 import MapNavigator from './components/MapNavigator';
 import ListingNavigator from './components/ListingNavigator';
 
-import Home from './components/Home';
 import Profile from './components/Profile';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';

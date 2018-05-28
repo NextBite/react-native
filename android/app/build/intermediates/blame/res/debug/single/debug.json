@@ -76,20 +76,20 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xhdpi/abc_list_longpressed_holo.9.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_abc_btn_check_to_on_mtrl_015.png.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxxhdpi/abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_googleg_standard_color_18.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/d2086adc0243d699c5accfe39ec50823/res/drawable-hdpi-v4/googleg_standard_color_18.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/raw_amu_cdata.kml.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/801b2c4f55b04435447a90988a925e5d/res/raw/amu_cdata.kml"
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_abc_btn_check_to_on_mtrl_015.png.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxxhdpi/abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi_abc_ic_ab_back_mtrl_am_alpha.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-hdpi/abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/raw_amu_cdata.kml.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/801b2c4f55b04435447a90988a925e5d/res/raw/amu_cdata.kml"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-v21_abc_btn_colored_material.xml.flat",
@@ -148,6 +148,10 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxhdpi/abc_btn_rating_star_off_mtrl_alpha.png"
     },
     {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_stat_notify.png.flat",
+        "source": "/Users/alexiskoss/Desktop/react-native/android/app/src/main/res/drawable-hdpi/ic_stat_notify.png"
+    },
+    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-mdpi_abc_tab_indicator_mtrl_alpha.9.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-mdpi/abc_tab_indicator_mtrl_alpha.9.png"
     },
@@ -164,16 +168,20 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/anim/abc_popup_enter.xml"
     },
     {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_stat_notify.png.flat",
+        "source": "/Users/alexiskoss/Desktop/react-native/android/app/src/main/res/drawable-mdpi/ic_stat_notify.png"
+    },
+    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/raw_amu_default_balloon.kml.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/801b2c4f55b04435447a90988a925e5d/res/raw/amu_default_balloon.kml"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xhdpi/abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_light_focused.xml.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/d2086adc0243d699c5accfe39ec50823/res/drawable/common_google_signin_btn_icon_light_focused.xml"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xhdpi/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
@@ -184,12 +192,12 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/d2086adc0243d699c5accfe39ec50823/res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_abc_btn_check_to_on_mtrl_015.png.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xhdpi/abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/raw_amu_inline_style.kml.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/801b2c4f55b04435447a90988a925e5d/res/raw/amu_inline_style.kml"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_abc_btn_check_to_on_mtrl_015.png.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xhdpi/abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/color-v23_abc_color_highlight_material.xml.flat",
@@ -220,12 +228,12 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/801b2c4f55b04435447a90988a925e5d/res/raw/amu_unknwown_folder.kml"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/raw_amu_multiple_placemarks.kml.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/801b2c4f55b04435447a90988a925e5d/res/raw/amu_multiple_placemarks.kml"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_abc_select_dialog_material.xml.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/raw_amu_multiple_placemarks.kml.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/801b2c4f55b04435447a90988a925e5d/res/raw/amu_multiple_placemarks.kml"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi_abc_btn_rating_star_off_mtrl_alpha.png.flat",
@@ -336,12 +344,12 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-hdpi/abc_btn_rating_star_on_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-ldrtl-xxxhdpi/abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_abc_ic_menu_moreoverflow_mtrl_alpha.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxhdpi/abc_ic_menu_moreoverflow_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-ldrtl-xxxhdpi/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnavigation_src_views_assets_backiconmask.png.flat",
@@ -412,32 +420,32 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/c093604661826a21bc7809e864d46c2d/res/drawable-hdpi-v4/notification_bg_low_normal.9.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-mdpi_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-mdpi/abc_btn_switch_to_on_mtrl_00001.9.png"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-mdpi_abc_list_divider_mtrl_alpha.9.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-mdpi/abc_list_divider_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi_abc_ic_ab_back_mtrl_am_alpha.png.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-ldrtl-hdpi/abc_ic_ab_back_mtrl_am_alpha.png"
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-mdpi_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-mdpi/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxxhdpi/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi_abc_ic_ab_back_mtrl_am_alpha.png.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-ldrtl-hdpi/abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_abc_textfield_search_material.xml.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable/abc_textfield_search_material.xml"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_abc_switch_thumb_material.xml.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable/abc_switch_thumb_material.xml"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/anim_catalyst_push_up_in.xml.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/602c28d3812aed803608f1bf3a232b84/res/anim/catalyst_push_up_in.xml"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_abc_switch_thumb_material.xml.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable/abc_switch_thumb_material.xml"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/anim_catalyst_push_up_out.xml.flat",
@@ -460,12 +468,12 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/801b2c4f55b04435447a90988a925e5d/res/raw/amu_nested_folders.kml"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_abc_ic_menu_cut_mtrl_alpha.png.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxxhdpi/abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/anim_catalyst_slide_down.xml.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/react-native-0.54.4.aar/602c28d3812aed803608f1bf3a232b84/res/anim/catalyst_slide_down.xml"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_abc_ic_menu_cut_mtrl_alpha.png.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxxhdpi/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_notification_template_big_media_custom.xml.flat",
@@ -476,12 +484,12 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-hdpi/abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_light_focused.xml.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/d2086adc0243d699c5accfe39ec50823/res/drawable/common_google_signin_btn_text_light_focused.xml"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_abc_list_selector_disabled_holo_light.9.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxhdpi/abc_list_selector_disabled_holo_light.9.png"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_light_focused.xml.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/d2086adc0243d699c5accfe39ec50823/res/drawable/common_google_signin_btn_text_light_focused.xml"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi_abc_ic_menu_cut_mtrl_alpha.png.flat",
@@ -528,12 +536,12 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-xxhdpi/abc_btn_radio_to_on_mtrl_000.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_abc_item_background_holo_dark.xml.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable/abc_item_background_holo_dark.xml"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi_abc_textfield_default_mtrl_alpha.9.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-hdpi/abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_abc_item_background_holo_dark.xml.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_low_pressed.9.png.flat",
@@ -724,12 +732,12 @@
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/d2086adc0243d699c5accfe39ec50823/res/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
-        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_abc_search_view.xml.flat",
-        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/layout/abc_search_view.xml"
-    },
-    {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-hdpi_abc_list_focused_holo.9.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/drawable-hdpi/abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/layout_abc_search_view.xml.flat",
+        "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/cb11005c9557c12b64dfcf8aba4ff57d/res/layout/abc_search_view.xml"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
@@ -1226,6 +1234,10 @@
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_googleg_standard_color_18.png.flat",
         "source": "/Users/alexiskoss/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/d2086adc0243d699c5accfe39ec50823/res/drawable-xhdpi-v4/googleg_standard_color_18.png"
+    },
+    {
+        "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_stat_notify.png.flat",
+        "source": "/Users/alexiskoss/Desktop/react-native/android/app/src/main/res/drawable-xhdpi/ic_stat_notify.png"
     },
     {
         "merged": "/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/res/merged/debug/drawable_abc_btn_default_mtrl_shape.xml.flat",
