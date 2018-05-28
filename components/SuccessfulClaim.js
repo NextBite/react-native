@@ -7,7 +7,7 @@ import HeaderComponent from './HeaderComponent';
 export default class SuccessfulClaim extends React.Component {
   constructor(props) {
     super(props);
-    state = { title: "Successful Claim" };
+    this.state = { title: "Successful Claim" };
 
     this.openMaps = this.openMaps.bind(this);
   }

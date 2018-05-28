@@ -81,7 +81,6 @@ export default class VolunteerPendingRescues extends React.Component {
               weight={pickupsObj.weight}
               tags={pickupsObj.tags}
               market={pickupsObj.location}
-              dropoffLocation={pickupsObj.dropoffLocation.name}
               listingId={rescue}
               key={rescue}
               navigation={this.props.navigation}

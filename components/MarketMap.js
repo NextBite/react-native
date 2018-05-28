@@ -197,13 +197,20 @@ export default class MarketMap extends React.Component {
     // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
     let markers = this.state.markets.slice(0, this.state.markets.length).map((market) => {
       let pos = { latitude: market.contents.coords.lat, longitude: market.contents.coords.long }
-
+      console.log("market.contents.lat", market.contents.coords.lat);
+      console.log("market contents", market.contents);
       return (
         <MapView.Marker
           coordinate={pos}
           key={market.key}
           title={market.key}
-        />
+          description={`${Object.keys(market.contents).length - 1} rescues available`}
+        >
+          <MapView.Callout onPress={() => this.props.navigation.navigate('MarketPickups', { marketName: market.key })}>
+            <Text style={styles.callout}>{market.key}</Text>
+            <Text style={styles.calloutDesc}>{`${Object.keys(market.contents).length - 1} rescues available`}</Text>
+          </MapView.Callout>
+        </MapView.Marker>
       );
     })
 
@@ -211,26 +218,26 @@ export default class MarketMap extends React.Component {
     return (
       <View style={styles.container}>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
-        
+
         <View style={styles.navigation}>
-          <Header style={{ height: 50, borderRadius: 50, width: 50, position: 'absolute', backgroundColor: '#f8b718',}} androidStatusBarColor='#35a08e'>
+          <Header style={{ height: 50, borderRadius: 50, width: 50, position: 'absolute', backgroundColor: '#f8b718', }} androidStatusBarColor='#35a08e'>
             <Button transparent>
               <Icon
                 name='menu'
                 onPress={() => this.props.navigation.navigate('DrawerOpen', {})}
-                style={{color: "#fff", display: 'flex', alignItems: 'center', marginLeft: -2}}
-                size={26} 
+                style={{ color: "#fff", display: 'flex', alignItems: 'center', marginLeft: -2 }}
+                size={26}
               />
             </Button>
           </Header>
         </View>
-        
+
         <View style={styles.button}>
           <Button transparent
             style={styles.innerButton}
             onPress={() => this.props.navigation.navigate('MarketList', { marketCards: this.state.mapCards })}
           >
-            <Text style={styles.buttonText}>{this.state.countOfPickups} Pickups Available</Text>
+            <Text style={styles.buttonText}>{this.state.countOfPickups} Rescues Available</Text>
           </Button>
         </View>
       </View>
@@ -270,4 +277,15 @@ const styles = StyleSheet.create({
     top: 10,
     left: 10,
   },
+  callout: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    alignItems: 'center',
+    alignSelf: 'center',
+    color: '#247f6e'
+  },
+  calloutDesc: {
+    alignItems: 'center',
+    alignSelf: 'center',
+  }
 });
