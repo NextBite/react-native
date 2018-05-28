@@ -2276,20 +2276,21 @@ public final class R {
     public static final int common_google_signin_btn_text_light_normal_background=0x7f060052;
     public static final int googleg_disabled_color_18=0x7f060053;
     public static final int googleg_standard_color_18=0x7f060054;
-    public static final int node_modules_reactnavigation_src_views_assets_backicon=0x7f060055;
-    public static final int node_modules_reactnavigation_src_views_assets_backiconmask=0x7f060056;
-    public static final int notification_action_background=0x7f060057;
-    public static final int notification_bg=0x7f060058;
-    public static final int notification_bg_low=0x7f060059;
-    public static final int notification_bg_low_normal=0x7f06005a;
-    public static final int notification_bg_low_pressed=0x7f06005b;
-    public static final int notification_bg_normal=0x7f06005c;
-    public static final int notification_bg_normal_pressed=0x7f06005d;
-    public static final int notification_icon_background=0x7f06005e;
-    public static final int notification_template_icon_bg=0x7f06005f;
-    public static final int notification_template_icon_low_bg=0x7f060060;
-    public static final int notification_tile_bg=0x7f060061;
-    public static final int notify_panel_notification_icon_bg=0x7f060062;
+    public static final int ic_stat_notify=0x7f060055;
+    public static final int node_modules_reactnavigation_src_views_assets_backicon=0x7f060056;
+    public static final int node_modules_reactnavigation_src_views_assets_backiconmask=0x7f060057;
+    public static final int notification_action_background=0x7f060058;
+    public static final int notification_bg=0x7f060059;
+    public static final int notification_bg_low=0x7f06005a;
+    public static final int notification_bg_low_normal=0x7f06005b;
+    public static final int notification_bg_low_pressed=0x7f06005c;
+    public static final int notification_bg_normal=0x7f06005d;
+    public static final int notification_bg_normal_pressed=0x7f06005e;
+    public static final int notification_icon_background=0x7f06005f;
+    public static final int notification_template_icon_bg=0x7f060060;
+    public static final int notification_template_icon_low_bg=0x7f060061;
+    public static final int notification_tile_bg=0x7f060062;
+    public static final int notify_panel_notification_icon_bg=0x7f060063;
   }
   public static final class id {
     public static final int action0=0x7f070000;
