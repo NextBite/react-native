@@ -135,6 +135,14 @@ export default class ListingsForm extends Component {
         errors.isValid = false;
       }
 
+      if(validations.numbers && value != '') {
+        let valid = /^[0-9]+$/.test(value)
+        if (!valid) {
+          errors.numbers = true;
+          errors.isValid = false;
+        }
+      }
+
       if(validations.match) {
         this.state.markets.forEach(function(market) {
           //console.log("MARKET", market);
@@ -160,7 +168,9 @@ export default class ListingsForm extends Component {
     if (error.time) {
       return <Text style={styles.errorText}>The expiration time must be after {this.readableTime(Date.now())}.</Text>
     } else if (!error.matchGood && error.match) {
-      return <Text style={styles.errorText}>Your input does not match any nearby markets.</Text>
+      return <Text style={styles.errorTextNearby}>Your input does not match any nearby markets.</Text>
+    } else if (error.numbers) {
+      return <Text style={styles.errorText}>Must contain only numbers.</Text>
     } else if (error.required) {
       return <Text style={styles.errorText}>This field is required.</Text>
     }
@@ -243,11 +253,11 @@ export default class ListingsForm extends Component {
   render() {
     //field validation
     let locationErrors = this.validate(this.state.location, { required: true, match: true });
-    let boxesErrors = this.validate(this.state.boxes, { required: true });
+    let boxesErrors = this.validate(this.state.boxes, { required: true, numbers: true });
     let weightErrors = this.validate(this.state.weight, { required: true });
     let tagErrors = this.validate(this.state.tags, { required: true });
     let expirationErrors = this.validate(this.state.expirationDate, { required: true, time: true });
-    let submitEnabled = (locationErrors.isValid && boxesErrors.isValid && weightErrors.isValid && tagErrors.isValid && expirationErrors.isValid)
+    let submitEnabled = (locationErrors.isValid && locationErrors.matchGood && boxesErrors.isValid && weightErrors.isValid && tagErrors.isValid && expirationErrors.isValid)
 
     const { query } = this.state;
     const markets = this.findMarket(query);
@@ -567,12 +577,19 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    marginLeft: 0,
     color: '#96372d',
     fontWeight: 'bold',
     alignSelf: 'flex-start',
     marginLeft: '2%',
     marginRight: '10%'
+  },
+  errorTextNearby: {
+    fontSize: 16,
+    color: '#96372d',
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    marginLeft: '-8%',
+    marginRight: '5%'
   },
   inputField: {
     width: '90%',
