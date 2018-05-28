@@ -98,7 +98,7 @@ export default class ListingsForm extends Component {
       }
     ]
 
-    this.setState({ markets: marketList })
+    this.setState({ markets: marketList });
   }
 
 
@@ -109,8 +109,10 @@ export default class ListingsForm extends Component {
    * (for required field, with min length of 5, and valid email)
    */
   validate(value, validations) {
-    let errors = { isValid: true };
+    let errors = { isValid: true, matchGood: false };
 
+    console.log("VALUE", value)
+    console.log("VALIDATIONS", validations)
     if (value === null) { //check validations
       //display name required
       if (validations.required) {
@@ -123,6 +125,24 @@ export default class ListingsForm extends Component {
           errors.time = true;
           errors.isValid = false;
         }
+      }
+    } 
+    
+    if (value !== undefined) {
+      console.log("HELLO!");
+      if (validations.required && value === '') {
+        errors.required = true;
+        errors.isValid = false;
+      }
+
+      if(validations.match) {
+        this.state.markets.forEach(function(market) {
+          //console.log("MARKET", market);
+          if(value.toLowerCase() === market.label.toLowerCase()) {
+            errors.matchGood = true;
+          }
+          errors.match = true;
+        });
       }
     }
 
@@ -139,6 +159,8 @@ export default class ListingsForm extends Component {
   renderErrorMsg(error) {
     if (error.time) {
       return <Text style={styles.errorText}>The expiration time must be after {this.readableTime(Date.now())}.</Text>
+    } else if (!error.matchGood && error.match) {
+      return <Text style={styles.errorText}>Your input does not match any nearby markets.</Text>
     } else if (error.required) {
       return <Text style={styles.errorText}>This field is required.</Text>
     }
@@ -194,13 +216,33 @@ export default class ListingsForm extends Component {
     if (query === '') {
       return [];
     }
-    const regex = new RegExp(`${query.trim()}`, 'i');
-    return this.state.markets.filter(market => market.label.search(regex) >= 0);
+
+    if (!query.includes('\\') && !query.includes('(') && !query.includes('[')) {
+      const regex = new RegExp(`${query.trim()}`, 'i');
+      return this.state.markets.filter(market => market.label.search(regex) >= 0);
+    } else {
+      return [];
+    }
+  }
+
+  camelCase(text) {
+    let splitText = text.split(" ");
+    let newText = "";
+
+    for(i = 0; i < splitText.length; i++) {
+
+     if(splitText.length - 1 === i) {
+        newText += (splitText[i].charAt(0).toUpperCase() + splitText[i].substring(1));
+      } else {
+        newText += (splitText[i].charAt(0).toUpperCase() + splitText[i].substring(1) + " ");
+      }
+    }
+    return newText;
   }
 
   render() {
     //field validation
-    let locationErrors = this.validate(this.state.location, { required: true });
+    let locationErrors = this.validate(this.state.location, { required: true, match: true });
     let boxesErrors = this.validate(this.state.boxes, { required: true });
     let weightErrors = this.validate(this.state.weight, { required: true });
     let tagErrors = this.validate(this.state.tags, { required: true });
@@ -288,7 +330,7 @@ export default class ListingsForm extends Component {
       }
     ]
 
-    console.log("LOCATION", this.state.location);
+    console.log("LOCATION", this.state);
 
     return (
       <Container style={{ alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6' }}>
@@ -301,25 +343,25 @@ export default class ListingsForm extends Component {
               <Left style={styles.left}>
                 <Icon name="map-marker" style={styles.icon} />
               </Left>
-              <Right style={{flex: 3, paddingLeft: '9%', borderWidth: 0, }} >
+              <Right style={{ flex: 3, paddingLeft: '9%', borderWidth: 0, }} >
 
-                <View style={{ zIndex: 1, width: '100%', marginRight: '10%', marginBottom: 0  }}>
+                <View style={{ zIndex: 1, width: '100%', marginRight: '10%', marginBottom: 0 }}>
                   <View style={styles.containerAuto}>
-                  <Label style={styles.inputLabelMarket}>Enter Market Location</Label>
+                    <Label style={styles.inputLabelMarket}>Enter Market Location</Label>
                     <Autocomplete
-                    floatingLabel style={styles.inputField}
+                      floatingLabel style={styles.inputField}
                       style={{ backgroundColor: '#f6f6f6', color: '#000000', fontSize: 16, borderColor: '#ffffff' }}
                       autoCapitalize="none"
                       autoCorrect={false}
                       data={markets.length === 1 && comp(query, markets[0].label) ? [] : markets}
                       defaultValue={query}
-                      onChangeText={text => this.setState({ query: text })}
-                      inputContainerStyle = {{ borderWidth: 0, }}
-                      containerStyle= {{ margin: 0, borderWidth: 0, }}
-                      listStyle= {{ borderWidth: 0 }}
+                      onChangeText={text => this.setState({ query: text, location: this.camelCase(text) })}
+                      inputContainerStyle={{ borderWidth: 0, }}
+                      containerStyle={{ margin: 0, borderWidth: 0, }}
+                      listStyle={{ borderWidth: 0 }}
                       placeholder="ex: Ballard Farmers Market"
                       renderItem={({ label }) => (
-                        <TouchableOpacity onPress={() => this.setState({ query: label })}>
+                        <TouchableOpacity onPress={() => this.setState({ query: label, location: label })}>
                           <Text style={styles.itemText}>
                             {label}
                           </Text>
@@ -558,7 +600,7 @@ const styles = StyleSheet.create({
   containerAuto: {
     flex: 1,
     paddingBottom: 0,
-    marginBottom: 0 ,
+    marginBottom: 0,
     borderWidth: 0,
   },
   autocompleteContainer: {
@@ -579,7 +621,7 @@ const styles = StyleSheet.create({
   descriptionContainer: {
     // `backgroundColor` needs to be set otherwise the
     // autocomplete input will disappear on text input.
-    width: '100%', 
+    width: '100%',
     marginTop: 25,
     fontSize: 16,
     borderWidth: 0,
