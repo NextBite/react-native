@@ -19,7 +19,7 @@ export default class VolunteerPendingCards extends React.Component {
                 Contains: {this.props.tags}
               </Text>
               <Text style={styles.regText}>
-                This rescue is being delivered to {this.props.dropoffLocation}.
+                This rescue is being delivered to {this.props.dropoffLocation.name}.
               </Text>
             </Body>
           </Left>
@@ -31,6 +31,12 @@ export default class VolunteerPendingCards extends React.Component {
               onPress={() => this.props.navigation.navigate('', {})}
             >
               <Text style={styles.buttonText}>Contact Vendor</Text>
+            </Button>
+            <Button transparent
+              style={styles.innerButton}
+              onPress={() => this.props.navigation.navigate('', {})}
+            >
+              <Text style={styles.buttonText}>Deliver</Text>
             </Button>
           </Left>
         </CardItem>
