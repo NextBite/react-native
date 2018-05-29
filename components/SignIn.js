@@ -21,6 +21,7 @@ export default class SignIn extends Component {
       showToast: false,
       timerMsg: "You have been successfully signed out.",
       signedOut: false,
+      personType: undefined,
     };
 
     this.signIn = this.signIn.bind(this);
@@ -34,8 +35,10 @@ export default class SignIn extends Component {
     this.unregister = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ userId: user.uid });
+        this.setState({ personType: undefined });
       } else {
         this.setState({ userId: null }); //null out the saved state
+        this.setState({ personType: undefined });
       }
     });
   }
@@ -113,6 +116,10 @@ export default class SignIn extends Component {
           {this.state.timerMsg}
         </Text>
       </View>;
+    }
+    
+    if(this.state.personType !== undefined) {
+      this.forceUpdate()
     }
 
     this.timer();

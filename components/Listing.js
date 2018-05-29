@@ -30,7 +30,8 @@ export default class Listing extends Component {
       error: null,
       showToast: false,
       spinnerDisplay: false,
-      title: "Create a Listing"
+      title: "Create a Listing",
+      personType: undefined
     }
     this.submit = this.submit.bind(this);
   }
@@ -49,18 +50,25 @@ export default class Listing extends Component {
     return { drawerLabel, drawerIcon };
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    /* Add a listener and callback for authentication events */
     this.unregister = firebase.auth().onAuthStateChanged(user => {
-
+      if (user) {
+        this.setState({ userId: user.uid });
+      }
+      else {
+        this.setState({ userId: null }); //null out the saved state
+        this.setState({ personType: undefined }); //null out the saved state
+      }
     });
   }
 
+  //when the component is unmounted, unregister using the saved function
   componentWillUnmount() {
-    if (this.unregister) {
-      this.unregister();
+    if(this.unregister){ //if have a function to unregister with
+      this.unregister(); //call that function!
     }
-  }
-
+}
   submit(location, boxes, expirationDate, weight, tags, claimed, claimedBy, delivered, dropoffLocation) {
     console.log(claimed)
     console.log(location)

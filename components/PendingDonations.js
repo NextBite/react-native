@@ -144,6 +144,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   view: {
-    marginBottom: 70,
+    marginBottom: 50,
   },
 });

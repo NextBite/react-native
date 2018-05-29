@@ -5954,6 +5954,7 @@
     </navigator>
     <panes>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <pane id="AndroidView" />
       <pane id="ProjectPane" />
@@ -5975,6 +5976,13 @@
       </pane>
       <pane id="ProjectPane" />
       <pane id="Scope" />
+=======
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+>>>>>>> master
     </panes>
   </component>
   <component name="PropertiesComponent">

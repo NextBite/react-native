@@ -19,6 +19,7 @@ export default class MarketMap extends React.Component {
     mapCards: [],
     marketDistance: [],
     countOfPickups: 0,
+    personType: undefined,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -32,7 +33,18 @@ export default class MarketMap extends React.Component {
     );
     return { drawerLabel, drawerIcon };
   }
-  componentDidMount() {
+  componentWillMount() {
+    /* Add a listener and callback for authentication events */
+    this.unregister = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ userId: user.uid });
+      }
+      else {
+        this.setState({ userId: null }); //null out the saved state
+        this.setState({ personType: undefined }); //null out the saved state
+      }
+    });
+
     let usersPosition = {};
     let countOfPickups = 0;
 
@@ -124,6 +136,13 @@ export default class MarketMap extends React.Component {
         }
       })
     });
+  }
+
+    //when the component is unmounted, unregister using the saved function
+    componentWillUnmount() {
+      if(this.unregister){ //if have a function to unregister with
+        this.unregister(); //call that function!
+      }
   }
 
   // when get location button is pressed, new location is calculated

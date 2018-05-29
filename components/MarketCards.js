@@ -10,12 +10,12 @@ export default class MarketCards extends React.Component {
         <CardItem>
           <Left>
             <Body>
-              <Text>{this.props.vendor}</Text>
+              <Text style={styles.vendorName}>10 Acres Farm</Text>
               <Text note style={styles.subText}>{String(new Date(this.props.expiration)).slice(0, -18)}</Text>
               <Text style={styles.regText}>
                 This rescue has {this.props.boxes} boxes and weighs {this.props.weight}.
               </Text>
-              <Text style={styles.regText}>
+              <Text style={styles.tags}>
                 Contains: {this.props.tags}
               </Text>
             </Body>
@@ -47,6 +47,9 @@ const styles = StyleSheet.create({
   regText: {
     fontSize: 14,
   },
+  tags: {
+    fontSize: 14,
+  },
   innerButton: {
     backgroundColor: '#44beac',
     alignSelf: 'center',
@@ -58,4 +61,9 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 14,
   },
+  vendorName: {
+    color: '#247f6e',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 22,
+  }
 });

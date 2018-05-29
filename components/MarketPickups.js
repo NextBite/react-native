@@ -100,7 +100,7 @@ export default class MarketPickups extends React.Component {
   render() {
     console.log("market cards state", this.state.marketCards);
     return (
-      <View>
+      <View style={styles.view}>
         <HeaderComponent {...this.props} title={this.state.title} />
         <ScrollView style={styles.cards}>
           <MarketTitleCard
@@ -117,5 +117,8 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     height: '100%',
-  }
+  },
+  view: {
+    marginBottom: 50,
+  },
 });
