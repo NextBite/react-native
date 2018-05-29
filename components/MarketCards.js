@@ -10,7 +10,7 @@ export default class MarketCards extends React.Component {
         <CardItem>
           <Left>
             <Body>
-              <Text style={styles.vendorName}>10 Acres Farm</Text>
+              <Text style={styles.vendorName}>{this.props.vendor}</Text>
               <Text note style={styles.subText}>{String(new Date(this.props.expiration)).slice(0, -18)}</Text>
               <Text style={styles.regText}>
                 This rescue has {this.props.boxes} boxes and weighs {this.props.weight}.
