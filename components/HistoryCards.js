@@ -19,7 +19,7 @@ export default class HistoryCards extends React.Component {
                 Contains: {this.props.tags}
               </Text>
               <Text style={styles.regText}>
-                Delivered successfully to {this.props.dropoffLocation}.
+                Delivered successfully to {this.props.dropoffLocation.name}.
               </Text>
             </Body>
           </Left>
