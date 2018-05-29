@@ -13,6 +13,7 @@ import MapNavigator from './components/MapNavigator';
 import ListingNavigator from './components/ListingNavigator';
 
 import Profile from './components/Profile';
+import Loading from './components/Loading';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignOut from './components/SignOut';
@@ -40,6 +41,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       signedIn: false,
+      personType: undefined,
     };
   }
 
@@ -171,12 +173,28 @@ export default class App extends Component {
                 });
             }
           });
+      } else {
+        this.setState({ userId: null }); //null out the saved state
+        this.setState({ personType: undefined }); //null out the saved state
       }
     });
   }
 
   componentWillUnmount() {
     this.onTokenRefreshListener();
+    if(this.unregister){ //if have a function to unregister with
+      this.unregister(); //call that function!
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // invoked before every update (new props or state).
+    // does not fire before initial 'render'.
+    if(nextState.personType !== undefined) {
+      this.setState({personType: undefined});
+      return true;
+    }
+    return false;
   }
 
   render() {
@@ -184,13 +202,13 @@ export default class App extends Component {
 
     let routeConfigs = {
       Home: {
-        screen: this.state.personType === undefined ? Profile : (this.state.personType === 'volunteer' ? MapNavigator : ListingNavigator),
+        screen: this.state.personType === undefined ? Loading : (this.state.personType === 'volunteer' ? MapNavigator : ListingNavigator),
       },
       Pending: {
-        screen: this.state.personType === 'volunteer' ? VolunteerPendingRescues : PendingDonations,
+        screen: this.state.personType === undefined ? Loading : (this.state.personType === 'volunteer' ? VolunteerPendingRescues : PendingDonations),
       },
       History: {
-        screen: this.state.personType === 'volunteer' ? VolunteerRescueHistory : VendorRescueHistory
+        screen: this.state.personType === undefined ? Loading : (this.state.personType === 'volunteer' ? VolunteerRescueHistory : VendorRescueHistory)
       },
       Profile: {
         screen: ProfileNavigator,

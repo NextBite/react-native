@@ -32,13 +32,14 @@ export default class SignOut extends React.Component {
 
 		this.unregister = firebase.auth().onAuthStateChanged(user => {
 			if(user) {
-				this.setState({userId:user.uid}); //grabs user id
+        this.setState({userId:user.uid}); //grabs user id
 			} else { //redirects to home page once logged out
-				this.setState({userId: null}); //null out the saved state
+        this.setState({userId: null}); //null out the saved state
+        this.setState({personType: undefined});
 			}
     });
     
-    navigate('SignIn', { signedOut: true })
+    navigate('SignIn', { signedOut: true, personType: undefined })
   }
 
 	//when component will be removed

@@ -19,6 +19,7 @@ export default class MarketMap extends React.Component {
     mapCards: [],
     marketDistance: [],
     countOfPickups: 0,
+    personType: undefined,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -32,7 +33,18 @@ export default class MarketMap extends React.Component {
     );
     return { drawerLabel, drawerIcon };
   }
-  componentDidMount() {
+  componentWillMount() {
+    /* Add a listener and callback for authentication events */
+    this.unregister = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ userId: user.uid });
+      }
+      else {
+        this.setState({ userId: null }); //null out the saved state
+        this.setState({ personType: undefined }); //null out the saved state
+      }
+    });
+
     let usersPosition = {};
     let countOfPickups = 0;
 
@@ -126,6 +138,13 @@ export default class MarketMap extends React.Component {
     });
   }
 
+    //when the component is unmounted, unregister using the saved function
+    componentWillUnmount() {
+      if(this.unregister){ //if have a function to unregister with
+        this.unregister(); //call that function!
+      }
+  }
+
   // when get location button is pressed, new location is calculated
   // plus coords are added to db
   getUserLocationHandler = () => {
@@ -211,20 +230,20 @@ export default class MarketMap extends React.Component {
     return (
       <View style={styles.container}>
         <UsersMap userLocation={this.state.userLocation} usersPlaces={this.state.usersPlaces} markers={markers} />
-        
+
         <View style={styles.navigation}>
-          <Header style={{ height: 50, borderRadius: 50, width: 50, position: 'absolute', backgroundColor: '#f8b718',}} androidStatusBarColor='#35a08e'>
+          <Header style={{ height: 50, borderRadius: 50, width: 50, position: 'absolute', backgroundColor: '#f8b718', }} androidStatusBarColor='#35a08e'>
             <Button transparent>
               <Icon
                 name='menu'
                 onPress={() => this.props.navigation.navigate('DrawerOpen', {})}
-                style={{color: "#fff", display: 'flex', alignItems: 'center', marginLeft: -2}}
-                size={26} 
+                style={{ color: "#fff", display: 'flex', alignItems: 'center', marginLeft: -2 }}
+                size={26}
               />
             </Button>
           </Header>
         </View>
-        
+
         <View style={styles.button}>
           <Button transparent
             style={styles.innerButton}
