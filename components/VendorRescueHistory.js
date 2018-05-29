@@ -27,9 +27,9 @@ export default class VendorRescueHistory extends React.Component {
     let currUser = firebase.auth().currentUser.uid;
     let rescuesRef = firebase.database().ref(`users/${currUser}/deliveredRescues`);
 
-    let historyCards = [];
-    let deliveredRescues = [];
     rescuesRef.on('value', (snapshot) => {
+      let historyCards = [];
+      let deliveredRescues = [];
       snapshot.forEach(function (child) {
         console.log("DELIVERED RESCUES CHILD", child.val().listingId);
         deliveredRescues.push(child.val().listingId);
@@ -50,18 +50,13 @@ export default class VendorRescueHistory extends React.Component {
 
           pickupsObj["listingId"] = rescue;
 
-          let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
-          usersRef.on('value', (snapshot) => {
-            let vendor = "";
-            snapshot.forEach(function (child) {
-              if (child.key == "vendorName") {
-                vendor = child.val();
-              }
-            });
+          let usersRef = firebase.database().ref(`users/${pickupsObj.claimedBy}`);
+          usersRef.once('value', (snapshot) => {
+            let volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
 
             historyCards.push(<HistoryCards
               boxes={pickupsObj.boxes}
-              vendor={vendor}
+              vendor={volunteerName}
               expiration={pickupsObj.expirationDate}
               weight={pickupsObj.weight}
               tags={pickupsObj.tags}
