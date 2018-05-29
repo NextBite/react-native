@@ -197,8 +197,6 @@ export default class MarketMap extends React.Component {
     // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
     let markers = this.state.markets.slice(0, this.state.markets.length).map((market) => {
       let pos = { latitude: market.contents.coords.lat, longitude: market.contents.coords.long }
-      console.log("market.contents.lat", market.contents.coords.lat);
-      console.log("market contents", market.contents);
       return (
         <MapView.Marker
           coordinate={pos}

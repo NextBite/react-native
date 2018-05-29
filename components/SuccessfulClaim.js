@@ -32,8 +32,6 @@ export default class SuccessfulClaim extends React.Component {
     // remove it from entires that are shown for each market
     firebase.database().ref(`markets/${marketName.split(",")[0]}/${marketId}`).remove();
 
-    // lGtcBwxX1XWtdioXbuEmQQUuTVn1 hard corded volunteer id 
-    //let currUser = "lGtcBwxX1XWtdioXbuEmQQUuTVn1"; // should be firebase.auth().currentUser.uid;
     let usersRef = firebase.database().ref('users/' + currUser + '/claimedRescues');
     let newUserListing = {
       listingId: listingId,
