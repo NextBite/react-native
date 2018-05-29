@@ -187,16 +187,6 @@ export default class App extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // invoked before every update (new props or state).
-    // does not fire before initial 'render'.
-    if(nextState.personType !== undefined) {
-      this.setState({personType: undefined});
-      return true;
-    }
-    return false;
-  }
-
   render() {
     const { signedIn } = this.state;
 
