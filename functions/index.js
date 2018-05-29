@@ -69,3 +69,47 @@ exports.claimedPushNotification = functions.database.ref('/listings/{pushId}/cla
     return admin.messaging().sendToDevice(values[1], payload, options);
   })
 });
+
+// Listens for updates made to listings/:pushId/delivered
+exports.deliveredPushNotification = functions.database.ref('/listings/{pushId}/delivered').onUpdate(event => {
+  let listingId = event.after._path.split("/")[2];
+
+  // query for the id of the vendor who created the donation that was claimed
+  let promise1 = admin.database()
+    .ref(`/listings/${listingId}/userId`)
+    .once('value')
+    .then(snapshot => {
+      return Promise.resolve(snapshot.node_.value_);
+    });
+
+  let promise2 = promise1.then(function (userId) {
+    // query for the fcm token of the vendor
+    let promise3 = admin.database()
+      .ref(`/users/${userId}/fcmToken`)
+      .once('value')
+      .then(snapshot => {
+        return Promise.resolve(snapshot.node_.value_);
+      });
+
+    return Promise.resolve(promise3);
+  });
+
+  const payload = {
+    notification: {
+      title: "Donation Delivered",
+      body: `A volunteer has delivered your donation successfully.`,
+      sound: "default",
+    },
+  };
+
+  //Create an options object that contains the time to live for the notification and the priority
+  const options = {
+    priority: "high",
+    timeToLive: 60 * 60 * 24
+  };
+
+  // sendToDevice can also accept an array of push tokens
+  return Promise.all([promise1, promise2]).then(function (values) {
+    return admin.messaging().sendToDevice(values[1], payload, options);
+  })
+});
