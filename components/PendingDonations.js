@@ -74,44 +74,37 @@ export default class PendingDonations extends Component {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
                 listingDetailObj[child.key] = child.val()
-
               });
-
               listingDetailObj["listingId"] = obj.listingId;
 
               // retrieve volunteer's name for the listing
-              let usersRef;
-              let volunteerName = "";
-              if (listingDetailObj.claimed === 'yes') {
-                usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
-                usersRef.once('value', (snapshot) => {
-                  volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
+              let volunteerName = ""
+              let usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
+              usersRef.once('value', (snapshot) => {
+                volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
+              }).then(() => {
+                // make one donation "card"
+                let oneCard = (<ListingItem
+                  timestamp={new Date(listingDetailObj.time)}
+                  location={listingDetailObj.location}
+                  boxes={listingDetailObj.boxes}
+                  weight={listingDetailObj.weight}
+                  tag={listingDetailObj.tags}
+                  expiration={listingDetailObj.expirationDate}
+                  claimed={listingDetailObj.claimed}
+                  volunteer={volunteerName}
+                  delivered={listingDetailObj.delivered}
+                  dropoff={listingDetailObj.dropoffLocation}
+                  listingID={listingDetailObj.listingId}
+                  pendingRescueKey={obj.randomKey}
+                />);
+                currentDonationCards.push(oneCard)
+                currentDonationCards.sort(function (a, b) {
+                  return new Date(a.props.expiration) - new Date(b.props.expiration);
                 });
-              }
-              // create one donation card
-              let oneCard = (<ListingItem
-                timestamp={new Date(listingDetailObj.time)}
-                location={listingDetailObj.location}
-                boxes={listingDetailObj.boxes}
-                weight={listingDetailObj.weight}
-                tag={listingDetailObj.tags}
-                expiration={listingDetailObj.expirationDate}
-                claimed={listingDetailObj.claimed}
-                volunteer={volunteerName}
-                delivered={listingDetailObj.delivered}
-                dropoff={listingDetailObj.dropoffLocation}
-                listingID={listingDetailObj.listingId}
-                pendingRescueKey={obj.randomKey}
-              />);
-
-              // add donation card to array
-              currentDonationCards.push(oneCard)
-
-              currentDonationCards.sort(function (a, b) {
-                return new Date(a.props.expiration) - new Date(b.props.expiration);
+              }).then(() => {
+                this.setState({ donationCards: currentDonationCards })
               });
-
-              this.setState({ donationCards: currentDonationCards })
             });
           });
         });
