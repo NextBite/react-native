@@ -42,9 +42,10 @@ export default class VolunteerPendingRescues extends React.Component {
     let currUser = firebase.auth().currentUser.uid;
     let rescuesRef = firebase.database().ref(`users/${currUser}/claimedRescues`);
 
-    let pendingCards = [];
-    let claimedRescues = [];
     rescuesRef.on('value', (snapshot) => {
+      let pendingCards = [];
+      let claimedRescues = [];
+      
       snapshot.forEach(function (child) {
         claimedRescues.push(child.val().listingId);
       });
@@ -63,13 +64,8 @@ export default class VolunteerPendingRescues extends React.Component {
           pickupsObj["listingId"] = rescue;
 
           let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
-          usersRef.on('value', (snapshot) => {
-            let vendor = "";
-            snapshot.forEach(function (child) {
-              if (child.key == "vendorName") {
-                vendor = child.val();
-              }
-            });
+          usersRef.once('value', (snapshot) => {
+            let vendor = snapshot.child("vendorName").val();
 
             pendingCards.push(<VolunteerPendingCards
               boxes={pickupsObj.boxes}
