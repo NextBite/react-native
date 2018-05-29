@@ -120,7 +120,7 @@ export default class MarketMap extends React.Component {
                       />
                     )
 
-                    countOfPickups = (marketKeys.length - 1);
+                    countOfPickups += (marketKeys.length - 1);
                     this.setState({ countOfPickups: countOfPickups });
 
                     // sort the cards by smallest to largest according to distance away from user
@@ -216,13 +216,18 @@ export default class MarketMap extends React.Component {
     // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
     let markers = this.state.markets.slice(0, this.state.markets.length).map((market) => {
       let pos = { latitude: market.contents.coords.lat, longitude: market.contents.coords.long }
-
       return (
         <MapView.Marker
           coordinate={pos}
           key={market.key}
           title={market.key}
-        />
+          description={`${Object.keys(market.contents).length - 1} rescues available`}
+        >
+          <MapView.Callout onPress={() => this.props.navigation.navigate('MarketPickups', { marketName: market.key })}>
+            <Text style={styles.callout}>{market.key}</Text>
+            <Text style={styles.calloutDesc}>{`${Object.keys(market.contents).length - 1} rescues available`}</Text>
+          </MapView.Callout>
+        </MapView.Marker>
       );
     })
 
@@ -249,7 +254,7 @@ export default class MarketMap extends React.Component {
             style={styles.innerButton}
             onPress={() => this.props.navigation.navigate('MarketList', { marketCards: this.state.mapCards })}
           >
-            <Text style={styles.buttonText}>{this.state.countOfPickups} Pickups Available</Text>
+            <Text style={styles.buttonText}>{this.state.countOfPickups} Rescues Available</Text>
           </Button>
         </View>
       </View>
@@ -289,4 +294,15 @@ const styles = StyleSheet.create({
     top: 10,
     left: 10,
   },
+  callout: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    alignItems: 'center',
+    alignSelf: 'center',
+    color: '#247f6e'
+  },
+  calloutDesc: {
+    alignItems: 'center',
+    alignSelf: 'center',
+  }
 });

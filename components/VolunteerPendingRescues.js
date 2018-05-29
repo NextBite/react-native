@@ -39,18 +39,15 @@ export default class VolunteerPendingRescues extends React.Component {
 
   componentDidMount() {
     // query the pickup listings within a particular market
-    let currUser = "lGtcBwxX1XWtdioXbuEmQQUuTVn1"; // CHANGE LATER TO NON-HARD CODE
+    let currUser = firebase.auth().currentUser.uid;
     let rescuesRef = firebase.database().ref(`users/${currUser}/claimedRescues`);
 
     let pendingCards = [];
     let claimedRescues = [];
     rescuesRef.on('value', (snapshot) => {
       snapshot.forEach(function (child) {
-        console.log("PENDING RESCUES CHILD", child.val().listingId);
         claimedRescues.push(child.val().listingId);
       });
-
-      console.log("claimed rescues array", claimedRescues);
 
       this.setState({ claimedRescues: claimedRescues });
 
@@ -81,6 +78,7 @@ export default class VolunteerPendingRescues extends React.Component {
               weight={pickupsObj.weight}
               tags={pickupsObj.tags}
               market={pickupsObj.location}
+              dropoffLocation={pickupsObj.dropoffLocation}
               listingId={rescue}
               key={rescue}
               navigation={this.props.navigation}

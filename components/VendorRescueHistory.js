@@ -24,7 +24,7 @@ export default class VendorRescueHistory extends React.Component {
 
   componentDidMount() {
     // query the pickup listings within a particular market
-    let currUser = "FfevlFo2FSWs0MMHm7J65rHrMA52"; // CHANGE LATER TO NON-HARD CODE
+    let currUser = firebase.auth().currentUser.uid;
     let rescuesRef = firebase.database().ref(`users/${currUser}/deliveredRescues`);
 
     let historyCards = [];
