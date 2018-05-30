@@ -10,7 +10,7 @@ export default class FoodBankCards extends React.Component {
         <CardItem>
           <Left>
             <Body>
-              <Text>{this.props.title}</Text>
+              <Text style={styles.nonprofitName}>{this.props.title}</Text>
               <Text note style={styles.subText}>{this.props.distance} mi</Text>
               <Text style={styles.regText}>
                 food bank info 
@@ -21,9 +21,10 @@ export default class FoodBankCards extends React.Component {
         <CardItem>
           <Left>
             <Button transparent
+              style={styles.innerButton}
               onPress={() => this.props.navigation.navigate('SuccessfulClaim', { nonprofit: this.props.title, coords: this.props.coords, listingId: this.props.listingId, marketId: this.props.marketId, marketName: this.props.marketName })}
             >
-              <Text>Choose Location</Text>
+              <Text style={styles.buttonText}>Choose Location</Text>
             </Button>
           </Left>
         </CardItem>
@@ -42,5 +43,21 @@ const styles = StyleSheet.create({
   },
   regText: {
     fontSize: 14,
+  },
+  innerButton: {
+    backgroundColor: '#44beac',
+    alignSelf: 'center',
+    alignItems: 'center',
+    paddingRight: 0,
+    marginLeft: 8
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 14,
+  },
+  nonprofitName: {
+    color: '#247f6e',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 22,
   }
 });
