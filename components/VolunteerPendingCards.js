@@ -194,12 +194,15 @@ export default class VolunteerPendingCards extends React.Component {
           <View style={styles.iconView}>
             <View style={{flex: 1, alignItems: 'center'}}>
               <Icon name='phone' style={styles.icons} onPress={() => Linking.openURL('tel:' + this.props.mobile)} />
+              <Text style={styles.buttonText}>Contact</Text>
             </View>
             <View style={{flex: 1, alignItems: 'center'}}>
               <Icon name='map-marker' style={styles.icons} onPress={() => this.openMaps()}/>
+              <Text style={styles.buttonText}>Directions</Text>
             </View>
             <View style={{flex: 1, alignItems: 'center'}}>
               <Icon name='check' style={styles.icons} onPress={() => this.openAlert()} />
+              <Text style={styles.buttonText}>Deliver</Text>
             </View>
           </View>
         </CardItem>
