@@ -126,7 +126,7 @@ export default class HistoryCardsVolunteer extends Component {
             {weight}
             {tags}
             {expiration}
-            {claimedBy}
+            {claimedFrom}
             {dropoffLocation}
           </Body>
         </CardItem>
