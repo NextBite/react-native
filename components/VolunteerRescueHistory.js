@@ -5,7 +5,7 @@ import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import HeaderComponent from './HeaderComponent';
-import HistoryCards from './HistoryCards';
+import HistoryCardsVolunteer from './HistoryCardsVolunteer';
 
 export default class VolunteerRescueHistory extends React.Component {
   state = { title: 'Rescue History' };
@@ -54,16 +54,16 @@ export default class VolunteerRescueHistory extends React.Component {
           usersRef.once('value', (snapshot) => {
             let vendor = snapshot.child("vendorName").val();
 
-            historyCards.push(<HistoryCards
+            historyCards.push(<HistoryCardsVolunteer
+              timestamp={new Date(pickupsObj.time)}
+              location={pickupsObj.location}
               boxes={pickupsObj.boxes}
-              vendor={vendor}
-              expiration={pickupsObj.expirationDate}
               weight={pickupsObj.weight}
-              tags={pickupsObj.tags}
-              market={pickupsObj.location}
-              listingId={rescue}
-              dropoffLocation={pickupsObj.dropoffLocation}
-              key={rescue}
+              tag={pickupsObj.tags}
+              expiration={pickupsObj.expirationDate}
+              vendor={vendor}
+              dropoff={pickupsObj.dropoffLocation.name}
+              listingID={pickupsObj.listingId}
               navigation={this.props.navigation}
             />);
 
