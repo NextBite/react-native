@@ -53,15 +53,18 @@ export default class PendingDonations extends Component {
         listingRef.on('value', (snapshot) => {
           let userListings = [];
           let currentDonationCards = [];
-          
+
           snapshot.forEach(function (child) {
-            let listingObj = child.val();
-            userListings.push(listingObj.listingId)
+            let listingObj = {};
+
+            listingObj['randomKey'] = child.key;
+            listingObj['listingId'] = child.val().listingId;
+            userListings.push(listingObj)
           });
 
           //query for details of each listing
           let listings = userListings.map((listingId) => {
-            let listingDetailRef = firebase.database().ref(`listings/${listingId}`);
+            let listingDetailRef = firebase.database().ref(`listings/${listingId.listingId}`);
             listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
@@ -74,6 +77,7 @@ export default class PendingDonations extends Component {
               let usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
               usersRef.once('value', (snapshot) => {
                 let volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
+
                 currentDonationCards.push(<ListingItem
                   timestamp={new Date(listingDetailObj.time)}
                   location={listingDetailObj.location}
@@ -86,6 +90,7 @@ export default class PendingDonations extends Component {
                   delivered={listingDetailObj.delivered}
                   dropoff={listingDetailObj.dropoffLocation}
                   listingID={listingDetailObj.listingId}
+                  pendingRescueKey={listingId.randomKey}
                 />);
 
                 currentDonationCards.sort(function (a, b) {
