@@ -198,8 +198,6 @@ export default class App extends Component {
     }
   }
 
-
-
   render() {
     console.log("RENDER STATE", this.state);
     const { signedIn } = this.state;

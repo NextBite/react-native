@@ -39,26 +39,25 @@ export default class VolunteerPendingRescues extends React.Component {
 
   componentDidMount() {
     // query the pickup listings within a particular market
-    let currUser = "lGtcBwxX1XWtdioXbuEmQQUuTVn1"; // CHANGE LATER TO NON-HARD CODE
+    let currUser = firebase.auth().currentUser.uid;
     let rescuesRef = firebase.database().ref(`users/${currUser}/claimedRescues`);
 
-    let pendingCards = [];
-    let claimedRescues = [];
     rescuesRef.on('value', (snapshot) => {
+      let pendingCards = [];
+      let claimedRescues = [];
+
       snapshot.forEach(function (child) {
-        console.log("PENDING RESCUES CHILD", child.val().listingId);
         claimedRescues.push(child.val().listingId);
       });
-
-      console.log("claimed rescues array", claimedRescues);
 
       this.setState({ claimedRescues: claimedRescues });
 
       // query for all pickup listing details
       let rescues = claimedRescues.map((rescue) => {
         let listingsRef = firebase.database().ref(`listings/${rescue}`);
-        listingsRef.on('value', (snapshot) => {
+        listingsRef.once('value', (snapshot) => {
           let pickupsObj = {};
+          
           snapshot.forEach(function (child) {
             pickupsObj[child.key] = child.val();
           });
@@ -66,17 +65,9 @@ export default class VolunteerPendingRescues extends React.Component {
           pickupsObj["listingId"] = rescue;
 
           let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
-          usersRef.on('value', (snapshot) => {
-            let vendor = "";
-            let mobile = null;
-            snapshot.forEach(function (child) {
-              if (child.key == "vendorName") {
-                vendor = child.val();
-              }
-              if(child.key == "mobile") {
-                mobile = child.val();
-              }
-            });
+          usersRef.once('value', (snapshot) => {
+            let vendor = snapshot.child("vendorName").val();
+            let mobile = snapshot.child("mobile").val();
 
             pendingCards.push(<VolunteerPendingCards
               boxes={pickupsObj.boxes}
@@ -86,6 +77,7 @@ export default class VolunteerPendingRescues extends React.Component {
               weight={pickupsObj.weight}
               tags={pickupsObj.tags}
               market={pickupsObj.location}
+              dropoffLocation={pickupsObj.dropoffLocation}
               listingId={rescue}
               key={rescue}
               navigation={this.props.navigation}

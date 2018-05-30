@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, View } from 'react-native';
 import HeaderComponent from './HeaderComponent';
 
 export default class MarketList extends React.Component {
-  state = { title: "Markets With Pickups"};
+  state = { title: "Markets With Pickups" };
   render() {
     // basically this.props.{name}, but navigator requires this
     const { params } = this.props.navigation.state;
@@ -12,9 +12,9 @@ export default class MarketList extends React.Component {
     return (
       <View>
         <HeaderComponent {...this.props} title={this.state.title} />
-      <ScrollView style={styles.cards}>
-        {marketCards}
-      </ScrollView>
+        <ScrollView style={styles.cards}>
+          {marketCards}
+        </ScrollView>
       </View>
     );
   }

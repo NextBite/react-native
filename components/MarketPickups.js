@@ -15,18 +15,17 @@ export default class MarketPickups extends React.Component {
     const marketName = params ? params.marketName : null;
     const marketKey = params ? params.marketKey : null;
     this.setState({ marketName: marketName });
-    let currentMarketCards = [];
-    console.log("beginngin of did mount", currentMarketCards);
+
+   //console.log("beginngin of did mount", currentMarketCards);
 
     // query the pickup listings within a particular market
     let marketRef = firebase.database().ref(`markets/${marketName}`);
     marketRef.on('value', (snapshot) => {
-      currentMarketCards = []
-      console.log("BEGINNING OF MARKET REF", currentMarketCards)
-
+      let currentMarketCards = [];
       let marketPickups = [];
       let marketIds = [];
       let pickupObj = "";
+
       snapshot.forEach(function (child) {
         pickupObj = child.val();
 
@@ -59,13 +58,8 @@ export default class MarketPickups extends React.Component {
           console.log("users pickup id", pickupsObj.userId)
           console.log("BEGINNING OF USERS REF", currentMarketCards)
 
-          usersRef.on('value', (snapshot) => {
-            let vendor = "";
-            snapshot.forEach(function (child) {
-              if (child.key == "vendorName") {
-                vendor = child.val();
-              }
-            });
+          usersRef.once('value', (snapshot) => {
+            let vendor = snapshot.child("vendorName").val();
             console.log("before the push", currentMarketCards);
 
             currentMarketCards.push(<MarketCards
@@ -93,7 +87,7 @@ export default class MarketPickups extends React.Component {
       });
     });
 
-    console.log("current market cards", currentMarketCards)
+    //console.log("current market cards", currentMarketCards)
     //this.setState({ marketCards: currentMarketCards })
   }
 
