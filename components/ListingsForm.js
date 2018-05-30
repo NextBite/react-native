@@ -373,7 +373,7 @@ export default class ListingsForm extends Component {
     return (
       <Container style={{ alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6' }}>
         <Content>
-          <View style={styles.messageView} key={this.state.unique}>
+          <View style={styles.messageView}>
             <Text style={styles.messageText}>What would you like to donate today?</Text>
           </View>
           <View style={{ width: '96%', alignSelf: 'center', marginTop: 10, }}>
