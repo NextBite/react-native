@@ -310,7 +310,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 0,
     backgroundColor: 'rgba(204,204,204,0.8)',
-    paddingBottom: 20,
   },
   saveButtonAlt: { //when button is enabled
     backgroundColor: '#44beac',
