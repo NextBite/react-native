@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, Linking, Alert } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Button, Left, Right } from 'native-base';
 import firebase from 'firebase';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class ListingItem extends Component {
   constructor(props) {
@@ -76,7 +77,6 @@ export default class ListingItem extends Component {
 
   buttonOptions() {
     if (this.props.claimed === 'no') {
-      console.log("TAGGGGGGGS", this.props.tags);
       return (
         <View style={styles.cardView}>
           <Left style={styles.leftButton}>
@@ -101,7 +101,11 @@ export default class ListingItem extends Component {
           <Button transparent
             style={{ alignSelf: 'center' }}
             onPress={() => Linking.openURL('tel:' + this.props.mobile)}>
-            <Text style={styles.buttonText}>CONTACT {volunteer}</Text>
+            <Icon
+              name="phone"
+              style={{ marginLeft: 0, marginTop: 2, color: "#247f6e", fontSize: 24 }}
+            />
+            <Text style={styles.buttonText}> CONTACT {volunteer}</Text>
           </Button>
         </View>
       );

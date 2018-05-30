@@ -3,6 +3,7 @@ import { StyleSheet, Image, Alert, Linking } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import firebase from 'firebase';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class VolunteerPendingCards extends React.Component {
   constructor(props) {
@@ -115,7 +116,11 @@ export default class VolunteerPendingCards extends React.Component {
               style={styles.innerButton}
               onPress={() => Linking.openURL('tel:' + this.props.mobile)}
             >
-              <Text style={styles.buttonText}>Contact {this.props.vendor}</Text>
+              <Icon
+                name="phone"
+                style={{ marginLeft: 0, marginTop: 2, color: "#247f6e", fontSize: 24 }}
+              />
+              <Text style={styles.buttonText}> Contact {this.props.vendor}</Text>
             </Button>
             <Button transparent
               style={styles.innerButton}
