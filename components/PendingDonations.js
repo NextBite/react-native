@@ -27,10 +27,9 @@ export default class PendingDonations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      donationCards: [],
+
       title: "Pending Donations"
     };
-    this.readableTime = this.readableTime.bind(this)
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -46,38 +45,40 @@ export default class PendingDonations extends Component {
   }
 
   componentDidMount() {
+
     this.unregister = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // query for vendor's listingIds
-        let listingRef = firebase.database().ref(`users/${user.uid}/pendingRescues`);
-        listingRef.on('value', (snapshot) => {
-          let userListings = [];
+        let pendingRescueRef = firebase.database().ref(`users/${user.uid}/pendingRescues`);
+
+        pendingRescueRef.on('value', (snapshot) => {
           let currentDonationCards = [];
+          let userListings = [];
 
           snapshot.forEach(function (child) {
-            let listingObj = {};
-
-            listingObj['randomKey'] = child.key;
-            listingObj['listingId'] = child.val().listingId;
-            userListings.push(listingObj)
+            let pendingRescueObj = {}
+            pendingRescueObj['randomKey'] = child.key;
+            pendingRescueObj['listingId'] = child.val().listingId;
+            userListings.push(pendingRescueObj);
           });
 
           //query for details of each listing
-          let listings = userListings.map((listingId) => {
-            let listingDetailRef = firebase.database().ref(`listings/${listingId.listingId}`);
+          let listings = userListings.map((obj) => {
+            let listingDetailRef = firebase.database().ref(`listings/${obj.listingId}`);
             listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
-                listingDetailObj[child.key] = child.val();
-
+                listingDetailObj[child.key] = child.val()
               });
+              listingDetailObj["listingId"] = obj.listingId;
 
-              listingDetailObj["listingId"] = listingId;
               // retrieve volunteer's name for the listing
+              let volunteerName = ""
               let usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
               usersRef.once('value', (snapshot) => {
-                let volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
+                volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
 
+                // make one donation "card"
                 currentDonationCards.push(<ListingItem
                   timestamp={new Date(listingDetailObj.time)}
                   location={listingDetailObj.location}
@@ -90,12 +91,15 @@ export default class PendingDonations extends Component {
                   delivered={listingDetailObj.delivered}
                   dropoff={listingDetailObj.dropoffLocation}
                   listingID={listingDetailObj.listingId}
-                  pendingRescueKey={listingId.randomKey}
-                />);
-
+                  pendingRescueKey={obj.randomKey}
+                />)
+                
+                // currentDonationCards.push(oneCard)
                 currentDonationCards.sort(function (a, b) {
                   return new Date(a.props.expiration) - new Date(b.props.expiration);
                 });
+
+
                 this.setState({ donationCards: currentDonationCards })
               });
             });
@@ -111,22 +115,6 @@ export default class PendingDonations extends Component {
     if (this.unregister) {
       this.unregister();
     }
-  }
-
-  readableTime(time) {
-    let dt = time.toString().slice(0, -18).split(" ");
-    console.debug(dt);
-    let hour = dt[4].split(":")[0];
-    if (parseInt(hour) > 0 && parseInt(hour) < 12) {
-      dt[4] = dt[4] + " AM";
-    } else if (parseInt(hour) > 12) {
-      dt[4] = (parseInt(hour) - 12).toString() + ":" + dt[4].split(":")[1] + " PM";
-    } else if (parseInt(hour) === 12) {
-      dt[4] = dt[4] + " PM";
-    } else if (parseInt(hour) === 0) {
-      dt[4] = "12:" + dt[4].split(":")[1] + " AM";
-    }
-    return dt[0] + " " + dt[1] + " " + dt[2] + " " + dt[3] + ", " + dt[4];
   }
 
   render() {
@@ -148,6 +136,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   view: {
-    marginBottom: 50,
+    marginBottom: 70,
   },
 });
