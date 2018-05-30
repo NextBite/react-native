@@ -79,12 +79,22 @@ export default class VolunteerRescueHistory extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-        <HeaderComponent {...this.props} title={this.state.title} />
+    let content;
+    if (this.state.historyCards !== undefined) {
+      content = (
         <ScrollView style={styles.cards}>
           {this.state.historyCards}
         </ScrollView>
+      );
+    } else (
+      content = (
+        <Text style={styles.text}>No Rescue History</Text>
+      )
+    )
+    return (
+      <View style={styles.view}>
+        <HeaderComponent {...this.props} title={this.state.title} />
+        {content}
       </View>
     );
   }
@@ -94,5 +104,14 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     height: '100%',
-  }
+    backgroundColor: '#44beac'
+  },
+  text: {
+    fontSize: 20,
+    alignSelf: 'center',
+    marginTop: 50
+  },
+  view: {
+    marginBottom: 50,
+  },
 });

@@ -8,7 +8,9 @@ import HeaderComponent from './HeaderComponent';
 import HistoryCardsVendor from './HistoryCardsVendor';
 
 export default class VendorRescueHistory extends React.Component {
-  state = { title: 'Donation History' };
+  state = {
+    title: 'Donation History'
+  };
 
   static navigationOptions = ({ navigation }) => {
     let drawerLabel = 'Donation History';
@@ -79,12 +81,22 @@ export default class VendorRescueHistory extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-        <HeaderComponent {...this.props} title={this.state.title} />
+    let content;
+    if (this.state.historyCards !== undefined) {
+      content = (
         <ScrollView style={styles.cards}>
           {this.state.historyCards}
         </ScrollView>
+      );
+    } else (
+      content = (
+        <Text style={styles.text}>No Donation History</Text>
+      )
+    )
+    return (
+      <View style={styles.view}>
+        <HeaderComponent {...this.props} title={this.state.title} />
+        {content}
       </View>
     );
   }
@@ -94,5 +106,14 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     height: '100%',
-  }
+    backgroundColor: '#44beac'
+  },
+  text: {
+    fontSize: 20,
+    alignSelf: 'center',
+    marginTop: 50
+  },
+  view: {
+    marginBottom: 50,
+  },
 });
