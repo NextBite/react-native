@@ -54,6 +54,7 @@ export default class PendingDonations extends Component {
         pendingRescueRef.on('value', (snapshot) => {
           let currentDonationCards = [];
           let userListings = [];
+          this.setState({ donationCards: [] });
 
           snapshot.forEach(function (child) {
             let pendingRescueObj = {}
@@ -100,13 +101,13 @@ export default class PendingDonations extends Component {
                 });
 
 
-                this.setState({ donationCards: currentDonationCards })
+                this.setState({ donationCards: currentDonationCards });
               });
             });
           });
         });
       } else {
-        this.setState({ userId: null })
+        this.setState({ userId: null });
       }
     });
   }

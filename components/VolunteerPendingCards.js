@@ -39,16 +39,17 @@ export default class VolunteerPendingCards extends React.Component {
       return Promise.resolve(snapshot);
     });
 
-    let listingKey = '';
     vendorIdPromise.then(function (value) {
       //let vendorId = value.child("userId").val();
       console.log("promise chain", value.child("userId").val())
       let vendorRescuesRef = firebase.database().ref(`users/${value.child("userId").val()}/pendingRescues`);
-      vendorRescuesRef.on('value', (snapshot) => {
+      vendorRescuesRef.once('value', (snapshot) => {
         snapshot.forEach(function (child) {
+          console.log("reallisting", listingId);
+          console.log("the child val listing", child.val().listingId);
           if (child.val().listingId === listingId) {
             console.log("match", child.key)
-            listingKey = child.key
+            firebase.database().ref(`users/${value.child("userId").val()}/pendingRescues/${child.key}`).remove();
           }
         });
       });
@@ -60,9 +61,6 @@ export default class VolunteerPendingCards extends React.Component {
       console.log("pushing twice??????????", newUserListing);
       usersRef.push(newUserListing);
 
-      console.log("Add to delivered")
-
-      firebase.database().ref(`users/${value.child("userId").val()}/pendingRescues/${listingKey}`).remove();
 
       // remove from volunteer's pending
       let currUser = firebase.auth().currentUser.uid;
