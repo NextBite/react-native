@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Content, Spinner, Toast } from 'native-base';
+import { Container, View, Spinner, Toast } from 'native-base';
+import { StyleSheet } from 'react-native';
 import firebase from 'firebase';
+
+import HeaderComponent from './HeaderComponent';
 import EditRescueForm from './EditRescueForm';
 
 export default class EditRescue extends Component {
@@ -9,14 +12,11 @@ export default class EditRescue extends Component {
     this.state = {
       error: null,
       showToast: false,
-      spinnerDisplay: false
+      spinnerDisplay: false,
+      title: "Edit Donation Listing"
     }
     this.submit = this.submit.bind(this);
   }
-
-  static navigationOptions = {
-    title: 'Edit Rescue',
-  };
 
   componentDidMount() {
     this.unregister = firebase.auth().onAuthStateChanged(user => {
@@ -45,10 +45,17 @@ export default class EditRescue extends Component {
     }
 
     return (
-      <Container>
-        <EditRescueForm submitCallback={this.submit} navigation={this.props.navigation} />
-        {spinner}
-      </Container>
+        <Container>
+          <HeaderComponent {...this.props} title={this.state.title} />
+          <EditRescueForm submitCallback={this.submit} navigation={this.props.navigation} />
+          {spinner}
+        </Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  view: {
+    marginBottom: 56,
+  },
+});

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, TimePickerAndroid, TimePickerAndroidOpenOptions, TouchableOpacity, } from 'react-native';
+import firebase from 'firebase';
+import { StyleSheet, View, Text, TextInput, TimePickerAndroid, TimePickerAndroidOpenOptions, TouchableOpacity, Alert } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Left, Right } from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -27,6 +28,16 @@ export default class ListingsForm extends Component {
   };
 
   componentDidMount() {
+    /* Add a listener and callback for authentication events */
+    this.unregister = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ userId: user.uid });
+      }
+      else {
+        this.setState({ userId: null }); //null out the saved state
+      }
+    });
+
     let marketList = [
       {
         label: 'Ballard Farmers Market',
@@ -101,6 +112,12 @@ export default class ListingsForm extends Component {
     this.setState({ markets: marketList });
   }
 
+    //when the component is unmounted, unregister using the saved function
+    componentWillUnmount() {
+      if (this.unregister) { //if have a function to unregister with
+        this.unregister(); //call that function!
+      }
+    }
 
   /**
    * A helper function to validate a value based on a hash of validations
@@ -126,8 +143,8 @@ export default class ListingsForm extends Component {
           errors.isValid = false;
         }
       }
-    } 
-    
+    }
+
     if (value !== undefined) {
       console.log("HELLO!");
       if (validations.required && value === '') {
@@ -135,7 +152,7 @@ export default class ListingsForm extends Component {
         errors.isValid = false;
       }
 
-      if(validations.numbers && value != '') {
+      if (validations.numbers && value != '') {
         let valid = /^[0-9]+$/.test(value)
         if (!valid) {
           errors.numbers = true;
@@ -143,10 +160,10 @@ export default class ListingsForm extends Component {
         }
       }
 
-      if(validations.match) {
-        this.state.markets.forEach(function(market) {
+      if (validations.match) {
+        this.state.markets.forEach(function (market) {
           //console.log("MARKET", market);
-          if(value.toLowerCase() === market.label.toLowerCase()) {
+          if (value.toLowerCase() === market.label.toLowerCase()) {
             errors.matchGood = true;
           }
           errors.match = true;
@@ -219,7 +236,14 @@ export default class ListingsForm extends Component {
   //handle submit button
   submit() {
     this.props.submitCallback(this.state.location, this.state.boxes, this.state.expirationDate, this.state.weight, this.state.tags, this.state.claimed, this.state.claimedBy, this.state.delivered, this.state.dropoffLocation);
-    this.props.navigation.navigate('PendingDonations');
+    Alert.alert(
+      'Donation Confirmation',
+      `You have successfully listed a donation.`,
+      [
+        { text: 'Okay', onPress: () => this.props.navigation.navigate('Listing') },
+      ],
+      { cancelable: false }
+    )
   }
 
   findMarket(query) {
@@ -239,9 +263,9 @@ export default class ListingsForm extends Component {
     let splitText = text.split(" ");
     let newText = "";
 
-    for(i = 0; i < splitText.length; i++) {
+    for (i = 0; i < splitText.length; i++) {
 
-     if(splitText.length - 1 === i) {
+      if (splitText.length - 1 === i) {
         newText += (splitText[i].charAt(0).toUpperCase() + splitText[i].substring(1));
       } else {
         newText += (splitText[i].charAt(0).toUpperCase() + splitText[i].substring(1) + " ");
@@ -340,12 +364,10 @@ export default class ListingsForm extends Component {
       }
     ]
 
-    console.log("LOCATION", this.state);
-
     return (
       <Container style={{ alignSelf: 'center', width: '100%', backgroundColor: '#f6f6f6' }}>
         <Content>
-          <View style={styles.messageView}>
+          <View style={styles.messageView} key={this.state.unique}>
             <Text style={styles.messageText}>What would you like to donate today?</Text>
           </View>
           <View style={{ width: '96%', alignSelf: 'center', marginTop: 10, }}>
@@ -573,7 +595,16 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 20,
     borderRadius: 10,
-    fontSize: 16
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  donationText: {
+    alignSelf: 'center',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    borderBottomWidth: 4,
+    borderBottomColor: '#f8b718',
+    fontSize: 16,
   },
   errorText: {
     fontSize: 16,

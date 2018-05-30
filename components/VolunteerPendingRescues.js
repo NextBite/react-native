@@ -96,7 +96,7 @@ export default class VolunteerPendingRescues extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.view}>
       <HeaderComponent {...this.props} title={this.state.title} />
       <ScrollView style={styles.cards}>
         {this.state.pendingCards}
@@ -110,5 +110,8 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     height: '100%',
-  }
+  },
+  view: {
+    marginBottom: 50,
+  },
 });

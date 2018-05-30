@@ -89,6 +89,7 @@ export default class PendingDonations extends Component {
                   delivered={listingDetailObj.delivered}
                   dropoff={listingDetailObj.dropoffLocation}
                   listingID={listingDetailObj.listingId}
+                  navigation={this.props.navigation}
                 />);
 
                 currentDonationCards.sort(function (a, b) {
@@ -146,6 +147,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   view: {
-    marginBottom: 50,
+    marginBottom: 56,
   },
 });

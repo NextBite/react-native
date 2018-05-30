@@ -75,11 +75,12 @@ export default class ListingItem extends Component {
 
   buttonOptions() {
     if (this.props.claimed === 'no') {
+      console.log("TAGGGGGGGS", this.props.tags);
       return (
         <View style={styles.cardView}>
           <Left style={styles.leftButton}>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('EditRescue', {market: this.props.market, boxes: this.props.boxes, weight: this.props.weight, tags: this.props.tags, expiration: this.props.expiration, listingId: this.props.listingId})}>
+              onPress={() => this.props.navigation.navigate('EditRescue', {location: this.props.location.split(",")[0], boxes: this.props.boxes, weight: this.props.weight, tags: this.props.tag, expiration: this.props.expiration, listingId: this.props.listingId})}>
               <Text style={styles.buttonText}>EDIT</Text>
             </Button>
           </Left>
