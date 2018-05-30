@@ -5,10 +5,12 @@ import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import HeaderComponent from './HeaderComponent';
-import HistoryCards from './HistoryCards';
+import HistoryCardsVendor from './HistoryCardsVendor';
 
 export default class VendorRescueHistory extends React.Component {
-  state = { title: 'Donation History' };
+  state = {
+    title: 'Donation History'
+  };
 
   static navigationOptions = ({ navigation }) => {
     let drawerLabel = 'Donation History';
@@ -54,16 +56,16 @@ export default class VendorRescueHistory extends React.Component {
           usersRef.once('value', (snapshot) => {
             let volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
 
-            historyCards.push(<HistoryCards
+            historyCards.push(<HistoryCardsVendor
+              timestamp={new Date(pickupsObj.time)}
+              location={pickupsObj.location}
               boxes={pickupsObj.boxes}
-              vendor={volunteerName}
-              expiration={pickupsObj.expirationDate}
               weight={pickupsObj.weight}
-              tags={pickupsObj.tags}
-              market={pickupsObj.location}
-              listingId={rescue}
-              dropoffLocation={pickupsObj.dropoffLocation}
-              key={rescue}
+              tag={pickupsObj.tags}
+              expiration={pickupsObj.expirationDate}
+              volunteer={volunteerName}
+              dropoff={pickupsObj.dropoffLocation.name}
+              listingID={pickupsObj.listingId}
               navigation={this.props.navigation}
             />);
 
@@ -79,12 +81,22 @@ export default class VendorRescueHistory extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-        <HeaderComponent {...this.props} title={this.state.title} />
+    let content;
+    if (this.state.historyCards !== undefined) {
+      content = (
         <ScrollView style={styles.cards}>
           {this.state.historyCards}
         </ScrollView>
+      );
+    } else (
+      content = (
+        <Text style={styles.text}>No Donation History</Text>
+      )
+    )
+    return (
+      <View style={styles.view}>
+        <HeaderComponent {...this.props} title={this.state.title} />
+        {content}
       </View>
     );
   }
@@ -94,5 +106,14 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     height: '100%',
-  }
+    backgroundColor: '#44beac'
+  },
+  text: {
+    fontSize: 20,
+    alignSelf: 'center',
+    marginTop: 50
+  },
+  view: {
+    marginBottom: 50,
+  },
 });

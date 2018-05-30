@@ -35,7 +35,6 @@ export default class DropOffLocation extends React.Component {
                 currentFoodBankCards.push(
                   <FoodBankCards
                     title={parsedRes[key].name}
-
                     coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
                     listingId={listingId}
                     marketId={marketId}

@@ -45,6 +45,7 @@ export default class MarketPickups extends React.Component {
         <Text>Tags: {this.state.tags}</Text>
         <Text>Weight: {this.state.weight}</Text>
         <Text>Vendor: {this.state.vendorName}</Text>
+        <Text>MarketId: {this.state.marketId}</Text>
 
         <View style={styles.button}>
           <Button transparent

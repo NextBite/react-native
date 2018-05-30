@@ -10,7 +10,7 @@ export default class MapCards extends React.Component {
         <CardItem>
           <Left>
             <Body>
-              <Text>{this.props.title}</Text>
+              <Text style={styles.marketName}>{this.props.title}</Text>
               <Text note style={styles.subText}>{this.props.distance}</Text>
               <Text style={styles.regText}>
                 There are {this.props.count} pickup(s) available.
@@ -48,10 +48,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#44beac',
     alignSelf: 'center',
     alignItems: 'center',
-    paddingRight: 0
+    paddingRight: 0,
+    marginLeft: 8
   },
   buttonText: {
     color: '#ffffff',
-    fontSize: 14
+    fontSize: 14,
   },
+  marketName: {
+    color: '#247f6e',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 22,
+  }
 });
