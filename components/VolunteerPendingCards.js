@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, Alert } from 'react-native';
+import { StyleSheet, Image, Alert, Linking } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import firebase from 'firebase';
@@ -113,9 +113,9 @@ export default class VolunteerPendingCards extends React.Component {
           <Left>
             <Button transparent
               style={styles.innerButton}
-              onPress={() => this.props.navigation.navigate('', {})}
+              onPress={() => Linking.openURL('tel:' + this.props.mobile)}
             >
-              <Text style={styles.buttonText}>Contact Vendor</Text>
+              <Text style={styles.buttonText}>Contact {this.props.vendor}</Text>
             </Button>
             <Button transparent
               style={styles.innerButton}

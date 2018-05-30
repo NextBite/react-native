@@ -9,9 +9,9 @@ import { Button, Container, Header, Content, Tab, Tabs } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
-export default class Profile extends Component {
+export default class Settings extends Component {
   state = {
-    title: "Profile",
+    title: "Settings",
     firstName: undefined,
     lastName: undefined,
     personType: undefined,
@@ -19,11 +19,11 @@ export default class Profile extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    let drawerLabel = 'Profile';
+    let drawerLabel = 'Settings';
     let drawerIcon = () => (
       <Icon
-        name="person"
-        style={{ color: "#44beac", }}
+        name="settings"
+        style={{ color: "#44beac", marginLeft: -3 }}
         size={28}
       />
     );
@@ -54,71 +54,18 @@ export default class Profile extends Component {
   }
 
   render() {
-    let first = this.state.firstName + "";
-    let last = this.state.lastName + "";
-    let initials = first.charAt() + last.charAt();
-    let tabs = (<Tabs style={styles.tabs} tabContainerStyle={{ elevation: 0 }} tabBarUnderlineStyle={{ backgroundColor: '#f8b718' }} initialPage={0}>
-      <Tab tabStyle={{ backgroundColor: '#44beac' }} textStyle={{color: '#f6f6f6'}} activeTabStyle={{ backgroundColor: '#44beac' }} heading="Ratings">
-      <Text>Ratings</Text>
-      </Tab>
-    </Tabs>);
 
     return (<View style={{
       flex: 1,
       flexDirection: 'column',
     }}>
       <HeaderComponent {...this.props} title={this.state.title} />
-      <View style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-      }}>
-        <View style={{ paddingTop: 20, paddingBottom: 0 }}>
-          <Avatar
-            xlarge
-            rounded
-            title={initials}
-            activeOpacity={0.7}
-          />
-        </View>
-        <Text style={styles.personName}>{this.state.firstName} {this.state.lastName}</Text>
-        
-        <Button transparent
-          style={styles.innerButton}
-          onPress={() => Linking.openURL('tel:' + this.state.mobile)}
-        >
-          <Icon
-            name="phone"
-            style={{ marginLeft: 0, marginTop: 2, color: "#fff", fontSize: 24 }}
-          />
-          <Text style={styles.buttonText}> CONTACT</Text>
-        </Button>
-      </View>
-
-      {tabs}
+        <Text>Settings</Text>
 
     </View>);
   }
 }
 
 const styles = StyleSheet.create({
-  personName: {
-    color: '#247f6e',
-    fontFamily: 'Montserrat-Bold',
-    fontSize: 36,
-  },
-  innerButton: {
-    backgroundColor: '#44beac',
-    alignSelf: 'center',
-    alignItems: 'center',
-    padding: 40,
-    marginTop: 15
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: 18,
-  },
-  tabs: {
-    marginTop: 20,
-  }
+
 });

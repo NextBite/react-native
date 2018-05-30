@@ -62,7 +62,7 @@ export default class PendingDonations extends Component {
           //query for details of each listing
           let listings = userListings.map((listingId) => {
             let listingDetailRef = firebase.database().ref(`listings/${listingId}`);
-            listingDetailRef.on('value', (snapshot) => {
+            listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
                 listingDetailObj[child.key] = child.val()
@@ -73,7 +73,9 @@ export default class PendingDonations extends Component {
               // retrieve volunteer's name for the listing
               let usersRef = firebase.database().ref(`users/${listingDetailObj.claimedBy}`);
               usersRef.once('value', (snapshot) => {
+                volunteerMobile = snapshot.child("mobile").val();
                 let volunteerName = `${snapshot.child("firstName").val()} ${snapshot.child("lastName").val()}`;
+
                 currentDonationCards.push(<ListingItem
                   timestamp={new Date(listingDetailObj.time)}
                   location={listingDetailObj.location}
@@ -83,6 +85,7 @@ export default class PendingDonations extends Component {
                   expiration={listingDetailObj.expirationDate}
                   claimed={listingDetailObj.claimed}
                   volunteer={volunteerName}
+                  mobile={volunteerMobile}
                   delivered={listingDetailObj.delivered}
                   dropoff={listingDetailObj.dropoffLocation}
                   listingID={listingDetailObj.listingId}

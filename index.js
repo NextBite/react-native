@@ -1,14 +1,17 @@
 
-import { AppRegistry, Dimensions } from 'react-native';
+import { AppRegistry, Dimensions, View, ScrollView, Text } from 'react-native';
 import firebase from 'firebase';
 import RNfirebase from 'react-native-firebase';
 import React, { Component } from 'react';
 import bgMessaging from './components/bgMessaging';
 
-import { DrawerNavigator, SwitchNavigator, StackNavigator } from 'react-navigation';
+import { Avatar } from 'react-native-elements'
+import { Button } from 'native-base';
+
+import { DrawerNavigator, SwitchNavigator, StackNavigator, DrawerItems } from 'react-navigation';
 import { Root } from 'native-base';
 
-import ProfileNavigator from './components/ProfileNavigator';
+import SettingsNavigator from './components/SettingsNavigator';
 import MapNavigator from './components/MapNavigator';
 import ListingNavigator from './components/ListingNavigator';
 
@@ -41,7 +44,9 @@ export default class App extends Component {
     super(props);
     this.state = {
       signedIn: false,
-      personType: undefined,
+      firstName: undefined,
+      lastName: undefined,
+      personType: undefined
     };
   }
 
@@ -54,14 +59,18 @@ export default class App extends Component {
         var profileRef = firebase.database().ref('users/' + this.state.userId);
         profileRef.once("value")
           .then(snapshot => {
+            console.log("SNAP", snapshot.child("firstName").val())
             this.setState({ personType: snapshot.child("personType").val() });
-            personType = this.state.personType;
+            this.setState({ firstName: snapshot.child("firstName").val() });
+            this.setState({ lastName: snapshot.child("lastName").val() });
+            console.log("FIREBASE STATE", this.state)
           });
+          
 
         this.onTokenRefreshListener = RNfirebase.messaging().onTokenRefresh(fcmToken => {
           // Process your token as required
           firebase.database().ref(`users/${this.state.userId}`)
-          .update({ fcmToken: fcmToken });
+            .update({ fcmToken: fcmToken });
         });
 
         RNfirebase.messaging().getToken()
@@ -71,11 +80,11 @@ export default class App extends Component {
             if (fcmToken) {
               // user has a device token
               firebase.database().ref(`users/${this.state.userId}`)
-              .update({ fcmToken: fcmToken });
+                .update({ fcmToken: fcmToken });
             } else {
               // user doesn't have a device token yet
               firebase.database().ref(`users/${this.state.userId}`)
-              .update({ fcmToken: 'no' });
+                .update({ fcmToken: 'no' });
             }
           });
 
@@ -176,19 +185,26 @@ export default class App extends Component {
       } else {
         this.setState({ userId: null }); //null out the saved state
         this.setState({ personType: undefined }); //null out the saved state
+        this.setState({ firstName: null }); //null out the saved state
+        this.setState({ lastName: undefined }); //null out the saved state
       }
     });
   }
 
   componentWillUnmount() {
     this.onTokenRefreshListener();
-    if(this.unregister){ //if have a function to unregister with
+    if (this.unregister) { //if have a function to unregister with
       this.unregister(); //call that function!
     }
   }
 
   render() {
+    console.log("RENDER STATE", this.state);
     const { signedIn } = this.state;
+    let first = this.state.firstName + "";
+    let last = this.state.lastName + "";
+    let initials = first.charAt() + last.charAt();
+
 
     let routeConfigs = {
       Home: {
@@ -200,8 +216,8 @@ export default class App extends Component {
       History: {
         screen: this.state.personType === undefined ? Loading : (this.state.personType === 'volunteer' ? VolunteerRescueHistory : VendorRescueHistory)
       },
-      Profile: {
-        screen: ProfileNavigator,
+      Settings: {
+        screen: SettingsNavigator,
       },
       SignOut: {
         screen: SignOut,
@@ -221,6 +237,26 @@ export default class App extends Component {
         activeTintColor: '#f8b718',
         inactiveTintColor: '#474748',
       }
+      ,
+      // define customComponent here
+      contentComponent: (props) =>
+        <View style={{ justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }}>
+
+          <View style={{ paddingTop: 20, paddingBottom: 5 }}>
+            <Avatar
+              large
+              rounded
+              title={initials}
+              activeOpacity={0.7}
+            />
+          </View>
+          <Text style={{ marginBottom: 10, color: '#247f6e', fontWeight: 'bold' }}>{this.state.firstName} {this.state.lastName}</Text>
+
+          <ScrollView>
+            <DrawerItems {...props} />
+          </ScrollView>
+        </View>
+
     };
 
 
