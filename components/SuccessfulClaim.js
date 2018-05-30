@@ -26,14 +26,33 @@ export default class SuccessfulClaim extends React.Component {
 
     // update the listing entry to reflect that it's been 
     // claimed by a volunteer
-    firebase.database().ref().child(`listings/${listingId}`)
-        .update({ claimed: "yes", dropoffLocation: { lat: coords.lat, long: coords.long, name: nonprofit }, claimedBy: currUser });
+    let listingsRef = firebase.database().ref().child(`listings/${listingId}`);
+    listingsRef.update({ claimed: "yes", dropoffLocation: { lat: coords.lat, long: coords.long, name: nonprofit }, claimedBy: currUser });
+    
+    // update vendor's pending donations to re-render their pending page
+    listingsRef.once('value', (snapshot) => {
+      let vendorId = snapshot.child("userId").val();
+      console.log("WORKORKROKROKR", vendorId);
+      let vendorPendingRef = firebase.database().ref().child(`users/${vendorId}/pendingRescues`);
+      vendorPendingRef.once('value', (snapshot) => {
+        snapshot.forEach(function (child) {
+          console.log("child keyy", child.val().listingId);
+          console.log("listingidddd", listingId);
+          if(child.val().listingId === listingId) {
+            console.log("vendor ID", vendorId);
+            console.log("listingId random", child.key);
+            firebase.database().ref().child(`users/${vendorId}/pendingRescues/${child.key}`)
+              .update( {claimed: "yes" });
+          }
+        });
+      });
+    });
 
     // remove it from entires that are shown for each market
     firebase.database().ref(`markets/${marketName.split(",")[0]}/${marketId}`).remove();
 
     let usersRef = firebase.database().ref('users/' + currUser + '/claimedRescues');
-    let newUserListing = {
+    let newUserListing = { 
       listingId: listingId,
     }
     usersRef.push(newUserListing);

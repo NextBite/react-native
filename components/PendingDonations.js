@@ -94,7 +94,7 @@ export default class PendingDonations extends Component {
                   listingID={listingDetailObj.listingId}
                   pendingRescueKey={obj.randomKey}
                 />)
-                
+
                 // currentDonationCards.push(oneCard)
                 currentDonationCards.sort(function (a, b) {
                   return new Date(a.props.expiration) - new Date(b.props.expiration);
