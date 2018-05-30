@@ -1,10 +1,29 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 
 export default class MarketCards extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.openAlert = this.openAlert.bind(this);
+  }
+
+  openAlert() {
+    Alert.alert(
+      'Rescue Confirmation',
+      `Are you sure you want to claim this rescue?`,
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'Yes', onPress: () => this.props.navigation.navigate('DropOffLocation', { location: this.props.marketId, listingId: this.props.listingId, marketId: this.props.marketId }) },
+      ],
+      { cancelable: false }
+    )
+  }
+
   render() {
+    console.log("market id", this.props.marketId);
     return (
       <Card style={styles.card}>
         <CardItem>
@@ -25,7 +44,7 @@ export default class MarketCards extends React.Component {
           <Left>
             <Button transparent
               style={styles.innerButton}
-              onPress={() => this.props.navigation.navigate('ClaimListing', { listingId: this.props.listingId, marketId: this.props.marketId })}
+              onPress={() => this.openAlert()}
             >
               <Text style={styles.buttonText}>Claim</Text>
             </Button>
