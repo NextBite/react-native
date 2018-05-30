@@ -68,6 +68,7 @@ export default class MarketPickups extends React.Component {
               expiration={pickupsObj.expirationDate}
               weight={pickupsObj.weight}
               tags={pickupsObj.tags}
+              marketName={marketName}
               marketId={pickup["dbKey"]}
               listingId={pickup["listingId"]}
               key={pickup["listingId"]}
