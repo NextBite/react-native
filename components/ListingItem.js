@@ -101,10 +101,6 @@ export default class ListingItem extends Component {
           <Button transparent
             style={{ alignSelf: 'center' }}
             onPress={() => Linking.openURL('tel:' + this.props.mobile)}>
-            <Icon
-              name="phone"
-              style={{ marginLeft: 0, marginTop: 2, color: "#247f6e", fontSize: 24 }}
-            />
             <Text style={styles.buttonText}> CONTACT {volunteer}</Text>
           </Button>
         </View>
