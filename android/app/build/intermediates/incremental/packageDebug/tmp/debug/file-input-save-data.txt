@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed May 30 16:16:53 PDT 2018
+#Wed May 30 16:36:48 PDT 2018
 5.base=/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/Users/alexiskoss/Desktop/react-native/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 22.path=fonts/MaterialIcons.ttf
