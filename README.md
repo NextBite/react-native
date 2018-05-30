@@ -7,12 +7,14 @@ NextBite offers different features depending on whether the user is a vendor or 
 ### Vendor
 * Create listing
 * View past donations
+* Contact volunteer
 * Verify donation pickup
 
 ### Volunteer
 * View donation listings
 * Recieve notifications about new listings nearby
 * Claim listings
+* Contact vendor
 * Get directions to farmer's market and non-profit
 * Confirm donation drop-off
 
@@ -25,7 +27,7 @@ We settled on a React Native App because we needed access to some key features -
 Firebase has a proven record with React and, indeed, is taught alongside React in client-side web developement courses. This made Firebase the obvious choice for us to handle NextBite's back-end including hosting profiles and listings. Firebase also handles user authentication which is necessary because most features of NextBite require user-specific data from our database.
 
 ## Team NextBite
-Lisa Koss - 
-Alexis Koss - 
-Kar Yin Ng - 
+Lisa Koss  -  
+Alexis Koss -  
+Kar Yin Ng -  
 Sean Martin - seanthompsonmartin@gmail.com
