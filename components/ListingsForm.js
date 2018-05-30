@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { StyleSheet, View, Text, TextInput, TimePickerAndroid, TimePickerAndroidOpenOptions, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TimePickerAndroid, TimePickerAndroidOpenOptions, TouchableOpacity, Alert, BackHandler } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Left, Right } from 'native-base';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -110,6 +110,7 @@ export default class ListingsForm extends Component {
     ]
 
     this.setState({ markets: marketList });
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
 
     //when the component is unmounted, unregister using the saved function
@@ -117,8 +118,13 @@ export default class ListingsForm extends Component {
       if (this.unregister) { //if have a function to unregister with
         this.unregister(); //call that function!
       }
+
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
+    handleBackButton() {
+      return true;
+    }
   /**
    * A helper function to validate a value based on a hash of validations
    * second parameter has format e.g.,

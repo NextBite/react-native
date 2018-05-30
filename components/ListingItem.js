@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Linking } from 'react-native';
+import { View, StyleSheet, Text, Linking, Alert } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Button, Left, Right } from 'native-base';
 import firebase from 'firebase';
 
@@ -11,7 +11,8 @@ export default class ListingItem extends Component {
     this.state = {
     };
 
-    this.deleteListing = this.deleteListing.bind(this)
+    this.deleteListing = this.deleteListing.bind(this);
+    this.alertDelete = this.alertDelete.bind(this);
   }
 
   checkStatus() {
@@ -80,13 +81,13 @@ export default class ListingItem extends Component {
         <View style={styles.cardView}>
           <Left style={styles.leftButton}>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('EditRescue', {location: this.props.location.split(",")[0], boxes: this.props.boxes, weight: this.props.weight, tags: this.props.tag, expiration: this.props.expiration, listingId: this.props.listingId})}>
+              onPress={() => this.props.navigation.navigate('EditRescue', { location: this.props.location.split(",")[0], boxes: this.props.boxes, weight: this.props.weight, tags: this.props.tag, expiration: this.props.expiration, listingId: this.props.listingId })}>
               <Text style={styles.buttonText}>EDIT</Text>
             </Button>
           </Left>
           <Right style={styles.rightButton}>
             <Button transparent
-              onPress={() => this.deleteListing()}
+              onPress={() => this.alertDelete()}
             >
               <Text style={styles.buttonText}>DELETE</Text>
             </Button>
@@ -97,7 +98,7 @@ export default class ListingItem extends Component {
       let volunteer = this.props.volunteer.toUpperCase()
       return (
         <View style={styles.cardViewAlt}>
-          <Button transparent 
+          <Button transparent
             style={{ alignSelf: 'center' }}
             onPress={() => Linking.openURL('tel:' + this.props.mobile)}>
             <Text style={styles.buttonText}>CONTACT {volunteer}</Text>
@@ -105,6 +106,18 @@ export default class ListingItem extends Component {
         </View>
       );
     }
+  }
+
+  alertDelete() {
+    Alert.alert(
+      'Delete Donation Listing?',
+      `Are you sure you want to delete this donation listing?`,
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'Okay', onPress: () => this.deleteListing() },
+      ],
+      { cancelable: false }
+    )
   }
 
   deleteListing() {
