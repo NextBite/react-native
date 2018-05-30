@@ -88,6 +88,7 @@ export default class Listing extends Component {
       userId: firebase.auth().currentUser.uid,
       claimed: claimed,
       claimedBy: claimedBy,
+      pickedUp: "no",
       delivered: delivered,
       pickedUp: "no",
       dropoffLocation: dropoffLocation

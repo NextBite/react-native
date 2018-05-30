@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Image, Alert, Linking, View } from 'react-native';
+import { StyleSheet, Image, Alert, Linking, View, Platform } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right } from 'native-base';
 import firebase from 'firebase';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class VolunteerPendingCards extends React.Component {
   constructor(props) {
@@ -11,12 +11,13 @@ export default class VolunteerPendingCards extends React.Component {
 
     this.openAlert = this.openAlert.bind(this);
     this.confirmDelivery = this.confirmDelivery.bind(this);
+    this.openMaps = this.openMaps.bind(this);
   }
 
   openAlert() {
     Alert.alert(
       'Delivery Confirmation',
-      `Has this this rescue been successfully delivered to ${this.props.dropoffLocation.name}?`,
+      `Has this rescue been successfully delivered to ${this.props.dropoffLocation.name}?`,
       [
         { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
         { text: 'Yes', onPress: () => this.confirmDelivery() },
@@ -88,25 +89,13 @@ export default class VolunteerPendingCards extends React.Component {
     })
   }
 
-  buttonOptions() {
-    return (
-      <View style={styles.cardView}>
-        <Left style={styles.leftButton}>
-          <Button transparent
-            onPress={() => Linking.openURL('tel:' + this.props.mobile)}
-          >
-            <Text style={styles.buttonText}> Contact</Text>
-          </Button>
-        </Left>
-        <Right style={styles.rightButton}>
-          <Button transparent
-            onPress={() => this.openAlert()}
-          >
-            <Text style={styles.buttonText}>Deliver</Text>
-          </Button>
-        </Right>
-      </View>
-    );
+  openMaps() {
+    const scheme = Platform.OS === 'ios' ? 'maps:0,0?q=' : 'geo:0,0?q=:';
+    const latLng = `${this.props.dropoffLocation.lat},${this.props.dropoffLocation.long}`;
+    const label = `${this.props.dropoffLocation.name}`;
+    const url = Platform.OS === 'ios' ? `${scheme}${label}@${latLng}` : `${scheme}${latLng}(${label})`;
+
+    Linking.openURL(url);
   }
 
   render() {
@@ -186,7 +175,31 @@ export default class VolunteerPendingCards extends React.Component {
         </Right>
       </View>
     );
-    
+
+    let deliveryStatus;
+    if(this.props.pickedUp === "yes") {
+      deliveryStatus = (
+        <View style={styles.cardView}>
+          <Left style={styles.left}>
+            <Text style={styles.leftText}>Delivery Status</Text>
+          </Left>
+          <Right style={styles.right}>
+            <Text style={styles.rightText}>Picked up</Text>
+          </Right>
+        </View>
+      );
+    } else {
+      deliveryStatus = (
+        <View style={styles.cardView}>
+          <Left style={styles.left}>
+            <Text style={styles.leftText}>Delivery Status</Text>
+          </Left>
+          <Right style={styles.right}>
+            <Text style={styles.rightText}>Not picked up</Text>
+          </Right>
+        </View>
+      );
+    }
     return (
       <Card style={styles.card}>
         <CardItem>
@@ -198,11 +211,25 @@ export default class VolunteerPendingCards extends React.Component {
             {tags}
             {expiration}
             {dropoffLocation}
+            {deliveryStatus}
           </Body>
         </CardItem>
-        
+
         <CardItem footer bordered style={styles.footer}>
-          {this.buttonOptions()}
+          <View style={styles.iconView}>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Icon name='phone' style={styles.icons} onPress={() => Linking.openURL('tel:' + this.props.mobile)} />
+              <Text style={styles.buttonText}>Contact</Text>
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Icon name='map-marker' style={styles.icons} onPress={() => this.openMaps()}/>
+              <Text style={styles.buttonText}>Directions</Text>
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Icon name='check' style={styles.icons} onPress={() => this.openAlert()} />
+              <Text style={styles.buttonText}>Deliver</Text>
+            </View>
+          </View>
         </CardItem>
       </Card>
     );
@@ -216,6 +243,10 @@ const styles = StyleSheet.create({
   },
   cardViewAlt: {
     flex: 1,
+  },
+  iconView: {
+    flex: 1,
+    flexDirection: 'row'
   },
   left: {
     flex: 4,
@@ -245,16 +276,25 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  topButton: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   card: {
     elevation: 0,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#247f6e'
   },
   footer: {
-    backgroundColor: '#c1e0da'
+    backgroundColor: '#c1e0da',
+    height: 70
+  },
+  icons: {
+    fontSize: 30,
+    color: '#247f6e',
   }
 });
 

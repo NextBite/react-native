@@ -14,6 +14,29 @@ export default class ListingItem extends Component {
 
     this.deleteListing = this.deleteListing.bind(this);
     this.alertDelete = this.alertDelete.bind(this);
+    this.openPickupAlert = this.openPickupAlert.bind(this);
+    this.confirmPickup = this.confirmPickup.bind(this);
+  }
+
+  openPickupAlert(listingId) {
+    Alert.alert(
+      'Pickup Confirmation',
+      `Has the volunteer picked up this donation?`,
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'Yes', onPress: () => this.confirmPickup() },
+      ],
+      { cancelable: false }
+    )
+  }
+
+  confirmPickup() {
+    let currUser = firebase.auth().currentUser.uid;
+    firebase.database().ref().child(`listings/${this.props.listingID}`)
+      .update({ pickedUp: "yes" });
+
+    firebase.database().ref().child(`users/${currUser}/pendingRescues/${this.props.pendingRescueKey}`)
+      .update({ pickedUp: "yes" });
   }
 
   checkStatus() {
@@ -32,14 +55,25 @@ export default class ListingItem extends Component {
     if (this.props.claimed === 'no') {
       return null
     } else if (this.props.claimed === 'yes') {
-      if (this.props.delivered === 'no') {
+      if (this.props.delivered === 'no' && this.props.pickedUp === 'no') {
         return (
           <View style={styles.cardView} >
             <Left style={styles.left}>
               <Text style={styles.leftText}>Delivery Status</Text>
             </Left>
             <Right style={styles.right}>
-              <Text style={styles.rightText}>Not yet delivered</Text>
+              <Text style={styles.rightText}>Not picked up</Text>
+            </Right>
+          </View>
+        );
+      } else if (this.props.delivered === 'no' && this.props.pickedUp === 'yes') {
+        return (
+          <View style={styles.cardView} >
+            <Left style={styles.left}>
+              <Text style={styles.leftText}>Delivery Status</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Text style={styles.rightText}>Picked up, but not yet delivered</Text>
             </Right>
           </View>
         );
@@ -76,7 +110,7 @@ export default class ListingItem extends Component {
   }
 
   buttonOptions() {
-    if (this.props.claimed === 'no') {
+    if (this.props.claimed === 'no' && this.props.pickedUp === 'no') {
       return (
         <View style={styles.cardView}>
           <Left style={styles.leftButton}>
@@ -94,14 +128,35 @@ export default class ListingItem extends Component {
           </Right>
         </View>
       );
-    } else if (this.props.claimed === 'yes') {
-      let volunteer = this.props.volunteer.toUpperCase()
+    } else if (this.props.claimed === 'yes' && this.props.pickedUp === "no") {
+      let volunteer = this.props.volunteer.toUpperCase();
+      console.log("pending rescue key", this.props.pendingRescueKey);
+      return (
+        <View style={styles.cardView}>
+          <Left style={styles.leftButton}>
+            <Button transparent
+              style={{ alignSelf: 'center' }}
+              onPress={() => Linking.openURL('tel:' + this.props.mobile)}>
+              <Text style={styles.buttonText}> CONTACT</Text>
+            </Button>
+          </Left>
+          <Right style={styles.rightButton}>
+            <Button transparent
+              onPress={() => this.openPickupAlert()}
+            >
+              <Text style={styles.buttonText}>CONFIRM</Text>
+            </Button>
+          </Right>
+        </View>
+      );
+    } else if (this.props.claimed === 'yes' && this.props.pickedUp === 'yes') {
+      let volunteer = this.props.volunteer.toUpperCase();
       return (
         <View style={styles.cardViewAlt}>
           <Button transparent
             style={{ alignSelf: 'center' }}
             onPress={() => Linking.openURL('tel:' + this.props.mobile)}>
-            <Text style={styles.buttonText}> CONTACT {volunteer}</Text>
+            <Text style={styles.buttonText}> CONTACT</Text>
           </Button>
         </View>
       );
