@@ -216,11 +216,6 @@ export default class MarketMap extends React.Component {
   render() {
     // generate markers for markets with current listings for the map
     // ***** slice is required due to code artifact that is adding keys unnecessarily to the array...
-
-    if (this.state.markets.length > 0) {
-
-      console.log("this.state.markets", Object.keys(this.state.markets[1]["contents"]).length);
-    }
     let markers = this.state.markets.slice(0, this.state.markets.length).map((market) => {
       if (Object.keys(market["contents"]).length > 1) {
         let pos = { latitude: market.contents.coords.lat, longitude: market.contents.coords.long }

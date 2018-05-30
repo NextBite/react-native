@@ -27,7 +27,6 @@ export default class PendingDonations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
       title: "Pending Donations"
     };
   }
@@ -66,12 +65,37 @@ export default class PendingDonations extends Component {
           //query for details of each listing
           let listings = userListings.map((obj) => {
             let listingDetailRef = firebase.database().ref(`listings/${obj.listingId}`);
+            /*let vendorPendingRef = firebase.database().ref(`users/${user.uid}/pendingRescues/${obj.randomKey}`);
+            if (new Date(snapshot.child("expirationDate").val()) < new Date()) {
+              marketListingsRef.remove();
+            }*/
             listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
                 listingDetailObj[child.key] = child.val()
               });
               listingDetailObj["listingId"] = obj.listingId;
+
+              console.log("each listings expiry date", listingDetailObj["expirationDate"])
+              if(new Date(listingDetailObj["expirationDate"]) < new Date() && listingDetailObj["claimed"] === "no") {
+                console.log("expired");
+                console.log("listingId", listingDetailObj["listingId"])
+                console.log("random key", obj.randomKey)
+
+                //remove
+                firebase.database().ref(`users/${user.uid}/pendingRescues/${obj.randomKey}`).remove();
+
+                // change drop off location to "undelivered"
+                let dropoffRef = firebase.database().ref().child(`listings/${obj.listingId}`);
+                dropoffRef.update({ dropoffLocation: { lat: "", long: "", name: "Undelivered" } });
+
+                // push id to history for vendor
+                let vendorDeliveryRef = firebase.database().ref(`users/${user.uid}/deliveredRescues`);
+                let newDelivery = { 
+                  listingId: obj.listingId,
+                }
+                vendorDeliveryRef.push(newDelivery);
+              }
 
               // retrieve volunteer's name for the listing
               let volunteerName = ""
