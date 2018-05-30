@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Image, Alert, Linking } from 'react-native';
+import { StyleSheet, Image, Alert, Linking, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right } from 'native-base';
 import firebase from 'firebase';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class VolunteerPendingCards extends React.Component {
   constructor(props) {
@@ -87,41 +88,121 @@ export default class VolunteerPendingCards extends React.Component {
     })
   }
 
+  buttonOptions() {
+    return (
+      <View style={styles.cardView}>
+        <Left style={styles.leftButton}>
+          <Button transparent
+            onPress={() => Linking.openURL('tel:' + this.props.mobile)}
+          >
+            <Text style={styles.buttonText}> Contact</Text>
+          </Button>
+        </Left>
+        <Right style={styles.rightButton}>
+          <Button transparent
+            onPress={() => this.openAlert()}
+          >
+            <Text style={styles.buttonText}>Deliver</Text>
+          </Button>
+        </Right>
+      </View>
+    );
+  }
+
   render() {
+    let vendorName = (
+      <View style={styles.cardView}>
+        <Left style={styles.left}>
+          <Text style={styles.leftText}>Vendor</Text>
+        </Left>
+        <Right style={styles.right}>
+          <Text style={styles.rightText}>{this.props.vendor}</Text>
+        </Right>
+      </View>
+    );
+
+    let location = (
+      <View style={styles.cardView}>
+        <Left style={styles.left}>
+          <Text style={styles.leftText}>Pickup Location</Text>
+        </Left>
+        <Right style={styles.right}>
+          <Text style={styles.rightText}>{this.props.market}</Text>
+        </Right>
+      </View>
+    );
+
+    let boxes = (
+      <View style={styles.cardView}>
+        <Left style={styles.left}>
+          <Text style={styles.leftText}>Number of Boxes</Text>
+        </Left>
+        <Right style={styles.right}>
+          <Text style={styles.rightText}>{this.props.boxes}</Text>
+        </Right>
+      </View>
+    );
+
+    let weight = (
+      <View style={styles.cardView}>
+        <Left style={styles.left}>
+          <Text style={styles.leftText}>Approx. weight</Text>
+        </Left>
+        <Right style={styles.right}>
+          <Text style={styles.rightText}>{this.props.weight}</Text>
+        </Right>
+      </View>
+    );
+
+    let tags = (
+      <View style={styles.cardView}>
+        <Left style={styles.left}>
+          <Text style={styles.leftText}>Types of Food</Text>
+        </Left>
+        <Right style={styles.right}>
+          <Text style={styles.rightText}>{this.props.tags}</Text>
+        </Right>
+      </View>
+    );
+
+    let expiration = (
+      <View style={styles.cardView}>
+        <Left style={styles.left}>
+          <Text style={styles.leftText}>Expiration Time</Text>
+        </Left>
+        <Right style={styles.right}>
+          <Text style={styles.rightText}>{String(new Date(this.props.expiration)).slice(0, -18)}</Text>
+        </Right>
+      </View>
+    );
+
+    let dropoffLocation = (
+      <View style={styles.cardView}>
+        <Left style={styles.left}>
+          <Text style={styles.leftText}>Dropoff Location</Text>
+        </Left>
+        <Right style={styles.right}>
+          <Text style={styles.rightText}>{this.props.dropoffLocation.name}</Text>
+        </Right>
+      </View>
+    );
+    
     return (
       <Card style={styles.card}>
         <CardItem>
-          <Left>
-            <Body>
-              <Text>{this.props.vendor}</Text>
-              <Text note style={styles.subText}>{String(new Date(this.props.expiration)).slice(0, -18)}</Text>
-              <Text style={styles.regText}>
-                This pickup has {this.props.boxes} boxes and weighs {this.props.weight}.
-              </Text>
-              <Text style={styles.regText}>
-                Contains: {this.props.tags}
-              </Text>
-              <Text style={styles.regText}>
-                This rescue is being delivered to {this.props.dropoffLocation.name}.
-              </Text>
-            </Body>
-          </Left>
+          <Body>
+            {vendorName}
+            {location}
+            {boxes}
+            {weight}
+            {tags}
+            {expiration}
+            {dropoffLocation}
+          </Body>
         </CardItem>
-        <CardItem>
-          <Left>
-            <Button transparent
-              style={styles.innerButton}
-              onPress={() => Linking.openURL('tel:' + this.props.mobile)}
-            >
-              <Text style={styles.buttonText}>Contact {this.props.vendor}</Text>
-            </Button>
-            <Button transparent
-              style={styles.innerButton}
-              onPress={() => this.openAlert()}
-            >
-              <Text style={styles.buttonText}>Deliver</Text>
-            </Button>
-          </Left>
+        
+        <CardItem footer bordered style={styles.footer}>
+          {this.buttonOptions()}
         </CardItem>
       </Card>
     );
@@ -129,25 +210,51 @@ export default class VolunteerPendingCards extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    marginBottom: 0,
-    marginTop: 0
+  cardView: {
+    flex: 1,
+    flexDirection: 'row'
   },
-  subText: {
-    paddingBottom: 10,
+  cardViewAlt: {
+    flex: 1,
   },
-  regText: {
-    fontSize: 14,
+  left: {
+    flex: 4,
   },
-  innerButton: {
-    backgroundColor: '#44beac',
-    alignSelf: 'center',
+  right: {
+    flex: 6,
+    alignItems: 'flex-start',
+    borderLeftWidth: 2,
+    borderLeftColor: '#44beac'
+  },
+  leftText: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginBottom: 10,
+    color: '#247f6e'
+  },
+  rightText: {
+    marginLeft: 10,
+    fontSize: 15,
+    marginBottom: 10
+  },
+  leftButton: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  rightButton: {
+    flex: 1,
     alignItems: 'center',
-    paddingRight: 0,
-    marginLeft: 8
+  },
+  card: {
+    elevation: 0,
   },
   buttonText: {
-    color: '#ffffff',
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#247f6e'
   },
+  footer: {
+    backgroundColor: '#c1e0da'
+  }
 });
+

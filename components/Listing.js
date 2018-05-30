@@ -61,6 +61,8 @@ export default class Listing extends Component {
         this.setState({ personType: undefined }); //null out the saved state
       }
     });
+
+    this.setState({ key: Math.random() });
   }
 
   //when the component is unmounted, unregister using the saved function
@@ -129,7 +131,7 @@ export default class Listing extends Component {
     return (
       <Container>
         <HeaderComponent {...this.props} title={this.state.title} />
-        <ListingsForm submitCallback={this.submit} navigation={this.props.navigation} />
+        <ListingsForm submitCallback={this.submit} navigation={this.props.navigation} key={this.state.key} />
         {spinner}
       </Container>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Platform, Linking } from 'react-native';
+import { StyleSheet, Text, View, Image, Platform, Linking, BackHandler } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { Button } from 'native-base';
 import firebase from 'firebase';
 import HeaderComponent from './HeaderComponent';
@@ -10,6 +11,10 @@ export default class SuccessfulClaim extends React.Component {
     this.state = { title: "Successful Claim" };
 
     this.openMaps = this.openMaps.bind(this);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   componentWillMount() {
@@ -56,6 +61,12 @@ export default class SuccessfulClaim extends React.Component {
       listingId: listingId,
     }
     usersRef.push(newUserListing);
+
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
   }
 
   openMaps() {
@@ -76,12 +87,6 @@ export default class SuccessfulClaim extends React.Component {
           source={{ uri: `https://maps.googleapis.com/maps/api/staticmap?center=${this.state.coords.lat},${this.state.coords.long}&zoom=16&size=400x400&scale=2&maptype=roadmap&markers=color:red|label:|${this.state.coords.lat},${this.state.coords.long}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE` }}
         />
         <Text style={styles.message}>You're delivering this donation to {this.state.nonprofit}!</Text>
-        <Button transparent
-          style={styles.innerButton}
-          onPress={() => this.props.navigation.navigate('VolunteerPendingRescues', {})}
-        >
-          <Text style={styles.buttonText}>Pending Rescues</Text>
-        </Button>
         <Button transparent
           style={styles.innerButton}
           onPress={() => this.openMaps()}
