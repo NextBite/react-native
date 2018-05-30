@@ -45,6 +45,7 @@ export default class VolunteerPendingRescues extends React.Component {
     rescuesRef.on('value', (snapshot) => {
       let pendingCards = [];
       let claimedRescues = [];
+      this.setState({ pendingCards: [] });
 
       snapshot.forEach(function (child) {
         claimedRescues.push(child.val().listingId);
