@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { Container, Content, Spinner, Toast } from 'native-base';
+import { View } from 'react-native';
 import firebase from 'firebase';
 import SignUpForm from './SignUpForm';
 

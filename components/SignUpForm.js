@@ -32,7 +32,7 @@ export default class SignUpFrom extends Component {
       passwordConfirm: undefined,
       mobile: undefined,
       personType: undefined,
-      vendorName: undefined,
+      vendorName: "blank",
       avatar: '', //optional            
     };
   }

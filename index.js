@@ -51,6 +51,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    console.disableYellowBox = true;
     this.unregister = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // user is signed in

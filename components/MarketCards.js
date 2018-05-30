@@ -22,6 +22,21 @@ export default class MarketCards extends React.Component {
     )
   }
 
+  readableTime(time) {
+    let dt = time.toString().slice(0, -18).split(" ");
+    let hour = dt[4].split(":")[0];
+    if (parseInt(hour) > 0 && parseInt(hour) < 12) {
+      dt[4] = dt[4] + " AM";
+    } else if (parseInt(hour) > 12) {
+      dt[4] = (parseInt(hour) - 12).toString() + ":" + dt[4].split(":")[1] + " PM";
+    } else if (parseInt(hour) === 12) {
+      dt[4] = dt[4] + " PM";
+    } else if (parseInt(hour) === 0) {
+      dt[4] = "12:" + dt[4].split(":")[1] + " AM";
+    }
+    return dt[0] + " " + dt[1] + " " + dt[2] + " " + dt[3] + ", " + dt[4];
+  }
+
   render() {
     console.log("market id", this.props.marketId);
     return (
@@ -30,7 +45,7 @@ export default class MarketCards extends React.Component {
           <Left>
             <Body>
               <Text style={styles.vendorName}>{this.props.vendor}</Text>
-              <Text note style={styles.subText}>{String(new Date(this.props.expiration)).slice(0, -18)}</Text>
+              <Text note style={styles.subText}>Valid until {this.readableTime(this.props.expiration)}</Text>
               <Text style={styles.regText}>
                 This rescue has {this.props.boxes} boxes and weighs {this.props.weight}.
               </Text>
