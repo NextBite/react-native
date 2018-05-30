@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
+import Sugar from 'sugar-date';
 
 import HeaderComponent from './HeaderComponent';
 
@@ -45,24 +46,71 @@ export default class DropOffLocation extends React.Component {
       for (nonprofit of nonprofitsArray) {
         console.log("indi nonprofit", nonprofit);
 
-        currentFoodBankCards.push(
-          <FoodBankCards
-            title={nonprofit.key}
-            coords={{ lat: parseFloat(nonprofit.contents.coords.lat), long: parseFloat(nonprofit.contents.coords.long) }}
-            distance={nonprofit.contents.distances[marketName]}
-            listingId={listingId}
-            marketId={marketId}
-            marketName={marketName}
-            key={nonprofit.key}
-            navigation={this.props.navigation}
-          />
-        );
+        console.log("nonprofit hrs", nonprofit.contents.hours);
+        console.log("get today's day", new Date().getDay())
 
-        // sort the cards by smallest to largest according to distance away 
-        // from the market the user picked
-        currentFoodBankCards.sort(function (a, b) {
-          return parseFloat(a.props.distance) - parseFloat(b.props.distance);
-        });
+        let day;
+        switch (new Date().getDay()) {
+          case 0:
+            day = "Sunday";
+            break;
+          case 1:
+            day = "Monday";
+            break;
+          case 2:
+            day = "Tuesday";
+            break;
+          case 3:
+            day = "Wednesday";
+            break;
+          case 4:
+            day = "Thursday";
+            break;
+          case 5:
+            day = "Friday";
+            break;
+          case 6:
+            day = "Saturday";
+        }
+
+        console.log("nonprofit hrs with day", nonprofit.contents.hours[day])
+        console.log("hrs @ open", Sugar.Date.create(nonprofit.contents.hours[day].split("-")[0]));
+        console.log("hrs @ close", Sugar.Date.create(nonprofit.contents.hours[day].split("-")[1]));
+        console.log("my curr date", new Date());
+
+        console.log("together", day + " " + nonprofit.contents.hours[day].split("-")[0]);
+
+        let openTime = Sugar.Date.create(nonprofit.contents.hours[day].split("-")[0]);
+        let closeTime = Sugar.Date.create(nonprofit.contents.hours[day].split("-")[1]);
+        let currentTime = new Date();
+        // opening time is after current time or closing time is before current time
+        // don't add
+        if(openTime > currentTime || closeTime < currentTime) {
+
+          console.log("bank closed", nonprofit)
+        } else { // nonprofit is open, add card
+          console.log("bank open", nonprofit)
+          currentFoodBankCards.push(
+            <FoodBankCards
+              title={nonprofit.key}
+              coords={{ lat: parseFloat(nonprofit.contents.coords.lat), long: parseFloat(nonprofit.contents.coords.long) }}
+              distance={nonprofit.contents.distances[marketName]}
+              openTime={nonprofit.contents.hours[day].split("-")[0]}
+              closeTime={nonprofit.contents.hours[day].split("-")[1]}
+              listingId={listingId}
+              marketId={marketId}
+              marketName={marketName}
+              key={nonprofit.key}
+              navigation={this.props.navigation}
+            />
+          );
+  
+          // sort the cards by smallest to largest according to distance away 
+          // from the market the user picked
+          currentFoodBankCards.sort(function (a, b) {
+            return parseFloat(a.props.distance) - parseFloat(b.props.distance);
+          });
+        }
 
         let foodBankCardsShown = [];
         // show closest 5; abitrary number
