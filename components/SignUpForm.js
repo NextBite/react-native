@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Container, Content, Form, Item, Input, Label, Button, Radio, Right, Left, Icon, Header } from 'native-base';
-import { StyleSheet, View, Text, Image, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Text, Image, KeyboardAvoidingView, Linking } from 'react-native';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import Svg, {
   Circle,
@@ -283,6 +283,11 @@ export default class SignUpFrom extends Component {
                 style={{ marginLeft: 0, marginTop: 2, color: "#fff", fontSize: 16 }}
               />
             </Button>
+          </View>
+          <View style={{backgroundColor: '#f8b718', padding: 10, marginTop: 10 }}>
+            <Button transparent onPress={ ()=>{ Linking.openURL('https://app.termly.io/document/terms-of-use-for-website/2a23e92a-143a-47a7-b90f-fe5b8a5579bd')}}>
+                <Text style={{ textAlign: 'center', fontWeight: 'bold', color: '#ffffff' }}>By creating an account, you agree to NextBite's Terms and Conditions.</Text>
+              </Button>
           </View>
         </Content>
       </KeyboardAvoidingView>

@@ -68,10 +68,12 @@ export default class VolunteerPendingRescues extends React.Component {
           let usersRef = firebase.database().ref(`users/${pickupsObj.userId}`);
           usersRef.once('value', (snapshot) => {
             let vendor = snapshot.child("vendorName").val();
+            let mobile = snapshot.child("mobile").val();
 
             pendingCards.push(<VolunteerPendingCards
               boxes={pickupsObj.boxes}
               vendor={vendor}
+              mobile={mobile}
               expiration={pickupsObj.expirationDate}
               weight={pickupsObj.weight}
               tags={pickupsObj.tags}

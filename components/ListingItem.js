@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Linking } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Button, Left, Right } from 'native-base';
 import firebase from 'firebase';
 
@@ -96,7 +96,9 @@ export default class ListingItem extends Component {
       let volunteer = this.props.volunteer.toUpperCase()
       return (
         <View style={styles.cardViewAlt}>
-          <Button transparent style={{ alignSelf: 'center' }}>
+          <Button transparent 
+            style={{ alignSelf: 'center' }}
+            onPress={() => Linking.openURL('tel:' + this.props.mobile)}>
             <Text style={styles.buttonText}>CONTACT {volunteer}</Text>
           </Button>
         </View>
