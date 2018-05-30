@@ -90,7 +90,6 @@ export default class Listing extends Component {
       claimedBy: claimedBy,
       pickedUp: "no",
       delivered: delivered,
-      pickedUp: "no",
       dropoffLocation: dropoffLocation
     }
 
