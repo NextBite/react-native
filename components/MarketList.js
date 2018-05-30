@@ -10,7 +10,7 @@ export default class MarketList extends React.Component {
     const marketCards = params ? params.marketCards : null;
 
     return (
-      <View>
+      <View style={styles.view}>
         <HeaderComponent {...this.props} title={this.state.title} />
         <ScrollView style={styles.cards}>
           {marketCards}
@@ -24,5 +24,8 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     height: '100%',
+  }, 
+  view: {
+    marginBottom: 56,
   }
 });
