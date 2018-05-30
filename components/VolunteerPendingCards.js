@@ -89,24 +89,38 @@ export default class VolunteerPendingCards extends React.Component {
   }
 
   buttonOptions() {
-    return (
-      <View style={styles.cardView}>
-        <Left style={styles.leftButton}>
-          <Button transparent
-            onPress={() => Linking.openURL('tel:' + this.props.mobile)}
-          >
-            <Text style={styles.buttonText}> Contact</Text>
-          </Button>
-        </Left>
-        <Right style={styles.rightButton}>
-          <Button transparent
-            onPress={() => this.openAlert()}
-          >
-            <Text style={styles.buttonText}>Deliver</Text>
-          </Button>
-        </Right>
-      </View>
-    );
+    if(this.props.pickedUp === "yes") {
+      return (
+        <View style={styles.cardView}>
+          <Left style={styles.leftButton}>
+            <Button transparent
+              onPress={() => Linking.openURL('tel:' + this.props.mobile)}
+            >
+              <Text style={styles.buttonText}> Contact</Text>
+            </Button>
+          </Left>
+          <Right style={styles.rightButton}>
+            <Button transparent
+              onPress={() => this.openAlert()}
+            >
+              <Text style={styles.buttonText}>Deliver</Text>
+            </Button>
+          </Right>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.cardView}>
+          <Left style={styles.leftButton}>
+            <Button transparent
+              onPress={() => Linking.openURL('tel:' + this.props.mobile)}
+            >
+              <Text style={styles.buttonText}> Contact</Text>
+            </Button>
+          </Left>
+        </View>
+      );
+    }
   }
 
   render() {
@@ -186,6 +200,31 @@ export default class VolunteerPendingCards extends React.Component {
         </Right>
       </View>
     );
+
+    let deliveryStatus;
+    if(this.props.pickedUp === "yes") {
+      deliveryStatus = (
+        <View style={styles.cardView}>
+          <Left style={styles.left}>
+            <Text style={styles.leftText}>Delivery Status</Text>
+          </Left>
+          <Right style={styles.right}>
+            <Text style={styles.rightText}>Picked up</Text>
+          </Right>
+        </View>
+      );
+    } else {
+      deliveryStatus = (
+        <View style={styles.cardView}>
+          <Left style={styles.left}>
+            <Text style={styles.leftText}>Delivery Status</Text>
+          </Left>
+          <Right style={styles.right}>
+            <Text style={styles.rightText}>Not picked up</Text>
+          </Right>
+        </View>
+      );
+    }
     
     return (
       <Card style={styles.card}>
@@ -198,6 +237,7 @@ export default class VolunteerPendingCards extends React.Component {
             {tags}
             {expiration}
             {dropoffLocation}
+            {deliveryStatus}
           </Body>
         </CardItem>
         

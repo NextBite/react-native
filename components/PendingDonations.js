@@ -67,7 +67,7 @@ export default class PendingDonations extends Component {
             let listingDetailRef = firebase.database().ref(`listings/${obj.listingId}`);
             /*let vendorPendingRef = firebase.database().ref(`users/${user.uid}/pendingRescues/${obj.randomKey}`);
             if (new Date(snapshot.child("expirationDate").val()) < new Date()) {
-              marketListingsRef.remove();
+              marketListingsRef.remove(); 
             }*/
             listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
@@ -112,6 +112,7 @@ export default class PendingDonations extends Component {
                   tag={listingDetailObj.tags}
                   expiration={listingDetailObj.expirationDate}
                   claimed={listingDetailObj.claimed}
+                  pickedUp={listingDetailObj.pickedUp}
                   volunteer={volunteerName}
                   mobile={volunteerMobile}
                   delivered={listingDetailObj.delivered}
