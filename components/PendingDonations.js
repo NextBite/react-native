@@ -62,10 +62,10 @@ export default class PendingDonations extends Component {
           //query for details of each listing
           let listings = userListings.map((listingId) => {
             let listingDetailRef = firebase.database().ref(`listings/${listingId}`);
-            listingDetailRef.on('value', (snapshot) => {
+            listingDetailRef.once('value', (snapshot) => {
               let listingDetailObj = {};
               snapshot.forEach(function (child) {
-                listingDetailObj[child.key] = child.val()
+                listingDetailObj[child.key] = child.val();
 
               });
 
