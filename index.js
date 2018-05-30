@@ -21,7 +21,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignOut from './components/SignOut';
 import VolunteerPendingRescues from './components/VolunteerPendingRescues';
-import PendingDonations from './components/PendingDonations';
+import PendingDonationsNavigator from './components/PendingDonationsNavigator';
 import VolunteerRescueHistory from './components/VolunteerRescueHistory';
 import VendorRescueHistory from './components/VendorRescueHistory';
 
@@ -211,7 +211,7 @@ export default class App extends Component {
         screen: this.state.personType === undefined ? Loading : (this.state.personType === 'volunteer' ? MapNavigator : ListingNavigator),
       },
       Pending: {
-        screen: this.state.personType === undefined ? Loading : (this.state.personType === 'volunteer' ? VolunteerPendingRescues : PendingDonations),
+        screen: this.state.personType === undefined ? Loading : (this.state.personType === 'volunteer' ? VolunteerPendingRescues : PendingDonationsNavigator),
       },
       History: {
         screen: this.state.personType === undefined ? Loading : (this.state.personType === 'volunteer' ? VolunteerRescueHistory : VendorRescueHistory)

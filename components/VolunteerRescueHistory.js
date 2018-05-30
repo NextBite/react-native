@@ -112,6 +112,6 @@ const styles = StyleSheet.create({
     marginTop: 50
   },
   view: {
-    marginBottom: 50,
+    marginBottom: 56,
   },
 });

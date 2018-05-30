@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, Header } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 import MapView from 'react-native-maps';
 import firebase from 'firebase';
 import RNfirebase from 'react-native-firebase';
@@ -31,6 +32,7 @@ export default class MarketMap extends React.Component {
         size={28}
       />
     );
+
     return { drawerLabel, drawerIcon };
   }
   componentWillMount() {

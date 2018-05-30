@@ -27,7 +27,7 @@ We settled on a React Native App because we needed access to some key features -
 Firebase has a proven record with React and, indeed, is taught alongside React in client-side web developement courses. This made Firebase the obvious choice for us to handle NextBite's back-end including hosting profiles and listings. Firebase also handles user authentication which is necessary because most features of NextBite require user-specific data from our database.
 
 ## Team NextBite
-Lisa Koss  -  
-Alexis Koss -  
-Kar Yin Ng -  
-Sean Martin - seanthompsonmartin@gmail.com
+* Lisa Koss  -  lisakoss@uw.edu
+* Alexis Koss -  alexis30@uw.edu
+* Kar Yin Ng -  
+* Sean Martin - seanthompsonmartin@gmail.com
