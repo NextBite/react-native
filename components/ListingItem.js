@@ -79,7 +79,7 @@ export default class ListingItem extends Component {
         <View style={styles.cardView}>
           <Left style={styles.leftButton}>
             <Button transparent
-              onPress={() => this.props.navigation.navigate('EditRescue', {market: this.props.market, boxes: this.props.boxes, weight: this.props.weight, tags: this.props.tags, expiration: this.props.expiration, listingId: this.props.listingId})}>
+              onPress={() => this.props.navigation.navigate('EditRescue', { market: this.props.market, boxes: this.props.boxes, weight: this.props.weight, tags: this.props.tags, expiration: this.props.expiration, listingId: this.props.listingId })}>
               <Text style={styles.buttonText}>EDIT</Text>
             </Button>
           </Left>
@@ -108,27 +108,49 @@ export default class ListingItem extends Component {
 
   deleteListing() {
     let listingId = this.props.listingID
-
-    // remove from listings
-    let listingRef = firebase.database().ref(`listings/${listingId}`);
-    listingRef.remove();
-
-    //remove from vendor's pending rescues
-    let idArray = [];
     let user = firebase.auth().currentUser;
-    let pendingRescueRef = firebase.database().ref(`users/${user.uid}/pendingRescues`);
-    pendingRescueRef.on('value', (snapshot) => {
-      snapshot.forEach(function (child) {
-        if (child.val().listingId === listingId) {
-          let newRef = firebase.database().ref(`users/${user.uid}/pendingRescues/${child.key}`)
-          newRef.remove();
-        }
-      });
-    });
+    let randomKey = this.props.pendingRescueKey
+    let currentMarket = this.props.location.split(",")[0];
 
-    //remove from user's listing field
-    let userListingRef = firebase.database().ref(`users/${user.uid}/listings/${listingId}`);
-    userListingRef.remove();
+    return new Promise(function (resolve, reject) {
+      let pendingRescueRef = firebase.database().ref(`users/${user.uid}/pendingRescues/${randomKey}`);
+      resolve(pendingRescueRef.remove());
+    }).then(() => {
+      return new Promise(function (resolve, reject) {
+        let userListingRef = firebase.database().ref(`users/${user.uid}/listings`);
+        console.log('delete func user listing ref')
+        userListingRef.once('value', (snapshot) => {
+          console.log('delete func user listing ref once()')
+          snapshot.forEach(function (child) {
+            if (child.val().listingId === listingId) {
+              let newRef = firebase.database().ref(`users/${user.uid}/listings/${child.key}`)
+              resolve(newRef.remove());
+              //console.log("remove from user's listing")
+            }
+          })
+        });
+      })
+    }).then(() => {
+      return new Promise(function (resolve, reject) {
+        let marketRef = firebase.database().ref(`markets/${currentMarket}`)
+        marketRef.once('value', (snapshot) => {
+          console.log('remove from market listing')
+          snapshot.forEach(function (child) {
+            if (child.val().listingId === listingId) {
+              let newRef = firebase.database().ref(`markets/${currentMarket}/${child.key}`)
+              resolve(newRef.remove());
+            }
+          })
+        });
+
+      })
+    }).then(() => {
+      return new Promise(function (resolve, reject) {
+        let listingRef = firebase.database().ref(`listings/${listingId}`);
+        console.log('delete func listing ref')
+        resolve(listingRef.remove());
+      })
+    })
   }
 
   readableTime(time) {
