@@ -40,74 +40,74 @@ export default class ListingsForm extends Component {
 
     let marketList = [
       {
-        label: 'Ballard Farmers Market',
-        value: 'Ballard Farmers Market, 47.6450099, -122.3486234'
+          label: 'Ballard Farmers Market',
+          value: 'Ballard Farmers Market, 47.6450099, -122.3868226'
       },
       {
-        label: 'Capitol Hill Farmers Market',
-        value: 'Capitol Hill Farmers Market, 47.6163942, -122.3231928'
+          label: 'Capitol Hill Farmers Market',
+          value: 'Capitol Hill Farmers Market, 47.616384, -122.3230037'
       },
       {
-        label: 'City Hall Farmers Market',
-        value: 'City Hall Farmers Market, 47.6097185, -122.3597025'
+          label: 'City Hall Farmers Market',
+          value: 'City Hall Farmers Market, 47.6061071, -122.3396986'
       },
       {
-        label: 'Columbia City Farmers Market',
-        value: 'Columbia City Farmers Market, 47.5663073, -122.3465634'
+          label: 'Columbia City Farmers Market',
+          value: 'Columbia City Farmers Market, 47.558659, -122.2884737'
       },
       {
-        label: 'Denny Regrade Farmers Market',
-        value: 'Denny Regrade Farmers Market, 47.6097158, -122.3597025'
+          label: 'Denny Regrade Farmers Market',
+          value: 'Denny Regrade Farmers Market, 47.6162035, -122.3415552'
       },
       {
-        label: 'Fremont Farmers Market',
-        value: 'Fremont Farmers Market, 47.6463977, -122.3474217,13'
+          label: 'Fremont Sunday Flea Market',
+          value: 'Fremont Sunday Flea Market, 47.6500674, -122.3538378'
       },
       {
-        label: 'Lake City Farmers Market',
-        value: 'Lake City Farmers Market, 47.71992, -122.3003247'
+          label: 'Lake City Farmers Market',
+          value: 'Lake City Farmers Market, 47.71992, -122.3003247'
       },
       {
-        label: 'Madrona Farmers Market',
-        value: 'Madrona Farmers Market, 47.612343, -122.2977045'
+          label: 'Madrona Farmers Market',
+          value: 'Madrona Farmers Market, 47.6123567, -122.2977639'
       },
       {
-        label: 'Magnolia Farmers Market',
-        value: 'Magnolia Farmers Market, 47.646629, -122.363557'
+          label: 'Magnolia Farmers Market',
+          value: 'Magnolia Farmers Market, 47.6395485, -122.4011365'
       },
       {
-        label: 'Phinney Farmers Market',
-        value: 'Phinney Farmers Market, 47.67763, -122.3562657'
+          label: 'Phinney Farmers Market',
+          value: 'Phinney Farmers Market, 47.67763, -122.3562657'
       },
       {
-        label: 'Pike Place Market',
-        value: 'Pike Place Market, 47.6097199, -122.3465703'
+          label: 'Pike Place Market',
+          value: 'Pike Place Market, 47.6097199, -122.3465703'
       },
       {
-        label: 'Queen Anne Farmers Market',
-        value: 'Queen Anne Farmers Market, 47.637149, -122.3592802'
+          label: 'Queen Anne Farmers Market',
+          value: 'Queen Anne Farmers Market, 47.637149, -122.3592802'
       },
       {
-        label: 'Rainier Farmers Market',
-        value: 'Rainier Farmers Market, 47.5663073,-122.3465634'
+          label: 'Rainier Farmers Market',
+          value: 'Rainier Farmers Market, 47.5838187, -122.3376951'
       },
       {
-        label: 'South Lake Union Farmers Market',
-        value: 'South Lake Union Farmers Market, 47.6040411, -122.3366638'
+          label: 'South Lake Union Saturday Market',
+          value: 'South Lake Union Farmers Market, 47.6136002, -122.3445845'
       },
       {
-        label: 'University District Farmers Market',
-        value: 'University District Farmers Market, 47.6656392, -122.3152575'
+          label: 'University District Farmers Market',
+          value: 'University District Farmers Market, 47.6656392, -122.3152575'
       },
       {
-        label: 'Wallingford Farmers Market',
-        value: 'Wallingford Farmers Market, 47.6623941, -122.3407796'
+          label: 'Wallingford Farmers Market',
+          value: 'Wallingford Farmers Market, 47.6638266, -122.3350488'
       },
       {
-        label: 'West Seattle Farmers Market',
-        value: 'West Seattle Farmers Market, 47.5612161, -122.3887488'
+          label: 'West Seattle Farmers Market',
+          value: 'West Seattle Farmers Market, 47.5612161, -122.3887488'
       }
-    ]
+  ]
 
     this.setState({ markets: marketList });
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);

@@ -16,7 +16,7 @@ export default class MarketCards extends React.Component {
       `Are you sure you want to claim this rescue?`,
       [
         { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-        { text: 'Yes', onPress: () => this.props.navigation.navigate('DropOffLocation', { location: this.props.marketId, listingId: this.props.listingId, marketId: this.props.marketId }) },
+        { text: 'Yes', onPress: () => this.props.navigation.navigate('DropOffLocation', { location: this.props.marketId, listingId: this.props.listingId, marketId: this.props.marketId, marketName: this.props.marketName }) },
       ],
       { cancelable: false }
     )

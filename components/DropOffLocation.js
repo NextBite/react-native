@@ -2,13 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'native-base';
 import firebase from 'firebase';
+import Sugar from 'sugar-date';
 
 import HeaderComponent from './HeaderComponent';
 
 import FoodBankCards from './FoodBankCards';
 
 export default class DropOffLocation extends React.Component {
-  state = {title: "Choose Dropoff Location"};
+  state = { title: "Choose Dropoff Location" };
 
 
   componentWillMount() {
@@ -17,6 +18,7 @@ export default class DropOffLocation extends React.Component {
     const location = params ? params.location : null;
     const listingId = params ? params.listingId : null;
     const marketId = params ? params.marketId : null;
+    const marketName = params ? params.marketName : null;
 
     let marketLat = parseFloat(location.split(",")[1]);
     let marketLong = parseFloat(location.split(",")[2]);
@@ -24,53 +26,138 @@ export default class DropOffLocation extends React.Component {
     let currentFoodBankCards = [];
 
     // fetch the non-profits
-    fetch('https://raw.githubusercontent.com/lisakoss/NextBite/claim-donation/FoodBanks.json')
-      .then(res => res.json())
-      .then(parsedRes => {
-        for (let key = 0; key < Object.keys(parsedRes).length; key++) {
-          let responseDistance = "";
-          fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${marketLat},${marketLong}&destinations=${parseFloat(parsedRes[key].latitude)},${parseFloat(parsedRes[key].longitude)}&key=AIzaSyBLkew0nfQHAXvEc4H9rVgGCT5wYVw19uE`)
-            .then(res => res.json())
-            .then(parsedDistance => {
-                currentFoodBankCards.push(
-                  <FoodBankCards
-                    title={parsedRes[key].name}
-                    coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
-                    listingId={listingId}
-                    marketId={marketId}
-                    marketName={location}
-                    key={parsedRes[key].name}
-                    navigation={this.props.navigation}
-                  />
-                );
+    let nonprofitsRef = firebase.database().ref(`nonprofits`);
+    nonprofitsRef.once("value").then(snapshot => {
+      let nonprofitsArray = [];
+      snapshot.forEach(function (child) {
+        let nonprofit = {};
+        //console.log("hours snapshot", snapshot.child("hours").val());
+        console.log("child.val();", child.val());
+        console.log("key", child.key)
+        nonprofit["contents"] = child.val();
+        nonprofit["key"] = child.key;
+        console.log("nonprofit", nonprofit);
+        nonprofitsArray.push(nonprofit);
+      });
+
+      console.log("nonprofits array", nonprofitsArray);
+      console.log("params location", marketName);
+
+      for (nonprofit of nonprofitsArray) {
+        console.log("indi nonprofit", nonprofit);
+
+        console.log("nonprofit hrs", nonprofit.contents.hours);
+        console.log("get today's day", new Date().getDay())
+
+        let day;
+        switch (new Date().getDay()) {
+          case 0:
+            day = "Sunday";
+            break;
+          case 1:
+            day = "Monday";
+            break;
+          case 2:
+            day = "Tuesday";
+            break;
+          case 3:
+            day = "Wednesday";
+            break;
+          case 4:
+            day = "Thursday";
+            break;
+          case 5:
+            day = "Friday";
+            break;
+          case 6:
+            day = "Saturday";
+        }
+
+        console.log("nonprofit hrs with day", nonprofit.contents.hours[day])
+        console.log("hrs @ open", Sugar.Date.create(nonprofit.contents.hours[day].split("-")[0]));
+        console.log("hrs @ close", Sugar.Date.create(nonprofit.contents.hours[day].split("-")[1]));
+        console.log("my curr date", new Date());
+
+        console.log("together", day + " " + nonprofit.contents.hours[day].split("-")[0]);
+
+        let openTime = Sugar.Date.create(nonprofit.contents.hours[day].split("-")[0]);
+        let closeTime = Sugar.Date.create(nonprofit.contents.hours[day].split("-")[1]);
+        let currentTime = new Date();
+        // opening time is after current time or closing time is before current time
+        // don't add
+        if(openTime > currentTime || closeTime < currentTime) {
+
+          console.log("bank closed", nonprofit)
+        } else { // nonprofit is open, add card
+          console.log("bank open", nonprofit)
+          currentFoodBankCards.push(
+            <FoodBankCards
+              title={nonprofit.key}
+              coords={{ lat: parseFloat(nonprofit.contents.coords.lat), long: parseFloat(nonprofit.contents.coords.long) }}
+              distance={nonprofit.contents.distances[marketName]}
+              openTime={nonprofit.contents.hours[day].split("-")[0]}
+              closeTime={nonprofit.contents.hours[day].split("-")[1]}
+              listingId={listingId}
+              marketId={marketId}
+              marketName={marketName}
+              key={nonprofit.key}
+              navigation={this.props.navigation}
+            />
+          );
+  
+          // sort the cards by smallest to largest according to distance away 
+          // from the market the user picked
+          currentFoodBankCards.sort(function (a, b) {
+            return parseFloat(a.props.distance) - parseFloat(b.props.distance);
+          });
+        }
+
+        let foodBankCardsShown = [];
+        // show closest 5; abitrary number
+        for (let i = 0; i < 5; i++) {
+          foodBankCardsShown.push(currentFoodBankCards[i]);
+        }
+
+        this.setState({ foodBankCards: foodBankCardsShown });
+      }
+
+    });
+
+    /*currentFoodBankCards.push(
+      <FoodBankCards
+        title={parsedRes[key].name}
+        coords={{ lat: parseFloat(parsedRes[key].latitude), long: parseFloat(parsedRes[key].longitude) }}
+        listingId={listingId}
+        marketId={marketId}
+        marketName={location}
+        key={parsedRes[key].name}
+        navigation={this.props.navigation}
+      />
+    );
 
 
-              if (key + 1 == Object.keys(parsedRes).length) {
-                // sort the cards by smallest to largest according to distance away 
-                // from the market the user picked
-                currentFoodBankCards.sort(function (a, b) {
-                  return parseFloat(a.props.distance) - parseFloat(b.props.distance);
-                });
+    if (key + 1 == Object.keys(parsedRes).length) {
+      // sort the cards by smallest to largest according to distance away 
+      // from the market the user picked
+      currentFoodBankCards.sort(function (a, b) {
+        return parseFloat(a.props.distance) - parseFloat(b.props.distance);
+      });
 
 
-                let foodBankCardsShown = [];
-                // show closest 5; abitrary number
-                for (let i = 0; i < 5; i++) {
-                  foodBankCardsShown.push(currentFoodBankCards[i]);
-                }
+      let foodBankCardsShown = [];
+      // show closest 5; abitrary number
+      for (let i = 0; i < 5; i++) {
+        foodBankCardsShown.push(currentFoodBankCards[i]);
+      }
 
-                this.setState({ foodBankCards: foodBankCardsShown });
-              }
-            })
-            .catch(err => console.log(err));
-        } 
-      })
+      this.setState({ foodBankCards: foodBankCardsShown });
+    } */
   }
 
   render() {
     return (
       <View style={styles.container}>
-       <HeaderComponent {...this.props} title={this.state.title} />
+        <HeaderComponent {...this.props} title={this.state.title} />
         <ScrollView style={styles.cards}>
           {this.state.foodBankCards}
         </ScrollView>
