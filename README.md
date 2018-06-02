@@ -37,4 +37,4 @@ Firebase has a proven record with React and, indeed, is taught alongside React i
 * Lisa Koss  -  lisakoss@uw.edu
 * Alexis Koss -  alexis30@uw.edu
 * Kar Yin Ng -  karyin3@uw.edu 
-* Sean Martin - seanthompsonmartin@gmail.com
+* Sean Martin - semartin@uw.edu
