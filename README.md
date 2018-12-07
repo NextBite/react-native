@@ -33,8 +33,14 @@ We settled on a React Native App because we needed access to some key features -
 ### Firebase
 Firebase has a proven record with React and, indeed, is taught alongside React in client-side web developement courses. This made Firebase the obvious choice for us to handle NextBite's back-end including hosting profiles and listings. Firebase makes it easy to query the database for information quickly and efficiently so that users are able to request the content they need immediately upon demand. Firebase also handles user authentication which is necessary because most features of NextBite require user-specific data from our database.
 
+### Google Maps API
+We used the Google Maps API to gather location data of our users in order to show farmers markets close to them. The Google Maps API is a key feature of our Android application because is what allows users to see donations that are available for pickup closest to them.
+
+## Installation 
+Requires Android Studio to emulate the application or to run on a physical Android device. 
+
 ## Team NextBite
-* Lisa Koss  -  lisakoss@uw.edu
-* Alexis Koss -  alexis30@uw.edu
-* Kar Yin Ng -  karyin3@uw.edu 
-* Sean Martin - semartin@uw.edu
+* Lisa Koss  -  lisakoss@uw.edu / Software Engineer & UX Designer
+* Alexis Koss -  alexis30@uw.edu / Software Engineer & UX Designer
+* Kar Yin Ng -  karyin3@uw.edu / UX Designer
+* Sean Martin - semartin@uw.edu / Project Manager
