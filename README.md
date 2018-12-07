@@ -25,6 +25,9 @@ NextBite offers different features depending on whether the user is a vendor or 
 * Confirm donation delivery
 * View past rescues
 
+## Design
+We went with a mobile application over a website because vendors and volunteers will most likely never have a laptop with them when they need to list a donation or when they're looking to pick a donation up for redistribution to a food bank or shelter. By going with a mobile-first approach in our initial sketches and designs, we can easily create a website version of our application by scaling up our current mobile application design. All buttons, input fields, and interactive areas are large enough to be tapped without the need to zoom in and all text is legible on small device screens due to responsive design choices.
+
 ## Tools
 
 ### React Native
